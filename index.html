@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JLPT 歌單習得帖 — 聽歌學日文（N4 → N3）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0c0a09; --ink-2:#141110; --ink-3:#1c1816; --line:#2a2320;
+  --paper:#f4ece0; --paper-dim:#b9a894; --amber:#e0a34a; --amber-hot:#f2b95e;
+  --vermilion:#c0483c; --moss:#7d8c6a; --cyan:#5d8f95;
+  --serif:'Shippori Mincho',serif; --sans:'Zen Kaku Gothic New',sans-serif; --mono:'Space Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink); color:var(--paper); font-family:var(--sans);
+  -webkit-font-smoothing:antialiased; line-height:1.7;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(224,163,74,.13), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(93,143,149,.08), transparent 60%);
+  background-attachment:fixed;
+}
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative; padding:clamp(3rem,9vw,7rem) clamp(1.2rem,5vw,4rem) clamp(2rem,5vw,3.5rem);
+  border-bottom:1px solid var(--line); overflow:hidden;
+}
+.hero__kana{
+  position:absolute; right:-1rem; top:-3rem; font-family:var(--serif); font-weight:800;
+  font-size:clamp(11rem,26vw,22rem); line-height:.82; color:rgba(224,163,74,.05);
+  writing-mode:vertical-rl; letter-spacing:-.04em; user-select:none; pointer-events:none;
+}
+.hero__inner{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+.hero__eyebrow{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--amber); display:flex; align-items:center; gap:.9rem; margin-bottom:1.6rem;
+}
+.hero__eyebrow::after{content:""; height:1px; flex:1; background:linear-gradient(90deg,var(--amber),transparent)}
+h1{
+  font-family:var(--serif); font-weight:800; letter-spacing:.02em;
+  font-size:clamp(2.4rem,7.2vw,5.2rem); line-height:1.06; margin-bottom:1.1rem;
+}
+h1 em{font-style:normal; color:var(--amber); position:relative}
+h1 em::after{
+  content:""; position:absolute; left:0; right:0; bottom:.06em; height:.09em;
+  background:var(--vermilion); opacity:.55; transform:scaleX(0); transform-origin:left;
+  animation:swipe 1s .7s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes swipe{to{transform:scaleX(1)}}
+.hero__lede{max-width:52ch; color:var(--paper-dim); font-size:clamp(.95rem,1.6vw,1.08rem)}
+.hero__lede b{color:var(--paper); font-weight:700}
+
+/* ============ METRICS ============ */
+.metrics{
+  max-width:1180px; margin:2.6rem auto 0; display:grid; gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden;
+}
+.metric{background:var(--ink-2); padding:1.3rem 1.25rem; position:relative}
+.metric__label{font-family:var(--mono); font-size:.62rem; letter-spacing:.2em; color:var(--paper-dim); text-transform:uppercase}
+.metric__value{font-family:var(--serif); font-size:clamp(1.6rem,3.4vw,2.3rem); font-weight:700; line-height:1.2; margin-top:.3rem}
+.metric__value small{font-size:.5em; color:var(--paper-dim); font-weight:500}
+.metric--hero .metric__value{color:var(--amber-hot)}
+
+/* ============ PROGRESS BAR ============ */
+.bar-wrap{max-width:1180px;margin:0 auto;padding:0 clamp(1.2rem,5vw,4rem) 0}
+.bar{margin:1.4rem auto 0;max-width:1180px;height:6px;background:var(--ink-3);border-radius:99px;overflow:hidden;position:relative}
+.bar__fill{height:100%;width:0;background:linear-gradient(90deg,var(--vermilion),var(--amber-hot));border-radius:99px;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.bar__ghost{position:absolute;top:0;height:100%;background:rgba(224,163,74,.22);transition:all .6s}
+
+/* ============ LAYOUT ============ */
+.shell{max-width:1180px;margin:0 auto;padding:clamp(2rem,5vw,3.4rem) clamp(1.2rem,5vw,4rem) 6rem;display:grid;gap:clamp(1.6rem,3vw,2.6rem);grid-template-columns:minmax(0,1fr)}
+@media(min-width:1080px){ .shell{grid-template-columns:340px minmax(0,1fr);align-items:start} }
+
+/* ============ SONG LIST ============ */
+.panel-title{font-family:var(--mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--amber);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:baseline}
+.panel-title span{color:var(--paper-dim);letter-spacing:.1em}
+.songlist{position:sticky;top:1.5rem;max-height:calc(100vh - 3rem);display:flex;flex-direction:column}
+.songlist__scroll{overflow-y:auto;padding-right:.4rem;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.songlist__scroll::-webkit-scrollbar{width:6px}
+.songlist__scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.song{
+  display:grid;grid-template-columns:2.1rem minmax(0,1fr) auto;gap:.7rem;align-items:center;
+  padding:.62rem .6rem;border-radius:2px;cursor:pointer;border:1px solid transparent;
+  transition:background .18s,border-color .18s,transform .18s;
+}
+.song:hover{background:var(--ink-2);border-color:var(--line);transform:translateX(2px)}
+.song.is-active{background:rgba(224,163,74,.1);border-color:rgba(224,163,74,.45)}
+.song.is-done .song__num{color:var(--moss)}
+.song__num{font-family:var(--mono);font-size:.72rem;color:var(--paper-dim);text-align:right}
+.song__body{min-width:0}
+.song__title{font-family:var(--serif);font-weight:600;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song__artist{font-size:.72rem;color:var(--paper-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song__badge{font-family:var(--mono);font-size:.66rem;color:var(--amber);white-space:nowrap;padding:.1rem .34rem;border:1px solid rgba(224,163,74,.35);border-radius:2px}
+.song__badge--zero{color:var(--paper-dim);border-color:var(--line)}
+
+/* ============ STAGE (player + grammar) ============ */
+.stage{display:grid;gap:1.4rem;min-width:0}
+.player{
+  position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:3px;overflow:hidden;
+}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cover{
+  position:absolute;inset:0;cursor:pointer;border:0;padding:0;width:100%;height:100%;
+  background-size:cover;background-position:center;display:grid;place-content:center;justify-items:center;gap:.9rem;
+}
+.cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(12,10,9,.15) 0%,rgba(12,10,9,.62) 75%)}
+.cover__play{
+  position:relative;z-index:1;width:74px;height:74px;border-radius:50%;display:grid;place-content:center;
+  background:var(--vermilion);box-shadow:0 0 0 8px rgba(192,72,60,.18),0 14px 34px rgba(0,0,0,.55);
+  transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s;
+}
+.cover__play::before{content:"";margin-left:5px;border-style:solid;border-width:13px 0 13px 21px;border-color:transparent transparent transparent #fff}
+.cover:hover .cover__play{transform:scale(1.08);box-shadow:0 0 0 14px rgba(192,72,60,.14),0 16px 40px rgba(0,0,0,.6)}
+.cover__hint{position:relative;z-index:1;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:#fff;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.9)}
+.player__alt{
+  position:absolute;right:.6rem;bottom:.6rem;z-index:2;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;
+  background:rgba(12,10,9,.82);border:1px solid var(--line);color:var(--paper-dim);text-decoration:none;
+  padding:.28rem .55rem;border-radius:2px;transition:all .18s;
+}
+.player__alt:hover{color:var(--amber);border-color:rgba(224,163,74,.5)}
+.player__idle{
+  position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:.8rem;text-align:center;
+  padding:2rem;background:
+    radial-gradient(circle at 50% 120%, rgba(224,163,74,.14), transparent 65%), var(--ink-2);
+}
+.player__idle p{color:var(--paper-dim);font-size:.85rem;max-width:34ch}
+.vinyl{
+  width:74px;height:74px;border-radius:50%;position:relative;
+  background:repeating-radial-gradient(circle at 50% 50%, #171312 0 1px, #0d0a09 1px 3px);
+  box-shadow:0 0 0 1px #2a2320, 0 12px 30px rgba(0,0,0,.6);animation:spin 3.4s linear infinite;
+}
+.vinyl::after{content:"";position:absolute;inset:31%;border-radius:50%;background:var(--amber);opacity:.85}
+.vinyl::before{content:"";position:absolute;inset:47%;border-radius:50%;background:var(--ink);z-index:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.stage__head{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:1rem}
+.stage__title{font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:700;line-height:1.2}
+.stage__meta{font-size:.8rem;color:var(--paper-dim);margin-top:.3rem;display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+.stage__meta a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted var(--cyan)}
+.stage__meta a:hover{color:var(--amber)}
+.chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;padding:.18rem .5rem;border:1px solid var(--line);border-radius:2px;color:var(--paper-dim)}
+.chip--new{color:var(--amber);border-color:rgba(224,163,74,.4)}
+
+/* ============ GRAMMAR CARDS ============ */
+.grammar-list{display:grid;gap:.7rem}
+.gcard{
+  border:1px solid var(--line);border-radius:3px;background:var(--ink-2);padding:.9rem 1rem;
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1rem;align-items:center;
+  transition:border-color .2s,background .2s;position:relative;overflow:hidden;
+}
+.gcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:background .25s}
+.gcard.is-new{border-color:rgba(224,163,74,.3)}
+.gcard.is-new::before{background:var(--amber)}
+.gcard.is-learned{background:rgba(125,140,106,.07);border-color:rgba(125,140,106,.3)}
+.gcard.is-learned::before{background:var(--moss)}
+.gcard.is-learned .gcard__form{color:var(--paper-dim)}
+.gcard__no{font-family:var(--mono);font-size:.68rem;color:var(--paper-dim);padding-top:.15rem;min-width:1.9rem}
+.gcard__form{font-family:var(--serif);font-size:1.16rem;font-weight:700;line-height:1.35;letter-spacing:.01em}
+.gcard__zh{font-size:.83rem;color:var(--amber);margin-top:.2rem}
+.gcard__ex{font-size:.86rem;color:var(--paper);margin-top:.5rem;padding-left:.8rem;border-left:1px solid var(--line);line-height:1.65}
+.gcard__romaji{font-family:var(--mono);font-size:.68rem;color:var(--paper-dim);margin-top:.35rem;letter-spacing:.04em}
+.stamp{
+  align-self:center;justify-self:end;width:2.35rem;height:2.35rem;border-radius:50%;
+  border:1.5px solid var(--line);background:transparent;color:var(--paper-dim);cursor:pointer;
+  display:grid;place-content:center;font-family:var(--serif);font-size:.76rem;font-weight:700;
+  transition:all .22s cubic-bezier(.2,.8,.2,1);flex-shrink:0;
+}
+.stamp:hover{border-color:var(--moss);color:var(--moss);transform:rotate(-8deg) scale(1.06)}
+.gcard.is-learned .stamp{background:var(--vermilion);border-color:var(--vermilion);color:#fff;transform:rotate(-9deg)}
+
+
+
+.gcard__form-row{
+  display:flex;gap:.5rem;align-items:baseline;margin-top:.5rem;
+  font-size:.82rem;line-height:1.6;
+}
+.gcard__key{
+  font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;color:var(--cyan);
+  border:1px solid rgba(120,180,170,.35);border-radius:2px;padding:.05rem .32rem;
+  flex:0 0 auto;transform:translateY(-1px);white-space:nowrap;
+}
+.gcard__val{color:var(--paper)}
+.gcard__note .gcard__key{color:var(--vermilion);border-color:rgba(192,72,60,.4)}
+.gcard__note .gcard__val{color:#e8d9c4;font-size:.8rem}
+
+/* ============ LYRICS FIRST ============ */
+.lyrics{
+  margin-top:1.1rem;border:1px solid var(--line);border-radius:3px;background:var(--ink-2);
+  padding:.4rem 0;max-height:none;
+}
+.lyrics__bar{
+  display:flex;align-items:center;justify-content:space-between;gap:.8rem;flex-wrap:wrap;
+  padding:.55rem .9rem .6rem;border-bottom:1px solid var(--line);
+}
+.lyrics__label{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--amber);text-transform:uppercase}
+.lyrics__acts{display:flex;gap:.4rem;flex-wrap:wrap}
+.lyric{
+  display:grid;grid-template-columns:2.1rem 1fr;gap:.55rem;align-items:baseline;
+  padding:.34rem 1rem .34rem .5rem;line-height:1.75;cursor:default;scroll-margin-block:45vh;
+  border-left:2px solid transparent;transition:background .18s,border-color .18s;
+}
+.lyric__n{font-family:var(--mono);font-size:.6rem;color:#6b625c;text-align:right;user-select:none}
+.lyric__jp{font-size:1rem;color:#b8afa7;letter-spacing:.01em}
+.lyric.has-g .lyric__jp{color:var(--paper)}
+.lyric.has-g{border-left-color:rgba(224,163,74,.22)}
+.lyric:hover{background:rgba(255,255,255,.025)}
+.lyric.is-blank{height:.55rem;padding:0}
+.lyric.is-active{background:rgba(224,163,74,.10);border-left-color:var(--amber)}
+.lyric.is-active .lyric__jp{color:#fff;font-weight:600}
+.lyric.is-marking{border-left-color:var(--cyan);background:rgba(120,180,170,.10)}
+.lyrics.is-marking{border-color:rgba(120,180,170,.45)}
+.lyrics.is-marking .lyrics__label{color:var(--cyan)}
+.lyric__chips{display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.2rem}
+.gchip{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.04em;padding:.1rem .42rem;
+  border:1px solid rgba(224,163,74,.35);border-radius:2px;background:rgba(224,163,74,.07);
+  color:var(--amber);cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.gchip:hover{background:rgba(224,163,74,.2);color:var(--amber-hot)}
+.gchip.is-new{border-color:var(--amber);background:rgba(224,163,74,.16);color:var(--amber-hot);font-weight:700}
+.gchip.is-learned{opacity:.45;text-decoration:line-through}
+.gcard.is-focus{border-color:var(--amber);box-shadow:0 0 0 1px rgba(224,163,74,.35),0 6px 20px rgba(0,0,0,.35)}
+@keyframes flash{0%,100%{background:transparent}30%{background:rgba(224,163,74,.16)}}
+.gcard.flash{animation:flash .8s ease}
+@media (max-width:520px){
+  .lyric{grid-template-columns:1.5rem 1fr;padding-right:.7rem}
+  .lyric__jp{font-size:.94rem}
+  .lyrics__bar{padding:.5rem .7rem}
+}
+
+/* ============ UNCOVERED SECTION ============ */
+.section-head{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--line)}
+.section-head h2{font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;margin-bottom:.5rem}
+.section-head p{color:var(--paper-dim);font-size:.88rem;max-width:60ch}
+.uncovered-grid{display:grid;gap:.55rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));margin-top:1.4rem}
+.ucard{border:1px solid var(--line);border-radius:3px;padding:.7rem .8rem;background:var(--ink-2);display:flex;gap:.7rem;align-items:center;transition:border-color .2s}
+.ucard:hover{border-color:rgba(224,163,74,.3)}
+.ucard.is-learned{background:rgba(125,140,106,.07);border-color:rgba(125,140,106,.3)}
+.ucard__no{font-family:var(--mono);font-size:.66rem;color:var(--paper-dim)}
+.ucard__form{font-family:var(--serif);font-weight:600;font-size:.95rem}
+.ucard__zh{font-size:.72rem;color:var(--amber)}
+
+/* ============ FOOTER ============ */
+.foot{max-width:1180px;margin:0 auto;padding:2.5rem clamp(1.2rem,5vw,4rem) 4rem;border-top:1px solid var(--line);color:var(--paper-dim);font-size:.76rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+.foot a{color:var(--cyan);text-decoration:none}
+
+/* ============ MISC ============ */
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.btn{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.42rem .8rem;border:1px solid var(--line);background:transparent;color:var(--paper-dim);
+  border-radius:2px;cursor:pointer;transition:all .18s;
+}
+.btn:hover{border-color:var(--amber);color:var(--amber)}
+.btn.is-on{background:rgba(224,163,74,.14);border-color:rgba(224,163,74,.5);color:var(--amber-hot)}
+.hidden{display:none!important}
+.reveal{opacity:0;transform:translateY(14px);animation:reveal .65s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+.empty{color:var(--paper-dim);font-size:.86rem;padding:1.5rem;text-align:center;border:1px dashed var(--line);border-radius:3px}
+
+@media (max-width:1079px){
+  .songlist{position:static;max-height:none}
+  .songlist__scroll{max-height:38vh;overflow-y:auto;border-bottom:1px solid var(--line);padding-bottom:.5rem}
+}
+
+@media (max-width:520px){
+  h1{font-size:1.95rem;line-height:1.18}
+  .hero__lede{font-size:.9rem}
+  .metric{padding:1rem}
+  .gcard{gap:.7rem;padding:.8rem .75rem}
+  .gcard__form{font-size:1.05rem}
+  .gcard__ex{font-size:.8rem}
+  .cover__play{width:60px;height:60px}
+  .stamp{width:2.1rem;height:2.1rem}
+}
+
+/* ============ BONUS TRACK ============ */
+.bonus{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--line)}
+.bonus__card{border:1px solid rgba(224,163,74,.28);border-radius:3px;background:
+  linear-gradient(160deg,rgba(224,163,74,.06),transparent 55%),var(--ink-2);padding:1.4rem;display:grid;gap:1.3rem}
+.bonus__top{display:flex;gap:1.3rem;flex-wrap:wrap;align-items:flex-start}
+.bonus__thumb{width:150px;flex:0 0 150px;aspect-ratio:16/9;border-radius:2px;overflow:hidden;position:relative;border:1px solid var(--line);background:#000}
+.bonus__thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}
+.bonus__thumb a{position:absolute;inset:0;display:grid;place-content:center;text-decoration:none}
+.bonus__thumb span{width:38px;height:38px;border-radius:50%;background:var(--vermilion);display:grid;place-content:center;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.bonus__thumb span::before{content:"";margin-left:3px;border-style:solid;border-width:7px 0 7px 11px;border-color:transparent transparent transparent #fff}
+.bonus__info{flex:1;min-width:min(100%,260px)}
+.bonus__title{font-family:var(--serif);font-size:1.25rem;font-weight:700;line-height:1.35}
+.bonus__artist{font-size:.78rem;color:var(--paper-dim);margin-top:.2rem}
+.bonus__why{font-size:.84rem;color:var(--paper);margin-top:.8rem;padding:.7rem .85rem;background:rgba(12,10,9,.5);border-left:2px solid var(--amber);line-height:1.7}
+.bonus__sub{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--amber);text-transform:uppercase;margin-bottom:.55rem}
+.bonus__list{display:grid;gap:.4rem}
+.bonus__row{font-size:.84rem;display:flex;gap:.6rem;align-items:baseline}
+.bonus__row b{font-family:var(--serif);color:var(--paper);font-weight:700;flex:0 0 auto}
+.bonus__row em{font-style:normal;color:var(--paper-dim);font-size:.78rem}
+.trap{border:1px solid rgba(192,72,60,.35);border-radius:2px;padding:.75rem .85rem;background:rgba(192,72,60,.06)}
+.trap__head{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--vermilion);display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.trap__tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;padding:.1rem .35rem;border:1px solid rgba(192,72,60,.5);border-radius:2px;color:var(--vermilion)}
+.trap__quote{font-size:.82rem;color:var(--paper);margin-top:.45rem;padding-left:.6rem;border-left:1px solid rgba(192,72,60,.4);line-height:1.6}
+.trap__why{font-size:.8rem;color:var(--paper-dim);margin-top:.45rem;line-height:1.65}
+.trap__why b{color:var(--paper)}
+
+/* ============ PRACTICE SONGS ============ */
+.practice{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--line)}
+.practice__grid{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr));margin-top:1.3rem}
+.pcard{border:1px solid var(--line);border-radius:3px;background:var(--ink-2);overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.pcard:hover{border-color:rgba(224,163,74,.34);transform:translateY(-2px)}
+.pcard__thumb{position:relative;aspect-ratio:16/9;background:#000;display:block;overflow:hidden}
+.pcard__thumb img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:opacity .2s,transform .3s}
+.pcard:hover .pcard__thumb img{opacity:1;transform:scale(1.03)}
+.pcard__play{position:absolute;inset:0;display:grid;place-content:center;text-decoration:none}
+.pcard__play span{width:42px;height:42px;border-radius:50%;background:rgba(192,72,60,.92);display:grid;place-content:center;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.pcard__play span::before{content:"";margin-left:3px;border-style:solid;border-width:8px 0 8px 12px;border-color:transparent transparent transparent #fff}
+.pcard__body{padding:.85rem .9rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.pcard__title{font-family:var(--serif);font-weight:700;font-size:1rem;line-height:1.3}
+.pcard__artist{font-family:var(--mono);font-size:.62rem;letter-spacing:.09em;color:var(--paper-dim)}
+.pcard__src{font-size:.72rem;color:var(--amber);opacity:.85}
+.pcard__g{display:flex;flex-wrap:wrap;gap:.28rem;margin-top:.2rem}
+.pcard__chip{font-family:var(--serif);font-size:.72rem;padding:.1rem .42rem;border:1px solid var(--line);border-radius:2px;color:var(--paper-dim)}
+.pcard__why{font-size:.76rem;color:var(--paper-dim);line-height:1.6;margin-top:.3rem}
+.pcard__zero{font-size:.72rem;color:var(--moss);font-style:italic}
+@media print{
+  body{background:#fff;color:#000}
+  .songlist,.player,.toolbar,.foot{display:none!important}
+  .shell{grid-template-columns:1fr;padding:0}
+  .gcard{border-color:#ccc;background:#fff;break-inside:avoid}
+  .gcard__zh{color:#8a5a00}
+  .stamp{display:none}
+  body::after{display:none}
+}
+/* ============ LEVEL SWITCH ============ */
+.lv{
+  display:inline-flex;gap:.35rem;margin:1.1rem 0 0;padding:.3rem;
+  border:1px solid var(--line);border-radius:3px;background:rgba(12,10,9,.55);
+}
+.lv button{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;padding:.5rem 1.1rem;
+  border:0;border-radius:2px;background:transparent;color:var(--paper-dim);cursor:pointer;
+  transition:all .2s;display:flex;align-items:center;gap:.5rem;
+}
+.lv button:hover{color:var(--paper)}
+.lv button.is-on{background:var(--amber);color:#191410;font-weight:700}
+.lv button small{font-size:.58rem;letter-spacing:.06em;opacity:.75}
+.lv button.is-on small{opacity:.9}
+.lv__hint{font-size:.72rem;color:var(--paper-dim);margin-top:.6rem;display:flex;gap:.5rem;align-items:center}
+.lv__hint b{color:var(--amber)}
+@media (max-width:520px){
+  .lv{width:100%}
+  .lv button{flex:1;justify-content:center;padding:.5rem .4rem;letter-spacing:.08em}
+}
+
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero__kana">聽</div>
+  <div class="hero__inner">
+    <div class="hero__eyebrow" id="eyebrow">JLPT N4 · 歌詞最小集合 · 習得帖</div>
+    <h1 id="h1">–</h1>
+    <p class="hero__lede" id="lede"></p>
+
+    <div class="lv" role="tablist">
+      <button data-lv="n4" role="tab">N4<small id="lvN4"></small></button>
+      <button data-lv="n3" role="tab">N3<small id="lvN3"></small></button>
+    </div>
+    <div class="lv__hint" id="lvHint"></div>
+
+    <div class="metrics">
+      <div class="metric metric--hero">
+        <div class="metric__label">已覆蓋文法</div>
+        <div class="metric__value" id="mCovered">–<small>/–</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric__label">你的習得</div>
+        <div class="metric__value" id="mLearned">0<small>/–</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric__label">習得率</div>
+        <div class="metric__value" id="mRate">0<small>%</small></div>
+      </div>
+      <div class="metric">
+        <div class="metric__label">歌曲數</div>
+        <div class="metric__value" id="mSongs">–</div>
+      </div>
+      <div class="metric">
+        <div class="metric__label">累積單字</div>
+        <div class="metric__value">1,400<small>詞</small></div>
+      </div>
+    </div>
+    <div class="bar"><div class="bar__fill" id="barFill"></div></div>
+  </div>
+</header>
+
+<main class="shell">
+  <aside class="songlist">
+    <div class="panel-title">Playlist <span id="listCount"></span></div>
+    <div class="toolbar">
+      <button class="btn" id="btnReset">重設進度</button>
+      <button class="btn" id="btnPrint">列印</button>
+    </div>
+    <div class="songlist__scroll" id="songScroll"></div>
+  </aside>
+
+  <section class="stage">
+    <div class="player" id="player">
+      <div class="player__idle">
+        <div class="vinyl"></div>
+        <p>從左邊點一首歌開始。<br>第一次聽先別查字典，抓感覺就好。</p>
+      </div>
+    </div>
+
+    <div id="stageBody"></div>
+
+    <div class="section-head">
+      <h2>課外 · 歌詞裡沒有的 <span id="ucCount"></span> 條</h2>
+      <p>
+        這些文法在流行歌中天然稀有（多為書面語），演算法再怎麼選歌也補不到。
+        它們不會拖累你的分數——用 Anki 文法卡補完即可。點硃印同樣可標記習得。
+      </p>
+      <div class="toolbar" style="margin-top:1.1rem">
+        <button class="btn" id="btnOnlyUnlearned">只顯示未習得</button>
+      </div>
+      <div class="uncovered-grid" id="ucGrid"></div>
+    </div>
+
+    <div class="bonus" id="bonusWrap"></div>
+    <div class="bonus" id="practiceWrap"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>資料源：j-lyric.net 歌詞 · jlptsensei 文法清單 · 演算法：greedy set cover + 冗員精簡（fugashi 分詞）</div>
+  <div>進度依等級分開記錄（localStorage）· <a href="#" id="lnkTop">回頂端</a></div>
+</footer>
+
+<script>
+const DATA = {"levels":{"n4":{"level":"N4","total":132,"covered":82,"coverage":62.1,"nsrc":173,"trimmed":[],"playlist":[{"i":1,"title":"ドライフラワー","artist":"優里","vid":"kzZ6KXDM1RI","vtitle":"優里『ドライフラワー』Official Music Video -ディレクターズカットver.-","hits":[5,7,25,30,32,54,64,73,88,93,95,97,105,107,110,118],"new":[5,7,25,30,32,54,64,73,88,93,95,97,105,107,110,118],"cum":16,"lines":[{"t":"多分(たぶん)、私(わたし)じゃなくていいね","g":[]},{"t":"余裕(よゆう)のない二人(ふたり)だったし","g":[]},{"t":"気付(きづ)けば喧嘩(けんか)ばっかりしてさ","g":[5,7]},{"t":"ごめんね","g":[]},{"t":"ずっと話(はな)そうと思(おも)ってた","g":[118]},{"t":"きっと私(わたし)たち合(あ)わないね","g":[32]},{"t":"二人(ふたり)きりしかいない部屋(へや)でさ","g":[]},{"t":"貴方(あなた)ばかり話(はな)していたよね","g":[7,95]},{"t":"もしいつか何処(どこ)かで会(あ)えたら","g":[88]},{"t":"今日(きょう)の事(こと)を笑(わら)ってくれるかな","g":[30,97,118]},{"t":"理由(りゆう)もちゃんと話(はな)せないけれど","g":[]},{"t":"貴方(あなた)が眠(ねむ)った後(あと)に泣(な)くのは嫌(いや)","g":[]},{"t":"声(こえ)も顔(かお)も不器用(ぶきよう)なとこも","g":[]},{"t":"全部(ぜんぶ)全部(ぜんぶ)嫌(きら)いじゃないの","g":[25]},{"t":"ドライフラワーみたい","g":[]},{"t":"君(きみ)との日々(ひび)もきっときっときっときっと","g":[32]},{"t":"色褪(いろあ)せる","g":[]},{"t":"多分(たぶん)、君(きみ)じゃなくてよかった","g":[105]},{"t":"もう泣(な)かされることもないし","g":[73]},{"t":"「私(わたし)ばかり」なんて言葉(ことば)も","g":[7]},{"t":"なくなった","g":[]},{"t":"あんなに悲(かな)しい別(わか)れでも","g":[107]},{"t":"時間(じかん)がたてば忘(わす)れてく","g":[5]},{"t":"新(あたら)しい人(ひと)と並(なら)ぶ君(きみ)は","g":[54,88]},{"t":"ちゃんとうまくやれているのかな","g":[30]},{"t":"もう顔(かお)も見(み)たくないからさ","g":[]},{"t":"変(へん)に連絡(れんらく)してこないでほしい","g":[93]},{"t":"都合(つごう)がいいのは変(か)わってないんだね","g":[64,118]},{"t":"でも無視(むし)できずにまた少(すこ)し返事(へんじ)","g":[]},{"t":"声(こえ)も顔(かお)も不器用(ぶきよう)なとこも","g":[]},{"t":"多分(たぶん)今(いま)も嫌(きら)いじゃないの","g":[25]},{"t":"ドライフラワーみたく","g":[]},{"t":"時間(じかん)が経(た)てば","g":[5]},{"t":"きっときっときっときっと色褪(いろあ)せる","g":[32]},{"t":"月(つき)灯(あか)りに魔物(まもの)が揺(ゆ)れる","g":[]},{"t":"きっと私(わたし)もどうかしてる","g":[32]},{"t":"暗闇(くらやみ)に色彩(しきさい)が浮(う)かぶ","g":[]},{"t":"赤(あか)黄(き)藍色(あいいろ)が胸(むね)の奥(おく)","g":[]},{"t":"ずっと貴方(あなた)の名前(なまえ)を呼(よ)ぶ","g":[]},{"t":"好(す)きという気持(きも)ち","g":[110]},{"t":"また香(かお)る","g":[]},{"t":"声(こえ)も顔(かお)も不器用(ぶきよう)なとこも","g":[]},{"t":"全部(ぜんぶ)全部(ぜんぶ)大嫌(だいきら)いだよ","g":[]},{"t":"まだ枯(か)れない花(はな)を","g":[]},{"t":"君(きみ)に添(そ)えてさ","g":[]},{"t":"ずっとずっとずっとずっと","g":[]},{"t":"抱(かか)えてよ","g":[]}]},{"i":2,"title":"高嶺の花子さん","artist":"back number","vid":"SII-S-zCg-c","vtitle":"back number - 高嶺の花子さん (full)","hits":[7,9,11,16,32,44,45,50,54,62,74,95,118,119,123],"new":[9,11,16,44,45,50,62,74,119,123],"cum":26,"lines":[{"t":"君から見た僕はきっと ただの友達の友達","g":[32]},{"t":"たかが知人Bにむけられた 笑顔があれならもう 恐ろしい人だ","g":[54,119]},{"t":"君を惚れさせる 黒魔術は知らないし 海に誘う勇気も車もない","g":[74]},{"t":"でも見たい となりで目覚めて おはようと笑う君を","g":[11]},{"t":"会いたいんだ 今すぐその角から 飛び出してきてくれないか","g":[9]},{"t":"夏の魔物に連れ去られ 僕のもとへ","g":[]},{"t":"生まれた星のもとが 違くたって 偶然と夏の魔法とやらの力で","g":[118]},{"t":"僕のものに なるわけないか","g":[62]},{"t":"君の恋人になる人は モデルみたいな人なんだろう","g":[44,45]},{"t":"そいつはきっと 君よりも年上で","g":[32,123]},{"t":"焼けた肌がよく似合う 洋楽好きな人だ","g":[]},{"t":"キスをするときも 君は背伸びしている","g":[]},{"t":"頭をなでられ君が笑います 駄目だ何ひとつ 勝ってない","g":[118]},{"t":"いや待てよ そいつ誰だ","g":[]},{"t":"会いたいんだ 今すぐその角から 飛び出してきてくれないか","g":[9]},{"t":"夏の魔物に連れ去られ 僕のもとへ","g":[]},{"t":"君が他の誰を 気になっていたって 偶然とアブラカタブラな力で","g":[95,118]},{"t":"僕のものに","g":[62]},{"t":"この胸の 焦りに身を任せ 君のとこへ走ったとして 実は僕の方が","g":[]},{"t":"悪い意味で 夏の魔法的なもので 舞い上がってましたって 怖すぎる","g":[16,95,118]},{"t":"オチばかり浮かんできて","g":[7]},{"t":"真夏の空の下で 震えながら 君の事を考えます","g":[50]},{"t":"好きなアイスの味はきっと","g":[32]},{"t":"会いたいんだ 今すぐその角から 飛び出してきてくれないか","g":[9]},{"t":"夏の魔物に連れ去られ 僕のもとへ","g":[]},{"t":"生まれた星のもとが違くたって 偶然と夏の魔法とやらの力で","g":[118]},{"t":"僕のものに なるわけないか","g":[62]}]},{"i":3,"title":"まちがいさがし","artist":"米津玄師","vid":"7940nuwCEYA","vtitle":"菅田将暉 『まちがいさがし』","hits":[14,32,44,46,52,83,95,98,108,114,126],"new":[14,46,52,83,98,108,114,126],"cum":34,"lines":[{"t":"まちがいさがしの間違いの方に","g":[]},{"t":"生まれてきたような気でいたけど","g":[95,98,126]},{"t":"まちがいさがしの正解の方じゃ","g":[]},{"t":"きっと出会えなかったと思う","g":[32,114]},{"t":"ふさわしく　笑いあえること","g":[]},{"t":"何故だろうか　涙がでること","g":[]},{"t":"君の目が貫いた　僕の胸を真っ直ぐ","g":[]},{"t":"その日から何もかも　変わり果てた気がした","g":[14]},{"t":"風に飛ばされそうな　深い春の隅で","g":[83]},{"t":"退屈なくらいに何気なく傍にいて","g":[]},{"t":"間違いだらけの　些細な隙間で","g":[]},{"t":"くだらない話を　くたばるまで","g":[]},{"t":"正しくありたい　あれない　寂しさが","g":[]},{"t":"何を育んだでしょう","g":[]},{"t":"一つずつ　探し当てていこう","g":[]},{"t":"起きがけの　子供みたいに","g":[44,46]},{"t":"君の手が触れていた　指を重ね合わせ","g":[95]},{"t":"間違いか正解かだなんてどうでもよかった","g":[]},{"t":"瞬く間に落っこちた　淡い靄の中で","g":[]},{"t":"君じゃなきゃいけないと　ただ強く思うだけ","g":[52,108]},{"t":"君の目が貫いた　僕の胸を真っ直ぐ","g":[]},{"t":"その日から何もかも　変わり果てた気がした","g":[14]},{"t":"風に飛ばされそうな　深い春の隅で","g":[83]},{"t":"誰にも見せない顔を見せて","g":[]},{"t":"君の手が触れていた　指を重ね合わせ","g":[95]},{"t":"間違いか正解かだなんてどうでもよかった","g":[]},{"t":"瞬く間に落っこちた　淡い靄の中で","g":[]},{"t":"君じゃなきゃいけないと　ただ強く思うだけ","g":[52,108]}]},{"i":4,"title":"HANABI","artist":"Mr.Children","vid":"EXxaBXKjl6Q","vtitle":"Mr.Children 「HANABI」 MUSIC VIDEO","hits":[28,30,34,36,47,54,58,62,88,95,107,118,119,126],"new":[28,34,36,47,58],"cum":39,"lines":[{"t":"どれくらいの値打ちがあるだろう?","g":[]},{"t":"僕が今生きているこの世界に","g":[]},{"t":"すべてが無意味だって思える","g":[118]},{"t":"ちょっと疲れてんのかなぁ","g":[30]},{"t":"手に入れたものと引き換えにして","g":[]},{"t":"切り捨てたいくつもの輝き","g":[]},{"t":"いちいち憂いていれるほど","g":[]},{"t":"平和な世の中じゃないし","g":[]},{"t":"一体どんな理想を描いたらいい?","g":[]},{"t":"どんな希望を抱き進んだらいい?","g":[]},{"t":"答えようもないその問いかけは","g":[]},{"t":"日常に葬られてく","g":[119]},{"t":"君がいたらなんていうかなぁ","g":[30,88]},{"t":"「暗い」と茶化して笑うのかなぁ","g":[30]},{"t":"その柔らかな笑顔に触れて","g":[]},{"t":"僕の憂鬱が吹き飛んだらいいのに","g":[62]},{"t":"決して捕まえることの出来ない","g":[]},{"t":"花火のような光だとしたって","g":[118,126]},{"t":"もう一回 もう一回","g":[47]},{"t":"もう一回 もう一回","g":[47]},{"t":"僕はこの手を伸ばしたい","g":[]},{"t":"誰も皆 悲しみを抱いてる","g":[]},{"t":"だけど素敵な明日を願っている","g":[]},{"t":"臆病風に吹かれて 波風がたった世界を","g":[119]},{"t":"どれだけ愛することができるだろう?","g":[34,36]},{"t":"考えすぎで言葉に詰まる","g":[]},{"t":"自分の不器用さが嫌い","g":[]},{"t":"でも妙に器用に立ち振舞う自分は","g":[]},{"t":"それ以上に嫌い","g":[]},{"t":"笑っていても","g":[107]},{"t":"泣いて過ごしても平等に時は流れる","g":[107]},{"t":"未来が僕らを呼んでる","g":[]},{"t":"その声は今 君にも聞こえていますか?","g":[]},{"t":"さよならが迎えに来ることを","g":[54]},{"t":"最初からわかっていたとしたって","g":[95,118]},{"t":"もう一回 もう一回","g":[47]},{"t":"もう一回 もう一回","g":[47]},{"t":"何度でも君に逢いたい","g":[]},{"t":"めぐり逢えたことでこんなに","g":[]},{"t":"世界が美しく見えるなんて","g":[58]},{"t":"想像さえもしていない 単純だって笑うかい?","g":[28,118]},{"t":"君に心からありがとうを言うよ","g":[]},{"t":"滞らないように 揺れて流れて","g":[126]},{"t":"透き通ってく水のような","g":[118,126]},{"t":"心であれたら","g":[88]},{"t":"逢いたくなったときの分まで","g":[]},{"t":"寂しくなったときの分まで","g":[]},{"t":"もう一回 もう一回","g":[47]},{"t":"もう一回 もう一回","g":[47]},{"t":"君を強く焼き付けたい","g":[]},{"t":"誰も皆 問題を抱えている","g":[]},{"t":"だけど素敵な明日を願っている","g":[]},{"t":"臆病風に吹かれて 波風がたった世界を","g":[119]},{"t":"どれだけ愛することができるだろう?","g":[34,36]},{"t":"もう一回 もう一回","g":[47]},{"t":"もう一回 もう一回","g":[47]}]},{"i":5,"title":"前前前世","artist":"RADWIMPS","vid":"PDSkFeMVNFs","vtitle":"RADWIMPS - 前前前世 (movie ver.) [Official Music Video]","hits":[1,8,50,62,95,98,99,104,110,118,122],"new":[1,8,99,104,122],"cum":44,"lines":[{"t":"やっと眼を覚ましたかい　それなのになぜ眼も合わせやしないんだい？","g":[62,122]},{"t":"「遅いよ」と怒る君　これでもやれるだけ飛ばしてきたんだよ","g":[98]},{"t":"心が身体を追い越してきたんだよ","g":[98]},{"t":"君の髪や瞳だけで胸が痛いよ","g":[8]},{"t":"同じ時を吸いこんで離したくないよ","g":[]},{"t":"遥か昔から知る　その声に","g":[]},{"t":"生まれてはじめて　何を言えばいい？","g":[]},{"t":"君の前前前世から僕は　君を探しはじめたよ","g":[]},{"t":"そのぶきっちょな笑い方をめがけて　やってきたんだよ","g":[98,104,118]},{"t":"君が全然全部なくなって　チリヂリになったって","g":[118]},{"t":"もう迷わない　また１から探しはじめるさ","g":[]},{"t":"むしろ０から　また宇宙をはじめてみようか","g":[99]},{"t":"どっから話すかな　君が眠っていた間のストーリー","g":[1,95]},{"t":"何億　何光年分の物語を語りにきたんだよ　けどいざその姿この眼に映すと","g":[]},{"t":"君も知らぬ君とジャレて　戯れたいよ","g":[]},{"t":"君の消えぬ痛みまで愛してみたいよ","g":[99]},{"t":"銀河何個分かの　果てに出逢えた","g":[]},{"t":"その手を壊さずに　どう握ったならいい？","g":[]},{"t":"君の前前前世から僕は　君を探しはじめたよ","g":[]},{"t":"その騒がしい声と涙をめがけ　やってきたんだよ","g":[98,118]},{"t":"そんな革命前夜の僕らを誰が止めるというんだろう","g":[110]},{"t":"もう迷わない　君のハートに旗を立てるよ","g":[]},{"t":"君は僕から諦め方を　奪い取ったの","g":[]},{"t":"前前前世から僕は　君を探しはじめたよ","g":[]},{"t":"そのぶきっちょな笑い方をめがけて　やってきたんだよ","g":[98,104,118]},{"t":"君が全然全部なくなって　チリヂリになったって","g":[118]},{"t":"もう迷わない　また１から探しはじめるさ","g":[]},{"t":"何光年でも　この歌を口ずさみながら","g":[50]}]},{"i":6,"title":"夜に駆ける","artist":"YOASOBI","vid":"by4SYYWlhEs","vtitle":"夜に駆ける","hits":[16,32,54,59,79,94,95,97,107,118,126],"new":[59,79,94],"cum":47,"lines":[{"t":"沈むように溶けてゆくように","g":[126]},{"t":"二人だけの空が広がる夜に","g":[16]},{"t":"「さよなら」だけだった","g":[54]},{"t":"その一言で全てが分かった","g":[]},{"t":"日が沈み出した空と君の姿","g":[]},{"t":"フェンス越しに重なっていた","g":[95]},{"t":"初めて会った日から","g":[]},{"t":"僕の心の全てを奪った","g":[]},{"t":"どこか儚い空気を纏う君は","g":[]},{"t":"寂しい目をしてたんだ","g":[]},{"t":"いつだってチックタックと","g":[118]},{"t":"鳴る世界で何度だってさ","g":[118]},{"t":"触れる心無い言葉うるさい声に","g":[]},{"t":"涙が零れそうでも","g":[107]},{"t":"ありきたりな喜び","g":[]},{"t":"きっと二人なら見つけられる","g":[32,54]},{"t":"騒がしい日々に笑えない君に","g":[]},{"t":"思い付く限り眩しい明日を","g":[]},{"t":"明けない夜に落ちてゆく前に","g":[]},{"t":"僕の手を掴んでほら","g":[]},{"t":"忘れてしまいたくて閉じ込めた日々も","g":[]},{"t":"抱きしめた温もりで溶かすから","g":[]},{"t":"怖くないよいつか日が昇るまで","g":[]},{"t":"二人でいよう","g":[]},{"t":"君にしか見えない","g":[]},{"t":"何かを見つめる君が嫌いだ","g":[]},{"t":"見惚れているかのような恋するような","g":[126]},{"t":"そんな顔が嫌いだ","g":[]},{"t":"信じていたいけど信じれないこと","g":[95]},{"t":"そんなのどうしたってきっと","g":[32,118]},{"t":"これからだっていくつもあって","g":[118]},{"t":"そのたんび怒って泣いていくの","g":[94,118]},{"t":"それでもきっといつかはきっと僕らはきっと","g":[32,79]},{"t":"分かり合えるさ信じてるよ","g":[]},{"t":"もう嫌だって疲れたんだって","g":[118]},{"t":"がむしゃらに差し伸べた僕の手を振り払う君","g":[]},{"t":"もう嫌だって疲れたよなんて","g":[118]},{"t":"本当は僕も言いたいんだ","g":[]},{"t":"ほらまたチックタックと","g":[]},{"t":"鳴る世界で何度だってさ","g":[118]},{"t":"君の為に用意した言葉どれも届かない","g":[]},{"t":"「終わりにしたい」だなんてさ","g":[59]},{"t":"釣られて言葉にした時","g":[59]},{"t":"君は初めて笑った","g":[]},{"t":"騒がしい日々に笑えなくなっていた","g":[95]},{"t":"僕の目に映る君は綺麗だ","g":[]},{"t":"明けない夜に溢れた涙も","g":[]},{"t":"君の笑顔に溶けていく","g":[94]},{"t":"変わらない日々に泣いていた僕を","g":[95]},{"t":"君は優しく終わりへと誘う","g":[]},{"t":"沈むように溶けてゆくように","g":[126]},{"t":"染み付いた霧が晴れる","g":[]},{"t":"忘れてしまいたくて閉じ込めた日々に","g":[]},{"t":"差し伸べてくれた君の手を取る","g":[97]},{"t":"涼しい風が空を泳ぐように今吹き抜けていく","g":[94,126]},{"t":"繋いだ手を離さないでよ","g":[]},{"t":"二人今、夜に駆け出していく","g":[94]}]},{"i":7,"title":"One more time, One more chance","artist":"山崎まさよし","vid":"BqFftJDXii0","vtitle":"山崎まさよし - 「One more time,One more chance」MUSIC VIDEO [4K画質]","hits":[19,20,54,62,74,83,102,107,110,119],"new":[19,20,102],"cum":50,"lines":[{"t":"これ以上何を失えば 心は許されるの","g":[]},{"t":"どれ程の痛みならば もういちど君に会える","g":[54]},{"t":"One more time 季節よ うつろわないで","g":[]},{"t":"One more time ふざけあった 時間よ","g":[]},{"t":"くいちがう時はいつも 僕が先に折れたね","g":[]},{"t":"わがままな性格が なおさら愛しくさせた","g":[74]},{"t":"One more chance 記憶に足を取られて","g":[119]},{"t":"One more chance 次の場所を選べない","g":[]},{"t":"いつでも捜しているよ どっかに君の姿を","g":[]},{"t":"向いのホーム 路地裏の窓","g":[]},{"t":"こんなとこにいるはずもないのに","g":[20,62]},{"t":"願いがもしも叶うなら 今すぐ君のもとへ","g":[54]},{"t":"できないことは もうなにもない","g":[]},{"t":"すべてかけて抱きしめてみせるよ","g":[]},{"t":"寂しさ紛らすだけなら","g":[54]},{"t":"誰でもいいはずなのに","g":[19,62]},{"t":"星が落ちそうな夜だから","g":[83]},{"t":"自分をいつわれない","g":[]},{"t":"One more time 季節よ うつろわないで","g":[]},{"t":"One more time ふざけあった時間よ","g":[]},{"t":"いつでも捜しているよ どっかに君の姿を","g":[]},{"t":"交差点でも 夢の中でも","g":[107]},{"t":"こんなとこにいるはずもないのに","g":[20,62]},{"t":"奇跡がもしも起こるなら 今すぐ君に見せたい","g":[54]},{"t":"新しい朝 これからの僕","g":[]},{"t":"言えなかった「好き」という言葉も","g":[110]},{"t":"夏の想い出がまわる ふいに消えた鼓動","g":[]},{"t":"いつでも捜しているよ どっかに君の姿を","g":[]},{"t":"明け方の街 桜木町で","g":[]},{"t":"こんなとこに来るはずもないのに","g":[20,62]},{"t":"願いがもしも叶うなら 今すぐ君のもとへ","g":[54]},{"t":"できないことはもう何もない","g":[]},{"t":"すべてかけて抱きしめてみせるよ","g":[]},{"t":"いつでも捜しているよ","g":[]},{"t":"どっかに君の破片を","g":[]},{"t":"旅先の店 新聞の隅","g":[]},{"t":"こんなとこにあるはずもないのに","g":[20,62]},{"t":"奇跡がもしも起こるなら 今すぐ君に見せたい","g":[54]},{"t":"新しい朝 これからの僕","g":[]},{"t":"言えなかった「好き」という言葉も","g":[110]},{"t":"いつでも捜してしまう どっかに君の笑顔を","g":[102]},{"t":"急行待ちの 踏切あたり","g":[]},{"t":"こんなとこにいるはずもないのに","g":[20,62]},{"t":"命が繰り返すならば 何度も君のもとへ","g":[54]},{"t":"欲しいものなど もう何もない","g":[]},{"t":"君のほかに大切なものなど","g":[]}]},{"i":8,"title":"スパークル","artist":"RADWIMPS","vid":"a2GujJZfXpg","vtitle":"スパークル [original ver.] -Your name. Music Video edition- 予告編 from new album「人間開花」初回盤DVD","hits":[14,16,22,44,50,54,101,107,114,115,118,126],"new":[22,101,115],"cum":53,"lines":[{"t":"まだこの世界は　僕を飼いならしてたいみたいだ","g":[44,54]},{"t":"望み通りいいだろう　美しくもがくよ","g":[]},{"t":"互いの砂時計　眺めながらキスをしようよ","g":[22,50]},{"t":"「さよなら」から一番　遠い　場所で待ち合わせよう","g":[54]},{"t":"辞書にある言葉で　出来上がった世界を憎んだ","g":[16]},{"t":"万華鏡の中で　八月のある朝","g":[]},{"t":"君は僕の前で　ハニかんでは澄ましてみせた","g":[]},{"t":"この世界の教科書のような笑顔で","g":[126]},{"t":"ついに時はきた　昨日までは序章の序章で","g":[]},{"t":"飛ばし読みでいいから　ここからが僕だよ","g":[]},{"t":"経験と知識と　カビの生えかかった勇気を持って","g":[118]},{"t":"いまだかつてないスピードで　君のもとへダイブを","g":[]},{"t":"まどろみの中で　生温いコーラに","g":[]},{"t":"ここでないどこかを　夢見たよ","g":[]},{"t":"教室の窓の外に","g":[]},{"t":"電車に揺られ　運ばれる朝に","g":[]},{"t":"愛し方さえも　君の匂いがした","g":[14]},{"t":"歩き方さえも　その笑い声がした","g":[14]},{"t":"いつか消えてなくなる　君のすべてを","g":[]},{"t":"この眼に焼き付けておくことは","g":[101]},{"t":"もう権利なんかじゃない　義務だと思うんだ","g":[114]},{"t":"運命だとか未来とかって　言葉がどれだけ手を","g":[115,118]},{"t":"伸ばそうと届かない　場所で僕ら恋をする","g":[]},{"t":"時計の針も二人を　横目に見ながら進む","g":[50]},{"t":"そんな世界を二人で　一生　いや、何章でも","g":[107]},{"t":"生き抜いていこう","g":[]}]},{"i":9,"title":"世界に一つだけの花","artist":"SMAP","vid":"n69cLnXHas4","vtitle":"SMAP - 世界に一つだけの花","hits":[5,16,50,61,62,83,87,95,98,118,122,126],"new":[61,87],"cum":55,"lines":[{"t":"「NO.1にならなくてもいい もともと特別なOnly one」","g":[]},{"t":"花屋の店先に並んだ","g":[]},{"t":"いろんな花を見ていた","g":[95]},{"t":"ひとそれぞれ好みはあるけど","g":[]},{"t":"どれもみんなきれいだね","g":[]},{"t":"この中で誰が一番だなんて","g":[61]},{"t":"争うこともしないで","g":[]},{"t":"バケツの中誇らしげに","g":[]},{"t":"しゃんと胸を張っている","g":[]},{"t":"それなのに僕ら人間は","g":[62]},{"t":"どうしてこうも比べたがる?","g":[16,87]},{"t":"一人一人違うのにその中で","g":[62]},{"t":"一番になりたがる?","g":[16,87]},{"t":"そうさ 僕らは","g":[]},{"t":"※世界に一つだけの花","g":[]},{"t":"一人一人違う種を持つ","g":[]},{"t":"その花を咲かせることだけに","g":[]},{"t":"一生懸命になればいい※","g":[5]},{"t":"困ったように笑いながら","g":[50,126]},{"t":"ずっと迷ってる人がいる","g":[118]},{"t":"頑張って咲いた花はどれも","g":[118]},{"t":"きれいだから仕方ないね","g":[]},{"t":"やっと店から出てきた","g":[98,122]},{"t":"その人が抱えていた","g":[95]},{"t":"色とりどりの花束と","g":[]},{"t":"うれしそうな横顔","g":[83]},{"t":"名前も知らなかったけれど","g":[]},{"t":"あの日僕に笑顔をくれた","g":[]},{"t":"誰も気づかないような場所で","g":[126]},{"t":"咲いてた花のように","g":[126]},{"t":"そうさ 僕らも","g":[]},{"t":"(※くり返し)","g":[]},{"t":"小さい花や大きな花","g":[]},{"t":"一つとして同じものはないから","g":[]},{"t":"NO.1にならなくてもいい","g":[]},{"t":"もともと特別なOnly one","g":[]},{"t":"※「 」内はシングルバージョンのみ有り","g":[]}]},{"i":10,"title":"未来予想図II","artist":"DREAMS COME TRUE","vid":"wUfYxzLq24E","vtitle":"【歌詞付き】 未来予想図II - DREAM COME TRUE","hits":[16,27,32,33,50,86,95,99,107,118,119],"new":[27,33,86],"cum":58,"lines":[{"t":"卒業してから もう3度目の春","g":[]},{"t":"あいかわらず そばにある 同じ笑顔","g":[]},{"t":"あの頃バイクで 飛ばした家までの道","g":[33]},{"t":"今はルーフからの星を 見ながら走ってる","g":[50,118]},{"t":"私を降ろした後 角をまがるまで 見送ると","g":[16]},{"t":"いつもブレーキランプ5回点滅","g":[]},{"t":"ア・イ・シ・テ・ル のサイン","g":[]},{"t":"きっと何年たっても こうしてかわらぬ気持ちで","g":[32,107]},{"t":"過ごしてゆけるのね あなたとだから","g":[]},{"t":"ずっと心に描く 未来予想図は","g":[]},{"t":"ほら 思ったとうりに かなえられてく","g":[119]},{"t":"時々2人で 開いてみるアルバム","g":[86,99]},{"t":"まだやんちゃな 写真達に笑いながら","g":[50]},{"t":"どれくらい同じ時間 2人でいたかしら","g":[27,95]},{"t":"こんなふうにさりげなく 過ぎてく毎日も","g":[]},{"t":"2人でバイクのメット5回ぶつけてたあの合図","g":[]},{"t":"サイン変わった今も 同じ気持ちで","g":[]},{"t":"素直に 愛してる","g":[]},{"t":"きっと何年たっても こうしてかわらぬ思いを","g":[32,107]},{"t":"持っていられるのも あなたとだから","g":[]},{"t":"ずっと心に描く 未来予想図は","g":[]},{"t":"ほら 思ったとうりに かなえられてく","g":[119]},{"t":"ほら 思ったとうりに かなえられてく・・・","g":[119]}]},{"i":11,"title":"雪の華","artist":"中島美嘉","vid":"mF5Qq2YheTg","vtitle":"中島美嘉「雪の華」Music Video","hits":[14,32,42,54,86,92,98,102,107,111,118,126],"new":[42,92,111],"cum":61,"lines":[{"t":"のびた人陰(かげ)を舗道にならべ","g":[54]},{"t":"夕闇のなかを君と歩いてる","g":[]},{"t":"手をつないでいつまでもずっと","g":[]},{"t":"そばにいれたなら","g":[54]},{"t":"泣けちゃうくらい","g":[102]},{"t":"風が冷たくなって","g":[118]},{"t":"冬の匂いがした","g":[14]},{"t":"そろそろこの街に","g":[]},{"t":"君と近付ける季節がくる","g":[]},{"t":"※今年、最初の雪の華を","g":[]},{"t":"ふたり寄り添って","g":[118]},{"t":"眺めているこの瞬間(とき)に","g":[]},{"t":"幸せがあふれだす※","g":[]},{"t":"甘えとか弱さじゃない","g":[]},{"t":"ただ、君を愛してる","g":[]},{"t":"心からそう思った","g":[]},{"t":"君がいるとどんなことでも","g":[107]},{"t":"乗りきれるような気持ちになってる","g":[118,126]},{"t":"こんな日々がいつまでもきっと","g":[32]},{"t":"続いてくことを祈っているよ","g":[86]},{"t":"風が窓を揺らした","g":[]},{"t":"夜は揺り起こして","g":[]},{"t":"どんな悲しいことも","g":[]},{"t":"僕が笑顔へと変えてあげる","g":[92]},{"t":"舞い落ちてきた雪の華が","g":[98]},{"t":"窓の外ずっと","g":[]},{"t":"降りやむことを知らずに","g":[]},{"t":"僕らの街を染める","g":[]},{"t":"誰かのためになにかを","g":[]},{"t":"したいと思えるのが","g":[]},{"t":"愛ということを知った","g":[111]},{"t":"もし、君を失ったとしたなら","g":[54]},{"t":"星になって君を照らすだろう","g":[118]},{"t":"笑顔も涙に濡れてる夜も","g":[]},{"t":"いつもいつでもそばにいるよ","g":[]},{"t":"(※くり返し)","g":[]},{"t":"甘えとか弱さじゃない","g":[]},{"t":"ただ、君とずっと","g":[]},{"t":"このまま一緒にいたい","g":[42]},{"t":"素直にそう思える","g":[]},{"t":"この街に降り積もってく","g":[118]},{"t":"真っ白な雪の華","g":[]},{"t":"ふたりの胸にそっと想い出を描くよ","g":[]},{"t":"これからも君とずっと…","g":[]}]},{"i":12,"title":"茶摘","artist":"文部省唱歌","vid":"NDWUhMZ05JA","vtitle":"茶摘","hits":[5,12,25,54,58],"new":[12],"cum":62,"lines":[{"t":"夏も近づく八十八夜　野にも山にも若葉が茂る","g":[]},{"t":"あれに見えるは茶摘じゃないか　あかねだすきに菅の笠","g":[12,25,58]},{"t":"日和つづきの今日此頃を　心のどかに摘みつつ歌う","g":[]},{"t":"摘めよ摘め　摘め摘め　摘まねばならぬ　摘まにゃ日本の茶にならぬ","g":[5,54]}]},{"i":13,"title":"3月9日","artist":"レミオロメン","vid":"UNRJyBHziX4","vtitle":"レミオロメン - 3月9日","hits":[5,35,71,118],"new":[35,71],"cum":64,"lines":[{"t":"流れる季節の真ん中で","g":[]},{"t":"ふと日の長さを感じます","g":[71]},{"t":"せわしく過ぎる日々の中に","g":[]},{"t":"私とあなたで夢を描く","g":[]},{"t":"3月の風に想いをのせて","g":[]},{"t":"桜のつぼみは春へとつづきます","g":[]},{"t":"溢れ出す光の粒が","g":[]},{"t":"少しずつ朝を暖めます","g":[]},{"t":"大きなあくびをした後に","g":[]},{"t":"少し照れてるあなたの横で","g":[]},{"t":"新たな世界の入口に立ち","g":[]},{"t":"気づいたことは 1人じゃないってこと","g":[118]},{"t":"※瞳を閉じれば あなたが","g":[5]},{"t":"まぶたのうらに いることで","g":[]},{"t":"どれほど強くなれたでしょう","g":[]},{"t":"あなたにとって私も そうでありたい※","g":[118]},{"t":"砂ぼこり運ぶ つむじ風","g":[]},{"t":"洗濯物に絡まりますが","g":[]},{"t":"昼前の空の白い月は","g":[]},{"t":"なんだかきれいで 見とれました","g":[]},{"t":"上手くはいかぬこともあるけれど","g":[35]},{"t":"天を仰げば それさえ小さくて","g":[5]},{"t":"青い空は凛と澄んで","g":[]},{"t":"羊雲は静かに揺れる","g":[]},{"t":"花咲くを待つ喜びを","g":[]},{"t":"分かち合えるのであれば それは幸せ","g":[5]},{"t":"この先も 隣で そっと微笑んで","g":[]},{"t":"(※くり返し)","g":[]}]},{"i":14,"title":"うっせぇわ","artist":"Ado","vid":"Qp3b-RXtz4w","vtitle":"【Ado】うっせぇわ","hits":[5,29,55,88,95,104,107,123,126],"new":[29,55],"cum":66,"lines":[{"t":"正(ただ)しさとは愚(おろ)かさとは","g":[]},{"t":"それが何(なに)か見(み)せつけてやる","g":[104]},{"t":"ちっちゃな頃(ころ)から優等(ゆうとう)生(せい)","g":[]},{"t":"気(き)づいたら大人(おとな)になっていた","g":[88,95]},{"t":"ナイフの様(よう)な思考(しこう)回路(かいろ)","g":[]},{"t":"持(も)ち合(あ)わせる訳(わけ)もなく","g":[]},{"t":"でも遊(あそ)び足(た)りない何(なに)か足(た)りない","g":[]},{"t":"困(こま)っちまうこれは誰(だれ)かのせい","g":[]},{"t":"あてもなくただ混乱(こんらん)するエイデイ","g":[107]},{"t":"それもそっか","g":[]},{"t":"最新(さいしん)の流行(りゅうこう)は当然(とうぜん)の把握(はあく)","g":[]},{"t":"経済(けいざい)の動向(どうこう)も通勤(つうきん)時(じ)チェック","g":[]},{"t":"純情(じゅんじょう)な精神(せいしん)で入社(にゅうしゃ)しワーク","g":[]},{"t":"社会人(しゃかいじん)じゃ当然(とうぜん)のルールです","g":[]},{"t":"はぁ？うっせぇうっせぇうっせぇわ","g":[]},{"t":"あなたが思(おも)うより健康(けんこう)です","g":[123]},{"t":"一切合切(いっさいがっさい)凡庸(ぼんよう)な","g":[]},{"t":"あなたじゃ分(わ)からないかもね","g":[29]},{"t":"嗚呼(ああ)よく似合(にあ)う","g":[]},{"t":"その可(か)もなく不可(ふか)もないメロディー","g":[]},{"t":"うっせぇうっせぇうっせぇわ","g":[]},{"t":"頭(あたま)の出来(でき)が違(ちが)うので問題(もんだい)はナシ","g":[]},{"t":"つっても私(わたし)模範(もはん)人間(にんげん)","g":[107]},{"t":"殴(なぐ)ったりするのはノーセンキュー","g":[]},{"t":"だったら言葉(ことば)の銃口(じゅうこう)を","g":[88]},{"t":"その頭(あたま)に突(つ)きつけて撃(う)てば","g":[5]},{"t":"マジヤバない？止(と)まれやしない","g":[]},{"t":"不平(ふへい)不満(ふまん)垂(た)れて成(な)れの果(は)て","g":[]},{"t":"サディスティックに変貌(へんぼう)する精神(せいしん)","g":[]},{"t":"クソだりぃな","g":[]},{"t":"酒(さけ)が空(あ)いたグラスあれば直(す)ぐに注(そそ)ぎなさい","g":[5,55]},{"t":"皆(みな)がつまみ易(やす)いように串(くし)外(はず)しなさい","g":[55,126]},{"t":"会計(かいけい)や注文(ちゅうもん)は先陣(せんじん)を切(き)る","g":[]},{"t":"不文律(ふぶんりつ)最低限(さいていげん)のマナーです","g":[]},{"t":"はぁ？うっせぇうっせぇうっせぇわ","g":[]},{"t":"くせぇ口塞(くちふた)げや限界(げんかい)です","g":[]},{"t":"絶対(ぜったい)絶対(ぜったい)現代(げんだい)の代弁者(だいべんしゃ)は私(わたし)やろがい","g":[]},{"t":"もう見飽(みあ)きたわ","g":[]},{"t":"二番煎(にばんせん)じ言(い)い換(か)えのパロディ","g":[]},{"t":"うっせぇうっせぇうっせぇわ","g":[]},{"t":"丸々(まるまる)と肉付(にくづ)いたその顔面(がんめん)にバツ","g":[]},{"t":"うっせぇうっせぇうっせぇわ","g":[]},{"t":"うっせぇうっせぇうっせぇわ","g":[]},{"t":"私(わたし)が俗(ぞく)に言(い)う天才(てんさい)です","g":[]},{"t":"うっせぇうっせぇうっせぇわ","g":[]},{"t":"あなたが思(おも)うより健康(けんこう)です","g":[123]},{"t":"一切合切(いっさいがっさい)凡庸(ぼんよう)な","g":[]},{"t":"あなたじゃ分(わ)からないかもね","g":[29]},{"t":"嗚呼(ああ)つまらねぇ","g":[]},{"t":"何回(なんかい)聞(き)かせるんだそのメモリー","g":[]},{"t":"うっせぇうっせぇうっせぇわ","g":[]},{"t":"アタシも大概(たいがい)だけど","g":[]},{"t":"どうだっていいぜ問題(もんだい)はナシ","g":[]}]},{"i":15,"title":"インフェルノ","artist":"Mrs. GREEN APPLE","vid":"wfCcs0vLysk","vtitle":"Mrs. GREEN APPLE - インフェルノ（Inferno）","hits":[5,40,42,86,95,98,99,118],"new":[40],"cum":67,"lines":[{"t":"照らすは闇","g":[]},{"t":"僕らは歩き慣れてきた日々も淘汰","g":[98]},{"t":"夢は安泰な暮らしだが","g":[]},{"t":"刺激不足故にタラタラ","g":[]},{"t":"照らすは熄み","g":[]},{"t":"僕らの歩き慣れていた道はどこだ","g":[95]},{"t":"時はたまに癪だが","g":[]},{"t":"温もりに包まれ只","g":[]},{"t":"炎が立つ","g":[]},{"t":"導の方へ","g":[]},{"t":"思い出すは優しいメロディー","g":[]},{"t":"永遠は無いんだと　無いんだと云フ","g":[]},{"t":"それもまたイイねと笑ってみる","g":[99,118]},{"t":"輝けばいつかは光も絶える","g":[5]},{"t":"僕らは命の火が消えるその日まで歩いてゆく","g":[]},{"t":"ところで何故","g":[]},{"t":"僕らは思考を急に辞めているんだ","g":[40]},{"t":"夢は安泰な暮らしだが","g":[]},{"t":"知識不足故にハラハラ","g":[]},{"t":"食せばYummy","g":[5]},{"t":"ヨスガに縋り付いたまま朽ちて行くんだ","g":[42]},{"t":"ここは業火の中だが","g":[]},{"t":"傷跡がヒリつき只","g":[]},{"t":"水面が立つ","g":[]},{"t":"光の方へ","g":[]},{"t":"手を取るは新しいメモリー","g":[]},{"t":"夜空が分かつ","g":[]},{"t":"導の方へ","g":[]},{"t":"遮るは堅苦しいセオリー","g":[]},{"t":"永遠は無いんだと　無いんだと云フ","g":[]},{"t":"やっぱ苦しいねと泣いてみる","g":[99]},{"t":"風船もいつかは萎むか割れる","g":[]},{"t":"僕らは命の泉を護り続けて繋いでゆく","g":[86]},{"t":"学びきれずに卒業","g":[]},{"t":"伝えきれずに失恋","g":[]},{"t":"遊びきれずに決別","g":[]},{"t":"面倒臭いが","g":[]},{"t":"地獄じゃあるまいし","g":[]},{"t":"音が出る玩具も","g":[]},{"t":"痛みを飛ばす魔法も","g":[]},{"t":"全部僕にとっての宝物","g":[118]},{"t":"永遠は無いんだと　無いんだと云フ","g":[]},{"t":"僕らは命の火が消えるその日まで歩いてゆく","g":[]}]},{"i":16,"title":"ケセラセラ","artist":"Mrs. GREEN APPLE","vid":"Jy-QS27q7lA","vtitle":"Mrs. GREEN APPLE「ケセラセラ」Official Music Video","hits":[16,22,54,64,71,88,93,107,118,126,127],"new":[127],"cum":68,"lines":[{"t":"ケセラセラ","g":[]},{"t":"今日も唱える","g":[]},{"t":"限界？上等。やってやろうか。","g":[22,118]},{"t":"愛を捨てるほど暇じゃない　いつも All right All right","g":[]},{"t":"ここを乗り越えたら　楽になるしかない","g":[88]},{"t":"痛み止めを飲んでも","g":[107]},{"t":"消えない胸のズキズキが","g":[]},{"t":"些細な誰かの優しさで","g":[]},{"t":"ちょっと和らいだりするんだよな","g":[]},{"t":"負けるな","g":[]},{"t":"今日も踏ん張って","g":[118]},{"t":"固めた殻で身を守って","g":[118]},{"t":"また諦める理由探すけど、","g":[]},{"t":"ケセラセラ","g":[]},{"t":"今日も唱える","g":[]},{"t":"限界、上等。妬ましさも全部","g":[]},{"t":"不幸の矢が抜けない日でも All right All right","g":[]},{"t":"食いしばってる","g":[118]},{"t":"でもね、","g":[]},{"t":"今日はちょっとだけご褒美を","g":[]},{"t":"わかっているけれど","g":[]},{"t":"私を愛せるのは私だけ。","g":[64]},{"t":"生まれ変わるなら？","g":[54]},{"t":"「また私だね。」","g":[]},{"t":"ひとりぼっちだと気付いても","g":[107]},{"t":"繋がりは消えるわけじゃない","g":[16]},{"t":"たまにがいい　たまにでいい","g":[]},{"t":"ちゃんと大切だと思えるから","g":[]},{"t":"貴方の幸せを分けてほしい","g":[93]},{"t":"悲劇の図鑑","g":[]},{"t":"私ってそう。","g":[118]},{"t":"仕方ない程　自分よがり","g":[16]},{"t":"バイバイ　幼き愛の日々","g":[]},{"t":"いいよもう　願うは「はじめから」","g":[]},{"t":"ベイベー　大人になんかなるもんじゃないぞ","g":[]},{"t":"ツァラトゥストラ","g":[]},{"t":"ケセラセラ","g":[]},{"t":"今日も唱える","g":[]},{"t":"何のせい？誰のせい？","g":[]},{"t":"勝てなくたっていい","g":[]},{"t":"負けない強さを持ちたい　そうさ All right All right","g":[71]},{"t":"乗り切ってみせる","g":[118]},{"t":"ケセラセラ","g":[]},{"t":"今日も言い聞かせる","g":[]},{"t":"不幸の矢が抜けない日でも All right All right","g":[]},{"t":"止まらないで居よう。","g":[]},{"t":"だから、今日は","g":[]},{"t":"ちょっとだけご褒美を","g":[]},{"t":"笑える日は来るから。","g":[]},{"t":"私を愛せるのは私だけ","g":[64]},{"t":"生まれ変わるなら？","g":[54]},{"t":"「また私だね。」","g":[]},{"t":"バイバイ　無頓着な愛の日々","g":[]},{"t":"ファンファーレ　喜劇的な「つづきから」","g":[]},{"t":"ベイベー　大人になんかなるもんじゃないけど","g":[]},{"t":"ケセラセラ","g":[]},{"t":"バイバイ　空っぽ器にヒビ","g":[]},{"t":"ファンファーレ　明日も「つづきから」","g":[]},{"t":"ベイベー　大人になんかなるもんじゃないけど","g":[]},{"t":"ケセラセラ","g":[]},{"t":"なるようになるのさ","g":[126,127]},{"t":"ケセラセラ","g":[]}]},{"i":17,"title":"ダンスホール","artist":"Mrs. GREEN APPLE","vid":"x2rvSf0STBM","vtitle":"Mrs. GREEN APPLE「ダンスホール」Official Music Video","hits":[32,42,69,70,80,86,88,99,102,107,117,118,126],"new":[69,70,80,117],"cum":72,"lines":[{"t":"いつだって大丈夫","g":[118]},{"t":"この世界はダンスホール","g":[]},{"t":"君が居るから愛を知ることがまた出来る","g":[]},{"t":"「大好き」を歌える","g":[69]},{"t":"知らぬ間に誰かいる","g":[]},{"t":"それに甘えすぎてる","g":[80]},{"t":"何処かできっと僕の事を","g":[32]},{"t":"恨んでる人がいる","g":[]},{"t":"溜息を吐いて吸って吸って吐かれては","g":[118]},{"t":"幸せを見逃しちゃうけど","g":[102]},{"t":"きっと結構ありがち","g":[32]},{"t":"足元にあるもの","g":[]},{"t":"いつだって大丈夫","g":[118]},{"t":"この世界はダンスホール","g":[]},{"t":"君が居るから愛を知ることがまた出来る","g":[]},{"t":"今日もほら陽が昇る","g":[]},{"t":"時代が周るダンスホール","g":[]},{"t":"悲しいことは尽き無いけど","g":[]},{"t":"幸せを数えてみる","g":[99]},{"t":"夢を追う君がいる","g":[]},{"t":"でもたまに自信を無くして見える","g":[]},{"t":"誰かになんと言われようとも","g":[]},{"t":"君はそのままがいい","g":[42]},{"t":"メンタルも成長痛を起こすでしょう","g":[]},{"t":"「無理をせず自分らしくいて」","g":[70]},{"t":"それが出来たら悩んでないよ","g":[88]},{"t":"まぁ明日こそ笑おう","g":[]},{"t":"結局は大丈夫","g":[]},{"t":"この世界はダンスホール","g":[]},{"t":"君の隣で愛を精一杯に探したい","g":[]},{"t":"今日もまた怒られる","g":[]},{"t":"気持ちの穴がポンっと増える","g":[]},{"t":"不器用だけど笑ってもらえるように笑う","g":[107,126]},{"t":"いつだって大丈夫","g":[118]},{"t":"この世界はダンスホール","g":[]},{"t":"楽しんだもん勝ちだ　ダンスホール","g":[]},{"t":"また陽が昇る","g":[]},{"t":"時代が周るダンスホール","g":[]},{"t":"足が疲れても踊る","g":[107]},{"t":"結局は大丈夫","g":[]},{"t":"この世界はダンスホール","g":[]},{"t":"あなたが主役のダンスホール","g":[]},{"t":"You know？ その笑顔が僕だけの太陽","g":[]},{"t":"君が笑える為のダンスホール","g":[]},{"t":"この愛を歌い続ける","g":[86,117]}]},{"i":18,"title":"ハルノヒ","artist":"あいみょん","vid":"pfGI91CFtRg","vtitle":"あいみょん – ハルノヒ【OFFICIAL MUSIC VIDEO】","hits":[14,30,50,57,58,71,86,93,97,99,117,118,126],"new":[57],"cum":73,"lines":[{"t":"北千住駅のプラットホーム","g":[]},{"t":"銀色の改札","g":[]},{"t":"思い出話と 想い出ふかし","g":[]},{"t":"腰掛けたベンチで","g":[]},{"t":"僕らは何も見えない","g":[]},{"t":"未来を誓い合った","g":[]},{"t":"寒さにこらえた木々と猫が","g":[71]},{"t":"まるで僕らのことで","g":[]},{"t":"蕾を咲かせようと実を揺らしてる","g":[]},{"t":"素敵に笑っている","g":[]},{"t":"焦らないでいい","g":[]},{"t":"いつか花束になっておくれよ","g":[118]},{"t":"それまで待っていてね","g":[]},{"t":"これからの展開をふたりで","g":[]},{"t":"飽きるまで過ごしてみるからね","g":[99]},{"t":"最低限の愛を伝えながら","g":[50]},{"t":"どんな未来が","g":[]},{"t":"こちらを覗いてるかな","g":[30]},{"t":"君の強さと僕の弱さをわけ合えば","g":[]},{"t":"どんな凄いことが起きるかな?","g":[]},{"t":"ほら もうこんなにも幸せ","g":[]},{"t":"いつかはひとり いつかはふたり","g":[]},{"t":"大切を増やしていこう","g":[]},{"t":"北千住駅をフワっと歩く","g":[]},{"t":"藍色のスカート","g":[]},{"t":"いつになく遠く遠くに見える","g":[58]},{"t":"加速する足音","g":[]},{"t":"素直じゃないと","g":[]},{"t":"いけないような気がしたよ","g":[14,126]},{"t":"優しさに甘えすぎて","g":[]},{"t":"怯えすぎた男の背中に","g":[]},{"t":"掌を添えてくれるのはもう","g":[97]},{"t":"前を歩く君じゃなきゃダメだから","g":[]},{"t":"どうか未来が","g":[]},{"t":"こちらに手を振ってほしい","g":[93,118]},{"t":"日々の辛さと僕の体が","g":[]},{"t":"だらしなく帰る場所を探し続けている","g":[86,117]},{"t":"ほら もうこんなにも夕焼け","g":[]},{"t":"いつかの灯り思い出すとき","g":[]},{"t":"大切に気づくのでしょう","g":[57]},{"t":"焦らないでいい","g":[]},{"t":"いつか花束になっておくれよ","g":[118]},{"t":"僕らは何も見えない","g":[]},{"t":"未来を誓い合った","g":[]},{"t":"どんな未来が","g":[]},{"t":"こちらを覗いてるかな","g":[30]},{"t":"君の強さと僕の弱さをわけ合えば","g":[]},{"t":"どんな凄いことが起きるかな?","g":[]},{"t":"ほら もうこんなにも幸せ","g":[]},{"t":"いつかはひとり いつかはふたり","g":[]},{"t":"いや もっと もっと","g":[]},{"t":"大切を増やしていこう?","g":[]},{"t":"住み慣れた駅のプラットホーム","g":[]},{"t":"水色に挨拶","g":[]},{"t":"「お帰りなさい」と","g":[]},{"t":"小さく揺れる影を踏む幸せ","g":[]}]},{"i":19,"title":"今夜このまま","artist":"あいみょん","vid":"mH6LoI63buY","vtitle":"あいみょん - 今夜このまま【OFFICIAL MUSIC VIDEO】","hits":[5,7,22,42,50,62,78,88,97,99,102,118,125,126],"new":[78,125],"cum":75,"lines":[{"t":"苦いようで甘いようなこの泡に","g":[125,126]},{"t":"くぐらせる想いが弾ける","g":[]},{"t":"体は言う事を聞かない","g":[]},{"t":"「いかないで」って","g":[118]},{"t":"走ってゆければいいのに","g":[5,62,118]},{"t":"広いようで狭いようなこの場所は","g":[125,126]},{"t":"言いたい事も喉に詰まる","g":[]},{"t":"体が帰りたいと嘆く","g":[]},{"t":"「いかないで」って","g":[118]},{"t":"叫んでくれる人がいればなぁ","g":[5,97]},{"t":"抜け出せない","g":[]},{"t":"抜けきれない","g":[]},{"t":"よくある話じゃ終われない","g":[]},{"t":"簡単に冷める気もないから","g":[]},{"t":"とりあえずアレ下さい","g":[]},{"t":"消えない想いは","g":[]},{"t":"軽く火照らせて飛ばして","g":[]},{"t":"指先から始まる何かに期待して","g":[]},{"t":"泳いでく　溺れてく","g":[]},{"t":"今夜はこのまま","g":[42]},{"t":"泡の中で眠れたらなぁ","g":[88]},{"t":"だんだん息もできなくなって","g":[118]},{"t":"心の壁も穴だらけで","g":[]},{"t":"制御不能　結構不幸？","g":[]},{"t":"自暴自棄　です。","g":[]},{"t":"そんなに多くはいらないから","g":[78]},{"t":"幸せの横棒ひとつくらいで","g":[]},{"t":"満たされたい　満たしてみたい","g":[99]},{"t":"乱されたい　会いたい","g":[]},{"t":"いつかの誰かに","g":[]},{"t":"やるせない","g":[]},{"t":"やりきれない","g":[]},{"t":"よくある話じゃ終われない","g":[]},{"t":"簡単に辞める気もないから","g":[]},{"t":"とりあえずアレ下さい","g":[]},{"t":"言えない想いは","g":[]},{"t":"軽く飲み込んで　隠しちゃって","g":[102,118]},{"t":"鼻の先に取り付いた本音に油断して","g":[]},{"t":"抱かれてく　騙されてく","g":[]},{"t":"今夜の夜風に","g":[]},{"t":"吹かれながら　揺れながら","g":[50]},{"t":"ねぇ　もう　帰ろう　帰ろう","g":[22]},{"t":"影も　もう　ねぇ　薄くなって","g":[118]},{"t":"結局　味のない　味気のない","g":[]},{"t":"夜が眠る","g":[]},{"t":"癒えない想いが","g":[]},{"t":"加速するばかりなんだ","g":[7]},{"t":"止められない","g":[]},{"t":"放たれてく　夜になる","g":[]},{"t":"私はこのまま","g":[42]},{"t":"消えない想いは","g":[]},{"t":"軽く火照らせて飛ばして","g":[]},{"t":"指先から始まる何かに期待して","g":[]},{"t":"泳いでく　溺れてく","g":[]},{"t":"今夜はこのまま","g":[42]},{"t":"泡の中で眠れたらなぁ","g":[88]},{"t":"誰かの腕の中で","g":[]},{"t":"甘い夢を見ながら","g":[50]},{"t":"眠れたらなぁ","g":[88]}]},{"i":20,"title":"光るなら","artist":"Goose house","vid":"SnXkhkEvNIM","vtitle":"光るなら／Goose house","hits":[9,16,18,32,54,68,88,97,118,126],"new":[18,68],"cum":77,"lines":[{"t":"雨上がりの虹も　凛と咲いた花も　色づき溢れ出す","g":[16]},{"t":"茜色の空　仰ぐ君に あの日　恋に落ちた","g":[]},{"t":"瞬間のドラマチック","g":[]},{"t":"フィルムの中の1コマも　消えないよ　心に刻むから","g":[]},{"t":"君だよ　君なんだよ　教えてくれた","g":[97]},{"t":"暗闇も光るなら　星空になる","g":[54]},{"t":"悲しみを笑顔に　もう隠さないで","g":[]},{"t":"煌めくどんな星も　君を照らすから","g":[]},{"t":"眠りも忘れて迎えた朝日が　やたらと突き刺さる","g":[88]},{"t":"低気圧運ぶ　頭痛だって　忘れる　君に会えば","g":[118]},{"t":"静寂はロマンティック","g":[]},{"t":"紅茶に溶けたシュガーのように　全身に巡るよ　君の声","g":[126]},{"t":"君だよ　君なんだよ　笑顔をくれた","g":[]},{"t":"涙も光るなら　流星になる","g":[54]},{"t":"傷付いたその手を　もう離さないで","g":[]},{"t":"願いを込めた空に　明日が来るから","g":[]},{"t":"導いてくれた　光は　君だよ　つられて僕も　走り出した","g":[9,97]},{"t":"知らぬ間に　クロスし始めた　ほら　今だ　ここで　光るなら","g":[18,54]},{"t":"君だよ　君なんだよ　教えてくれた　暗闇は終わるから","g":[68,97]},{"t":"君だよ　君なんだよ　教えてくれた","g":[97]},{"t":"暗闇も光るなら　星空になる","g":[54]},{"t":"悲しみを笑顔に　もう隠さないで","g":[]},{"t":"煌めくどんな星も　君を照らすから","g":[]},{"t":"答えはいつでも　偶然？必然？　いつか選んだ道こそ　運命になる","g":[]},{"t":"握りしめたその希望も不安も　きっと2人を動かす　光になるから","g":[32]}]},{"i":21,"title":"ラムのラブソング","artist":"松谷祐子","vid":"JJw6exFLpEE","vtitle":"ラムのラブソング","hits":[3,33,107,118,123],"new":[3],"cum":78,"lines":[{"t":"※あんまりソワソワしないで","g":[3]},{"t":"あなたはいつでもキョロキョロ","g":[]},{"t":"よそ見をするのはやめてよ","g":[]},{"t":"私が誰よりいちばん","g":[123]},{"t":"好きよ 好きよ 好きよ","g":[]},{"t":"好きよ 好きよ 好きよ","g":[]},{"t":"好きよ 好きよ 好きよ","g":[]},{"t":"好きよ 好きよ 好きよ","g":[]},{"t":"星たちが輝く夜ふけ","g":[]},{"t":"夢見るの あなたの全て","g":[]},{"t":"愛しても あなたは知らんぷりで","g":[107]},{"t":"今ごろは 誰かに夢中","g":[33]},{"t":"ああ 男の人って","g":[118]},{"t":"いくつも愛を持っているのね","g":[]},{"t":"ああ あちこちにバラまいて","g":[]},{"t":"私を悩ませるわ","g":[]},{"t":"※印くりかえし","g":[]},{"t":"ああ 男の人って","g":[118]},{"t":"何人 好きな人がほしいの","g":[]},{"t":"ああ 私だけ愛してよ","g":[]},{"t":"いつでもひとりだけを","g":[]},{"t":"※印くりかえし","g":[]},{"t":"私がいつでもいちばん","g":[]},{"t":"あなたの全てが","g":[]},{"t":"好きよ 好きよ 好きよ","g":[]},{"t":"好きよ 好きよ 好きよ","g":[]},{"t":"いちばん好きよ!","g":[]}]},{"i":22,"title":"それが大事","artist":"大事MANブラザーズバンド","vid":"i-4in14x5y0","vtitle":"大事MANブラザーズバンド - それが大事","hits":[5,8,26,70,79,83,107,114,119,123,126],"new":[26],"cum":79,"lines":[{"t":"※負けない事","g":[]},{"t":"投げ出さない事","g":[]},{"t":"逃げ出さない事","g":[]},{"t":"信じ抜く事","g":[]},{"t":"駄目になりそうな時","g":[83]},{"t":"それが一番大事※","g":[]},{"t":"△負けない事","g":[]},{"t":"投げ出さない事","g":[]},{"t":"逃げ出さない事","g":[]},{"t":"信じ抜く事","g":[]},{"t":"涙見せてもいいよ","g":[]},{"t":"それを忘れなければ△","g":[5]},{"t":"Ohー","g":[]},{"t":"高価な墓石を建てるより","g":[123]},{"t":"安くても生きてる方がすばらしい","g":[70,107]},{"t":"ここに居るだけで傷ついてる人はいるけど","g":[8]},{"t":"さんざん我侭言った後あなたへの想いは","g":[]},{"t":"変わらないけど","g":[]},{"t":"見えてるやさしさに時折負けそうになる","g":[83]},{"t":"ここにあなたが居ないのが淋しいのじゃなくて","g":[]},{"t":"ここにあなたが居ないと思う事が淋しい(でも)","g":[114]},{"t":"(※くり返し)","g":[]},{"t":"高価なニットをあげるより","g":[123]},{"t":"下手でも手で編んだ方が美しい","g":[]},{"t":"ここに無いものを信じれるかどうかにある","g":[26]},{"t":"今は遠くに離れてるそれでも生きていれば","g":[5,79]},{"t":"いつかは逢える","g":[]},{"t":"でも傷つかぬように嘘は繰り返される","g":[119,126]},{"t":"ここにあなたがいないのがせつないのじゃなくて","g":[]},{"t":"ここにあなたがいないと思う事がせつない(でも)","g":[114]},{"t":"(※くり返し×2)","g":[]},{"t":"(△くり返し)","g":[]},{"t":"(※くり返し)","g":[]},{"t":"(△くり返し)","g":[]}]},{"i":23,"title":"I'm proud","artist":"華原朋美","vid":"kRaJsFM7VV8","vtitle":"I'm proud","hits":[14,32,83,86,94,95,98,100,107,117,118],"new":[100],"cum":80,"lines":[{"t":"Lonely くじけそうな姿 窓に映して","g":[83]},{"t":"あてもなく歩いた 人知れずため息つく","g":[107]},{"t":"I'm proud 壊れそうで崩れそな情熱を","g":[]},{"t":"つなぎとめる何かいつも捜し続けてた","g":[86,117]},{"t":"どうして あんなに夢が素直に見れなくなってた?","g":[118]},{"t":"街中で居る場所なんてどこにもない","g":[]},{"t":"体中から愛がこぼれていた","g":[95]},{"t":"人混みをすりぬける 大人が誘いの手を引く","g":[]},{"t":"経験が増えていく 避けて通れなくなってた","g":[94,118]},{"t":"さまよったって 愛すること誇れる誰かに","g":[118]},{"t":"会えなさそうで 会えそな気がしてたから生きてた…","g":[14]},{"t":"I'm proud 届きそうで つかめない いちごの様に","g":[]},{"t":"甘く切ない事 夜中(よるじゅう)思い浮かべてた","g":[]},{"t":"ひとつふたつ消えてく 家の明かり数えていた","g":[95]},{"t":"街中で寝る場所なんてどこにもない","g":[]},{"t":"体中から涙こぼれていた","g":[95]},{"t":"最善を尽しても理解りあえない人もいた","g":[107]},{"t":"めちゃくちゃを言ったって 瞳の奥の優しさを","g":[118]},{"t":"持っている人 持っている私をあげたい","g":[]},{"t":"忘れないでね 寂しくたって私は負けない","g":[118]},{"t":"Lonely 壊れそうで崩れそな情熱を","g":[]},{"t":"つなぎとめる何か いつも捜し続けてた","g":[86,117]},{"t":"I'm proud いつからか自分を誇れる様に","g":[]},{"t":"なってきたのはきっと あなたに会えた夜から","g":[32,98,118]},{"t":"声にならなくても想いが時には伝わらなくても","g":[107]},{"t":"笑顔も泣き顔も全てみんな かならずあなたに知ってもらうの","g":[100,107]},{"t":"…I'm proud","g":[]}]},{"i":24,"title":"ら・ら・ら","artist":"大黒摩季","vid":"SBogk2eyj6s","vtitle":"ら・ら・ら","hits":[5,7,14,62,64,77,107,110,118],"new":[77],"cum":81,"lines":[{"t":"懐かしいにおいがした すみれの花時計","g":[14]},{"t":"恋愛中ってもっと楽しいと思ってた","g":[107,118]},{"t":"好きになるのは簡単なのに輝き持続するのは…","g":[62]},{"t":"ら・ら・ら ～今日と明日はあなたに逢えない","g":[]},{"t":"TVやマスコミはいったい誰のもの?","g":[]},{"t":"とっても寂しいから とりあえずつけてます","g":[107]},{"t":"夢があるのはいいのだけど こんな忙しい人じゃ…","g":[64]},{"t":"ら・ら・ら ～今日も明日もあなたに逢いたい","g":[]},{"t":"年月が経つのはナゼ こんなに早いのだろう","g":[64]},{"t":"あっという間にもう こんな年齢だし、親も年だし、","g":[77,110]},{"t":"あなたしかいないし…ねえ","g":[]},{"t":"ら・ら・ら ～何かやらなきゃ誰にも会えない","g":[]},{"t":"人の心 裏の裏は ただの表だったりして","g":[]},{"t":"振り返れば恋ばかりで つい自分を忘れてた","g":[5,7]},{"t":"これから私 何をどうして生きていけばいいんだろう…","g":[5]},{"t":"ら・ら・ら ～やっぱり 今日も明日もあなたに逢いたい","g":[]},{"t":"ら・ら・ら ～だけど 今日も明日もあなたに逢えない","g":[]},{"t":"ずっと ずっと ずっと…一緒にいようね","g":[]}]},{"i":25,"title":"セロリ","artist":"山崎まさよし","vid":"M4sWFgBYNbI","vtitle":"山崎まさよし - 「セロリ」MUSIC VIDEO [4K画質]","hits":[98,99,102,107,118,120],"new":[120],"cum":82,"lines":[{"t":"育ってきた環境が違うから好き嫌いはイナメナイ","g":[98,118]},{"t":"夏がだめだったりセロリが好きだったりするのね","g":[]},{"t":"ましてや男と女だからすれちがいはしょうがない","g":[120]},{"t":"妥協してみたり多くを求めたり なっちゃうね","g":[99,102]},{"t":"何がきっかけでどんなタイミングで二人は出逢ったんだろう","g":[]},{"t":"やるせない時とか心許ない夜","g":[]},{"t":"出来るだけいっしょにいたいのさ","g":[]},{"t":"がんばってみるよ　やれるだけ","g":[99,118]},{"t":"がんばってみてよ　少しだけ","g":[99,118]},{"t":"なんだかんだ言っても　つまりは　単純に","g":[107]},{"t":"君のこと好きなのさ","g":[]},{"t":"もともと何処吹く他人だから価値観はイナメナイ","g":[]},{"t":"流行が好きだったりそのわり古風なとこあったりするのね","g":[]},{"t":"性格曲げてまで気持ちおさえてまで付き合うことないけど","g":[]},{"t":"一人じゃ持ち切れない素敵な時間に","g":[]},{"t":"出来るだけいっしょにいたいのさ","g":[]},{"t":"がんばってみるよ　やれるだけ","g":[99,118]},{"t":"がんばってみてよ　少しだけ","g":[99,118]},{"t":"なんだかんだ言っても　つまりは　単純に","g":[107]},{"t":"君のこと好きなのさ","g":[]}]}],"uncovered":[2,4,6,10,13,15,17,21,23,24,31,37,38,39,41,43,48,49,51,53,56,60,63,65,66,67,72,75,76,81,82,84,85,89,90,91,96,103,106,109,112,113,116,121,124,128,129,130,131,132],"grammar":[{"no":1,"g":"間（あいだ）","romaji":"aida","zh":"在～期間（持續狀態）","example":"夏休みの間、ずっと田舎にいた。","form":"動詞ている形／名詞 + の + 間","note":""},{"no":2,"g":"間に（あいだに）","romaji":"aida ni","zh":"在～期間內發生了某事","example":"留守の間に荷物が届いた。","form":"動詞ている形／名詞 + の + 間に","note":""},{"no":3,"g":"あまり～ない","romaji":"amari~nai","zh":"不太～（程度不高）","example":"この料理はあまり辛くない。","form":"あまり + 否定形","note":""},{"no":4,"g":"後で（あとで）","romaji":"ato de","zh":"～之後（時間順序）","example":"食事の後で散歩する。","form":"名詞 + の + 後で／動詞た形 + 後で","note":""},{"no":5,"g":"ば（条件形）","romaji":"ba","zh":"如果～就～（假定條件）","example":"雨が降れば試合は中止だ。","form":"動詞ば形（書けば・食べれば）","note":""},{"no":6,"g":"場合は（ばあいは）","romaji":"baai wa","zh":"在～的情況下","example":"雨の場合は中止です。","form":"名詞 + の／動詞 + 場合は","note":""},{"no":7,"g":"ばかり","romaji":"bakari","zh":"光是～；淨是～；大約","example":"文句ばかり言っている。","form":"名詞／動詞 + ばかり","note":"「ばかり」表「淨是」，帶不滿；表「大約」時接數量詞（三十分ばかり）。"},{"no":8,"g":"だけで","romaji":"dake de","zh":"光是～就（能）～；只要～","example":"見ただけで分かった。","form":"動詞た形／名詞 + だけで","note":""},{"no":9,"g":"出す（だす）","romaji":"dasu","zh":"開始～（動作的起始）","example":"急に泣き出した。","form":"動詞ます形語幹 + 出す","note":""},{"no":10,"g":"でございます","romaji":"de gozaimasu","zh":"是～（最高敬語）","example":"こちらが受付でございます。","form":"名詞 + でございます","note":""},{"no":11,"g":"でも","romaji":"demo","zh":"～之類；～怎麼樣（提案）","example":"お茶でも飲みませんか。","form":"名詞 + でも（提案）","note":""},{"no":12,"g":"ではないか","romaji":"dewa nai ka","zh":"不是～嗎（確認／反駁）","example":"これは君のミスではないか。","form":"文末 + ではないか","note":""},{"no":13,"g":"が必要（がひつよう）","romaji":"ga hitsuyou","zh":"需要～","example":"説明が必要だ。","form":"名詞 + が必要","note":""},{"no":14,"g":"がする","romaji":"ga suru","zh":"（味道／聲音／感覺）有～","example":"台所からいい匂いがする。","form":"名詞 + がする（匂い・音・味）","note":""},{"no":15,"g":"がり","romaji":"gari","zh":"～的性格（容易～的人）","example":"彼は寂しがりだ。","form":"形容詞語幹 + がり（寂しがり）","note":""},{"no":16,"g":"がる / がっている","romaji":"garu / gatteiru","zh":"（第三人稱）表現出～的樣子","example":"子供が怖がっている。","form":"形容詞語幹 + がる／た形 + がる","note":""},{"no":17,"g":"ございます","romaji":"gozaimasu","zh":"有～／是～（最禮貌）","example":"お手洗いはこちらにございます。","form":"名詞 + でございます／にございます","note":""},{"no":18,"g":"始める（はじめる）","romaji":"hajimeru","zh":"開始～（動作起始）","example":"本を読み始めた。","form":"動詞ます形語幹 + 始める","note":""},{"no":19,"g":"はずだ","romaji":"hazu da","zh":"應該～；理應～","example":"彼はもう着いているはずだ。","form":"動詞辞書形／た形 + はずだ","note":"「はずだ」是有根據的推測，比「だろう」更確定。否定形「はずがない」＝不可能。"},{"no":20,"g":"はずがない","romaji":"hazu ga nai","zh":"不可能～；不會～","example":"そんなはずがない。","form":"動詞辞書形 + はずがない","note":"語氣強烈：說話者認為絕對不可能。"},{"no":21,"g":"必要がある（ひつようがある）","romaji":"hitsuyou ga aru","zh":"有必要～；必須～","example":"もっと勉強する必要がある。","form":"動詞辞書形 + 必要がある","note":""},{"no":22,"g":"意向形（いこうけい）","romaji":"ikou kei","zh":"（意志／邀約）～吧","example":"そろそろ帰ろう。","form":"動詞意向形（しよう・行こう）","note":"意向形＝動詞的「意志・邀約」形（行こう・食べよう），不是句型而是活用。"},{"no":23,"g":"いらっしゃる","romaji":"irassharu","zh":"在／來／去（尊敬語）","example":"先生はいらっしゃいますか。","form":"いらっしゃる（いる／行く／来る 的尊敬語）","note":""},{"no":24,"g":"いたします","romaji":"itashimasu","zh":"做～（謙讓語）","example":"私がご案内いたします。","form":"いたします（する 的謙讓語）","note":""},{"no":25,"g":"じゃないか","romaji":"janai ka","zh":"不是嗎（確認／主張）","example":"ほら、言ったじゃないか。","form":"文末 + じゃないか","note":""},{"no":26,"g":"かどうか","romaji":"ka dou ka","zh":"是否～","example":"行くかどうか決めていない。","form":"動詞辞書形 + かどうか","note":""},{"no":27,"g":"かしら","romaji":"kashira","zh":"～吧？（女性疑問）","example":"これでいいのかしら。","form":"文末 + かしら","note":""},{"no":28,"g":"かい","romaji":"kai","zh":"～嗎？（男性親切疑問）","example":"元気かい？","form":"文末 + かい（男性）","note":""},{"no":29,"g":"かもしれない","romaji":"kamo shirenai","zh":"也許～；說不定～","example":"明日は雨かもしれない。","form":"動詞／形容詞 + かもしれない","note":"口語常省略成「かも」：明日は雨かも。"},{"no":30,"g":"かな","romaji":"kana","zh":"～吧（自言自語的疑問）","example":"どうしようかな。","form":"文末 + かな","note":""},{"no":31,"g":"から作る（からつくる）","romaji":"kara tsukuru","zh":"由～製成（原料看不出原形）","example":"ワインはぶどうから作られる。","form":"名詞 + から作る（材料看不出原形）","note":""},{"no":32,"g":"きっと","romaji":"kitto","zh":"一定～；肯定～","example":"きっと合格するよ。","form":"きっと + 推量","note":""},{"no":33,"g":"頃（ころ / ごろ）","romaji":"koro / goro","zh":"大約～的時候","example":"子供の頃、よく遊んだ。","form":"名詞 + の頃／動詞た形 + 頃","note":""},{"no":34,"g":"こと（名詞化）","romaji":"koto","zh":"把動詞變成名詞（～這件事）","example":"歌うことが好きだ。","form":"動詞辞書形 + こと（名詞化）","note":"「こと」和「の」都能名詞化，但「こと」偏書面、抽象；「の」偏口語、具體感受。"},{"no":35,"g":"ことがある","romaji":"koto ga aru","zh":"有時會～（經驗／偶爾）","example":"たまに映画を見ることがある。","form":"動詞た形／辞書形 + ことがある","note":""},{"no":36,"g":"ことができる","romaji":"koto ga dekiru","zh":"能夠～（可能）","example":"日本語を話すことができる。","form":"動詞辞書形 + ことができる","note":""},{"no":37,"g":"ことになる","romaji":"koto ni naru","zh":"（客觀決定）決定～；結果變成～","example":"来月転勤することになった。","form":"動詞辞書形／ない形 + ことになる","note":""},{"no":38,"g":"ことにする","romaji":"koto ni suru","zh":"（自己決定）決定要～","example":"毎日走ることにした。","form":"動詞辞書形／ない形 + ことにする","note":""},{"no":39,"g":"くする","romaji":"ku suru","zh":"使～變成（形容詞）","example":"部屋を明るくする。","form":"形容詞語幹 + くする","note":""},{"no":40,"g":"急に（きゅうに）","romaji":"kyuu ni","zh":"突然地","example":"急に雨が降り出した。","form":"急に + 動詞","note":""},{"no":41,"g":"までに","romaji":"made ni","zh":"在～之前（期限）","example":"明日の10時までに来てください。","form":"名詞／動詞辞書形 + までに","note":""},{"no":42,"g":"まま","romaji":"mama","zh":"保持原樣；就那樣","example":"靴を履いたまま入った。","form":"動詞た形／ない形 + まま（名詞 + の + まま）","note":"「まま」＝維持某狀態不變。「〜たまま」＝做了之後就一直那樣。"},{"no":43,"g":"または","romaji":"mata wa","zh":"或者～（書面選擇）","example":"現金またはカードで払える。","form":"名詞 + または + 名詞","note":""},{"no":44,"g":"みたいだ","romaji":"mitai da","zh":"好像～（口語推測）","example":"雨が降ったみたいだ。","form":"動詞／形容詞 + みたいだ","note":"「みたいだ」是口語，「ようだ」是書面，意思幾乎相同。"},{"no":45,"g":"みたいな","romaji":"mitai na","zh":"像～那樣的（連體）","example":"君みたいな人が好きだ。","form":"名詞 + みたいな + 名詞","note":""},{"no":46,"g":"みたいに","romaji":"mitai ni","zh":"像～一樣地（連用）","example":"鳥みたいに飛びたい。","form":"名詞 + みたいに + 動詞","note":""},{"no":47,"g":"も（数量強調）","romaji":"mo","zh":"多達～；竟有～","example":"三時間も待った。","form":"数量詞 + も","note":"「も」接數量詞表示「多達」，帶驚訝感：三時間も待った。"},{"no":48,"g":"な（禁止形）","romaji":"na","zh":"不要～（強烈禁止）","example":"触るな。","form":"動詞辞書形 + な（禁止）","note":"原形 + な 是強烈禁止，語氣很硬，對長輩不可用。"},{"no":49,"g":"など","romaji":"nado","zh":"～之類；等等","example":"本や雑誌などを読む。","form":"名詞 + など","note":""},{"no":50,"g":"ながら","romaji":"nagara","zh":"一邊～一邊～","example":"音楽を聴きながら歩く。","form":"動詞ます形語幹 + ながら","note":"「ながら」主句動作是重點，附屬動作是背景；「ながらも」則表逆接。"},{"no":51,"g":"なかなか～ない","romaji":"nakanaka~nai","zh":"遲遲不～；不容易～","example":"なかなか眠れない。","form":"なかなか + 否定形","note":""},{"no":52,"g":"なければいけない","romaji":"nakereba ikenai","zh":"必須～；不得不～","example":"行かなければいけない。","form":"動詞ない形（ければ）+ いけない","note":""},{"no":53,"g":"なければならない","romaji":"nakereba naranai","zh":"必須～（客觀義務）","example":"約束は守らなければならない。","form":"動詞ない形（ければ）+ ならない","note":""},{"no":54,"g":"なら","romaji":"nara","zh":"如果是～的話（提起話題）","example":"君が行くなら僕も行く。","form":"名詞／動詞辞書形 + なら","note":"「なら」是承接對方話題的假定，與「たら」「ば」的條件不同。"},{"no":55,"g":"なさい","romaji":"nasai","zh":"請～（指示）","example":"早く寝なさい。","form":"動詞ます形語幹 + なさい","note":"「なさい」是父母對小孩、老師對學生的指示，對平輩以上失禮。"},{"no":56,"g":"なさる","romaji":"nasaru","zh":"做～（尊敬語）","example":"何をなさいますか。","form":"なさいます／なさる（する 的尊敬語）","note":""},{"no":57,"g":"に気がつく（にきがつく）","romaji":"ni ki ga tsuku","zh":"注意到～；察覺到～","example":"間違いに気がついた。","form":"名詞 + に気がつく","note":""},{"no":58,"g":"に見える（にみえる）","romaji":"ni mieru","zh":"看起來像～","example":"彼は若く見える。","form":"名詞／形容詞 + に見える","note":""},{"no":59,"g":"にする","romaji":"ni suru","zh":"決定選～；做成～","example":"コーヒーにする。","form":"名詞 + にする（選擇）","note":""},{"no":60,"g":"にくい","romaji":"nikui","zh":"難以～；不容易～","example":"この字は読みにくい。","form":"動詞ます形語幹 + にくい","note":""},{"no":61,"g":"の中で（のなかで）","romaji":"no naka de","zh":"在～之中（最高級）","example":"クラスの中で彼が一番速い。","form":"名詞 + の中で（最高級）","note":""},{"no":62,"g":"のに","romaji":"noni","zh":"明明～卻～（不滿／意外）","example":"頑張ったのに負けた。","form":"文 + のに（逆接）","note":"「のに」帶不滿或惋惜；單純逆接用「が」「けれど」。"},{"no":63,"g":"のに（目的）","romaji":"noni","zh":"為了～（需要／有用）","example":"この道具は料理を作るのに便利だ。","form":"動詞辞書形 + のに（用途）","note":""},{"no":64,"g":"のは〜だ","romaji":"nowa~da","zh":"～的是…（強調句）","example":"犯人は彼なのは明らかだ。","form":"文 + のは + 名詞 + だ","note":""},{"no":65,"g":"お～ください","romaji":"o~kudasai","zh":"請～（尊敬指示）","example":"お掛けください。","form":"お + 動詞ます形語幹 + ください","note":""},{"no":66,"g":"お～になる","romaji":"o~ni naru","zh":"做～（尊敬語）","example":"先生はもうお帰りになりました。","form":"お + 動詞ます形語幹 + になる","note":""},{"no":67,"g":"おきに","romaji":"oki ni","zh":"每隔～","example":"一日おきに運動する。","form":"数量詞 + おきに","note":""},{"no":68,"g":"終わる（おわる）","romaji":"owaru","zh":"結束～（動作完了）","example":"映画が終わった。","form":"動詞ます形語幹 + 終わる","note":""},{"no":69,"g":"られる（可能形）","romaji":"rareru","zh":"能夠～（可能）","example":"このキノコは食べられる。","form":"動詞可能形（書ける・食べられる）","note":"可能形與被動形同形（られる），要靠上下文判斷。五段動詞是「える」段（書ける）。"},{"no":70,"g":"らしい","romaji":"rashii","zh":"似乎～；聽說～（客觀推測）","example":"明日は雨らしい。","form":"名詞／動詞 + らしい","note":"「らしい」是根據客觀資訊的推測；「みたい」「ようだ」偏主觀印象。"},{"no":71,"g":"さ（名詞化）","romaji":"sa","zh":"～的程度；～性（形容詞名詞化）","example":"高さが分からない。","form":"形容詞語幹 + さ","note":""},{"no":72,"g":"さっき","romaji":"sakki","zh":"剛才～","example":"さっきから待っている。","form":"さっき + 動詞た形","note":""},{"no":73,"g":"させられる（使役受身）","romaji":"saserareru","zh":"被迫做～","example":"上司に残業させられた。","form":"動詞使役受身形（させられる）","note":""},{"no":74,"g":"させる（使役形）","romaji":"saseru","zh":"讓／叫～做","example":"子供を遊ばせる。","form":"動詞使役形（させる）","note":"使役形＝讓／叫某人做。短縮形「させる→さす」（書かす）。"},{"no":75,"g":"させてください","romaji":"sasete kudasai","zh":"請讓我～","example":"私に行かせてください。","form":"動詞使役形 + てください","note":""},{"no":76,"g":"さすが","romaji":"sasuga","zh":"不愧是～；果然～","example":"さすがプロだ。","form":"さすが + 名詞／文","note":""},{"no":77,"g":"し（並列）","romaji":"shi","zh":"～而且～（列舉理由）","example":"安いし、美味しいし、最高だ。","form":"文 + し、文 + し","note":"「し」列舉理由，暗示「還有其他」。"},{"no":78,"g":"そんなに","romaji":"sonna ni","zh":"那麼～（程度）","example":"そんなに怒らないで。","form":"そんなに + 形容詞／動詞","note":""},{"no":79,"g":"それでも","romaji":"sore demo","zh":"即使如此～","example":"雨だ。それでも行く。","form":"それでも + 文","note":""},{"no":80,"g":"それに","romaji":"sore ni","zh":"而且～；再加上～","example":"安い。それに美味しい。","form":"それに + 文","note":""},{"no":81,"g":"そうだ（伝聞）","romaji":"sou da","zh":"聽說～（轉述）","example":"天気予報によると雨だそうだ。","form":"普通形 + そうだ（聽說）","note":"「そうだ（伝聞）」前面接普通形；「そうだ（様態）」接語幹。兩者完全不同。"},{"no":82,"g":"そうだ（様態）","romaji":"sou da","zh":"看起來～（眼前判斷）","example":"このケーキは美味しそうだ。","form":"形容詞語幹／動詞ます形語幹 + そうだ（樣態）","note":"樣態「そうだ」不能接「綺麗だ」等已含狀態的詞：「綺麗そう」不自然。"},{"no":83,"g":"そうに / そうな","romaji":"sou ni / sou na","zh":"看起來～地／～的","example":"彼は嬉しそうに笑った。","form":"そうに + 動詞／そうな + 名詞","note":""},{"no":84,"g":"たばかり","romaji":"ta bakari","zh":"剛剛才～（主觀）","example":"今帰ってきたばかりだ。","form":"動詞た形 + ばかり","note":"「たばかり」是說話者主觀覺得「才剛」；「たところ」是客觀時點。"},{"no":85,"g":"たところ","romaji":"ta tokoro","zh":"剛剛～（客觀時點）","example":"今、駅に着いたところだ。","form":"動詞た形 + ところ","note":""},{"no":86,"g":"他動詞 & 自動詞","romaji":"tadoushi & jidoushi","zh":"自他動詞對應（開く／開ける等）","example":"ドアが開いた／ドアを開けた。","form":"同源自他動詞對（開く／開ける）","note":""},{"no":87,"g":"たがる","romaji":"tagaru","zh":"（第三人稱）想要～","example":"子供は外で遊びたがる。","form":"動詞ます形語幹 + たがる","note":""},{"no":88,"g":"たら","romaji":"tara","zh":"如果～；～之後（條件）","example":"雨が降ったら行かない。","form":"動詞た形 + ら","note":""},{"no":89,"g":"たらどう","romaji":"tara dou","zh":"～怎麼樣？（建議）","example":"少し休んだらどう？","form":"動詞た形 + らどう","note":""},{"no":90,"g":"たらいいですか","romaji":"tara ii desu ka","zh":"該怎麼做才好？（求助）","example":"どこに置いたらいいですか。","form":"動詞た形 + らいいですか","note":""},{"no":91,"g":"て / で（接續）","romaji":"te / de","zh":"～然後／因為～（連接）","example":"朝起きて、顔を洗った。","form":"動詞て形 + 、（接續）","note":"「て形」是最基本的接續，可表順序、原因、方法。"},{"no":92,"g":"てあげる","romaji":"te ageru","zh":"為（別人）做～","example":"友達に教えてあげた。","form":"動詞て形 + あげる","note":""},{"no":93,"g":"てほしい","romaji":"te hoshii","zh":"希望（你）～","example":"早く来てほしい。","form":"動詞て形 + ほしい","note":""},{"no":94,"g":"ていく","romaji":"te iku","zh":"（由近而遠／持續）～下去","example":"これからも歩いていく。","form":"動詞て形 + いく","note":"「ていく」表時間上持續或空間上遠離；「てくる」表靠近或開始變化。"},{"no":95,"g":"ていた","romaji":"te ita","zh":"（過去持續）當時正在～","example":"昨日はずっと寝ていた。","form":"動詞て形 + いた","note":""},{"no":96,"g":"ていただけませんか","romaji":"te itadakemasen ka","zh":"能否請您～（禮貌請求）","example":"教えていただけませんか。","form":"動詞て形 + いただけませんか","note":""},{"no":97,"g":"てくれる","romaji":"te kureru","zh":"（別人）為我做～","example":"友達が手伝ってくれた。","form":"動詞て形 + くれる","note":""},{"no":98,"g":"てくる","romaji":"te kuru","zh":"（由遠而近／開始變化）～起來","example":"雨が降ってきた。","form":"動詞て形 + くる","note":"「てくる」可表「由遠而近」「開始變化」「持續至今」。"},{"no":99,"g":"てみる","romaji":"te miru","zh":"試著～看看","example":"この料理を食べてみて。","form":"動詞て形 + みる","note":""},{"no":100,"g":"てもらう","romaji":"te morau","zh":"請（別人）為自己做～","example":"先生に直してもらった。","form":"動詞て形 + もらう","note":""},{"no":101,"g":"ておく","romaji":"te oku","zh":"預先～好（事前準備）","example":"先に予約しておく。","form":"動詞て形 + おく","note":""},{"no":102,"g":"てしまう / ちゃう","romaji":"te shimau / chau","zh":"（不小心／徹底）～了","example":"ケーキを全部食べてしまった。","form":"動詞て形 + しまう（口語 ちゃう）","note":"「てしまう」表「不小心做了」或「徹底做完」，帶遺憾感。"},{"no":103,"g":"てすみません","romaji":"te sumimasen","zh":"抱歉～（為某事道歉）","example":"遅れてすみません。","form":"動詞て形 + すみません","note":""},{"no":104,"g":"てやる","romaji":"te yaru","zh":"（為下位者）做～","example":"犬に餌をやってくれ。","form":"動詞て形 + やる","note":""},{"no":105,"g":"てよかった","romaji":"te yokatta","zh":"幸好～；～太好了","example":"間に合ってよかった。","form":"動詞て形 + よかった","note":""},{"no":106,"g":"ているところ","romaji":"teiru tokoro","zh":"正在～（進行中）","example":"今ご飯を食べているところだ。","form":"動詞ている + ところ","note":""},{"no":107,"g":"ても","romaji":"temo","zh":"即使～也～","example":"雨が降っても行く。","form":"動詞て形 + も","note":"「ても」表讓步；「でも」接名詞。"},{"no":108,"g":"と（条件）","romaji":"to","zh":"一～就～（必然條件）","example":"春になると桜が咲く。","form":"動詞辞書形 + と（必然條件）","note":"「と」表必然條件，後句不能接意志・命令（✗ 春になると花見に行こう）。"},{"no":109,"g":"と言ってもいい","romaji":"to ittemo ii","zh":"可以說是～","example":"天才と言ってもいい。","form":"文 + と言ってもいい","note":""},{"no":110,"g":"という","romaji":"to iu","zh":"叫做～；所謂的～","example":"「もったいない」という言葉。","form":"名詞 + という + 名詞","note":"「という」是定義／命名；「ということ」是把整句名詞化。"},{"no":111,"g":"ということ","romaji":"to iu koto","zh":"也就是～；所謂～（名詞化）","example":"行かないということですね。","form":"文 + ということ","note":""},{"no":112,"g":"と言われている","romaji":"to iwarete iru","zh":"據說～；被認為～","example":"体にいいと言われている。","form":"文 + と言われている","note":""},{"no":113,"g":"と聞いた","romaji":"to kiita","zh":"聽說～","example":"彼が結婚すると聞いた。","form":"文 + と聞いた","note":""},{"no":114,"g":"と思う","romaji":"to omou","zh":"我認為～；我覺得～","example":"彼は来ると思う。","form":"文 + と思う","note":""},{"no":115,"g":"とか～とか","romaji":"toka~toka","zh":"～啦～啦（列舉）","example":"映画とか音楽とかが好きだ。","form":"名詞 + とか + 名詞 + とか","note":""},{"no":116,"g":"ところ（ところだ）","romaji":"tokoro","zh":"正要～；～之中","example":"今出かけるところだ。","form":"動詞辞書形 + ところだ","note":""},{"no":117,"g":"続ける（つづける）","romaji":"tsuzukeru","zh":"持續～","example":"走り続けた。","form":"動詞ます形語幹 + 続ける","note":""},{"no":118,"g":"って","romaji":"tte","zh":"叫做～（口語引用）","example":"田中さんって人を知ってる？","form":"名詞 + って（口語引用）","note":"「って」是「と」的口語形，也當主題提示（田中さんって人）。"},{"no":119,"g":"受身形（うけみけい）","romaji":"ukemi kei","zh":"被～（被動）","example":"先生に褒められた。","form":"動詞未然形 + れる／られる（被動）","note":"被動形與可能形同形；被動常帶受害感（雨に降られた）。"},{"no":120,"g":"は〜が… は","romaji":"wa~ga...wa","zh":"～是～，但…","example":"安いは安いが、質が悪い。","form":"文 + は + 同詞 + が","note":""},{"no":121,"g":"やすい","romaji":"yasui","zh":"容易～；易於～","example":"この本は読みやすい。","form":"動詞ます形語幹 + やすい","note":"「やすい」表容易；反義是「にくい」。另有「がたい」偏書面。"},{"no":122,"g":"やっと","romaji":"yatto","zh":"終於～；好不容易～","example":"やっと終わった。","form":"やっと + 動詞た形","note":""},{"no":123,"g":"より","romaji":"yori","zh":"比起～（比較）","example":"今年は去年より暑い。","form":"名詞 + より（比較）","note":""},{"no":124,"g":"予定だ（よていだ）","romaji":"yotei da","zh":"預定～","example":"来週出発する予定だ。","form":"動詞辞書形 + 予定だ","note":""},{"no":125,"g":"ようだ","romaji":"you da","zh":"好像～（推測）","example":"誰か来たようだ。","form":"普通形 + ようだ","note":"「ようだ」比「らしい」主觀，比「みたいだ」正式。"},{"no":126,"g":"ように / ような","romaji":"you ni / you na","zh":"像～一樣；為了～","example":"君のような人になりたい。","form":"名詞 + の + ように／ような","note":""},{"no":127,"g":"ようになる","romaji":"you ni naru","zh":"變得能夠～；變得會～","example":"日本語が話せるようになった。","form":"動詞辞書形／ない形 + ようになる","note":"「ようになる」表能力或狀態的變化；「ことになる」表被決定。"},{"no":128,"g":"ようにする","romaji":"you ni suru","zh":"盡量做到～；設法～","example":"毎日運動するようにしている。","form":"動詞辞書形／ない形 + ようにする","note":"「ようにする」是努力做到；「ようになる」是自然變成。"},{"no":129,"g":"ようと思う","romaji":"you to omou","zh":"打算～","example":"来年留学しようと思う。","form":"動詞意向形 + と思う","note":""},{"no":130,"g":"ぜひ","romaji":"zehi","zh":"務必～；一定～","example":"ぜひ遊びに来てください。","form":"ぜひ + 動詞て形ください","note":""},{"no":131,"g":"全然～ない","romaji":"zenzen~nai","zh":"完全不～","example":"全然分からない。","form":"全然 + 否定形","note":""},{"no":132,"g":"づらい","romaji":"zurai","zh":"難以～（心理上）","example":"言いづらい話だ。","form":"動詞ます形語幹 + づらい","note":""}]},"n3":{"level":"N3","total":182,"covered":89,"coverage":48.9,"nsrc":173,"trimmed":[],"playlist":[{"i":1,"title":"HANABI","artist":"Mr.Children","vid":"EXxaBXKjl6Q","vtitle":"Mr.Children 「HANABI」 MUSIC VIDEO","hits":[16,18,28,33,41,48,53,68,99,123,174,176],"new":[16,18,28,33,41,48,53,68,99,123,174,176],"cum":12,"lines":[{"t":"どれくらいの値打ちがあるだろう?","g":[53]},{"t":"僕が今生きているこの世界に","g":[]},{"t":"すべてが無意味だって思える","g":[]},{"t":"ちょっと疲れてんのかなぁ","g":[]},{"t":"手に入れたものと引き換えにして","g":[]},{"t":"切り捨てたいくつもの輝き","g":[]},{"t":"いちいち憂いていれるほど","g":[28]},{"t":"平和な世の中じゃないし","g":[]},{"t":"一体どんな理想を描いたらいい?","g":[33]},{"t":"どんな希望を抱き進んだらいい?","g":[]},{"t":"答えようもないその問いかけは","g":[174]},{"t":"日常に葬られてく","g":[]},{"t":"君がいたらなんていうかなぁ","g":[68]},{"t":"「暗い」と茶化して笑うのかなぁ","g":[]},{"t":"その柔らかな笑顔に触れて","g":[]},{"t":"僕の憂鬱が吹き飛んだらいいのに","g":[]},{"t":"決して捕まえることの出来ない","g":[41]},{"t":"花火のような光だとしたって","g":[123,176]},{"t":"もう一回 もう一回","g":[]},{"t":"もう一回 もう一回","g":[]},{"t":"僕はこの手を伸ばしたい","g":[]},{"t":"誰も皆 悲しみを抱いてる","g":[]},{"t":"だけど素敵な明日を願っている","g":[18]},{"t":"臆病風に吹かれて 波風がたった世界を","g":[]},{"t":"どれだけ愛することができるだろう?","g":[16,48]},{"t":"考えすぎで言葉に詰まる","g":[]},{"t":"自分の不器用さが嫌い","g":[]},{"t":"でも妙に器用に立ち振舞う自分は","g":[]},{"t":"それ以上に嫌い","g":[]},{"t":"笑っていても","g":[]},{"t":"泣いて過ごしても平等に時は流れる","g":[]},{"t":"未来が僕らを呼んでる","g":[]},{"t":"その声は今 君にも聞こえていますか?","g":[]},{"t":"さよならが迎えに来ることを","g":[]},{"t":"最初からわかっていたとしたって","g":[123]},{"t":"もう一回 もう一回","g":[]},{"t":"もう一回 もう一回","g":[]},{"t":"何度でも君に逢いたい","g":[]},{"t":"めぐり逢えたことでこんなに","g":[]},{"t":"世界が美しく見えるなんて","g":[68]},{"t":"想像さえもしていない 単純だって笑うかい?","g":[99]},{"t":"君に心からありがとうを言うよ","g":[]},{"t":"滞らないように 揺れて流れて","g":[176]},{"t":"透き通ってく水のような","g":[176]},{"t":"心であれたら","g":[]},{"t":"逢いたくなったときの分まで","g":[]},{"t":"寂しくなったときの分まで","g":[]},{"t":"もう一回 もう一回","g":[]},{"t":"もう一回 もう一回","g":[]},{"t":"君を強く焼き付けたい","g":[]},{"t":"誰も皆 問題を抱えている","g":[]},{"t":"だけど素敵な明日を願っている","g":[18]},{"t":"臆病風に吹かれて 波風がたった世界を","g":[]},{"t":"どれだけ愛することができるだろう?","g":[16,48]},{"t":"もう一回 もう一回","g":[]},{"t":"もう一回 もう一回","g":[]}]},{"i":2,"title":"Pretender","artist":"Official髭男dism","vid":"TQ8WlA2GXbk","vtitle":"Official髭男dism - Pretender［Official Video］","hits":[16,25,40,85,117,123,137,151],"new":[25,40,85,117,137,151],"cum":18,"lines":[{"t":"君とのラブストーリー","g":[]},{"t":"それは予想通り","g":[]},{"t":"いざ始まればひとり芝居だ","g":[]},{"t":"ずっとそばにいたって","g":[123]},{"t":"結局ただの観客だ","g":[40]},{"t":"感情のないアイムソーリー","g":[]},{"t":"それはいつも通り","g":[]},{"t":"慣れてしまえば悪くはないけど","g":[]},{"t":"君とのロマンスは人生柄","g":[]},{"t":"続きはしないことを知った","g":[]},{"t":"もっと違う設定で　もっと違う関係で","g":[]},{"t":"出会える世界線　選べたらよかった","g":[]},{"t":"もっと違う性格で　もっと違う価値観で","g":[]},{"t":"愛を伝えられたらいいな　そう願っても無駄だから","g":[137]},{"t":"グッバイ","g":[]},{"t":"君の運命のヒトは僕じゃない","g":[]},{"t":"辛いけど否めない　でも離れ難いのさ","g":[25]},{"t":"その髪に触れただけで　痛いや　いやでも","g":[16]},{"t":"甘いな　いやいや","g":[]},{"t":"グッバイ","g":[]},{"t":"それじゃ僕にとって君は何？","g":[85]},{"t":"答えは分からない　分かりたくもないのさ","g":[]},{"t":"たったひとつ確かなことがあるとするのならば","g":[]},{"t":"「君は綺麗だ」","g":[]},{"t":"誰かが偉そうに","g":[]},{"t":"語る恋愛の論理","g":[]},{"t":"何ひとつとしてピンとこなくて","g":[151]},{"t":"飛行機の窓から見下ろした","g":[]},{"t":"知らない街の夜景みたいだ","g":[]},{"t":"もっと違う設定で　もっと違う関係で","g":[]},{"t":"出会える世界線　選べたらよかった","g":[]},{"t":"いたって純な心で　叶った恋を抱きしめて","g":[123]},{"t":"「好きだ」とか無責任に言えたらいいな","g":[137]},{"t":"そう願っても虚しいのさ","g":[]},{"t":"グッバイ","g":[]},{"t":"繋いだ手の向こうにエンドライン","g":[]},{"t":"引き伸ばすたびに　疼きだす未来には","g":[117]},{"t":"君はいない　その事実に Cry...","g":[]},{"t":"そりゃ苦しいよな","g":[]},{"t":"グッバイ","g":[]},{"t":"君の運命のヒトは僕じゃない","g":[]},{"t":"辛いけど否めない　でも離れ難いのさ","g":[25]},{"t":"その髪に触れただけで　痛いや　いやでも　甘いな　いやいや","g":[16]},{"t":"グッバイ","g":[]},{"t":"それじゃ僕にとって君は何？","g":[85]},{"t":"答えは分からない　分かりたくもないのさ","g":[]},{"t":"たったひとつ確かなことがあるとするのならば","g":[]},{"t":"「君は綺麗だ」","g":[]},{"t":"それもこれもロマンスの定めなら　悪くないよな","g":[]},{"t":"永遠も約束もないけれど","g":[]},{"t":"「とても綺麗だ」","g":[]}]},{"i":3,"title":"アイドル","artist":"YOASOBI","vid":"ZRtdQ81jPUQ","vtitle":"YOASOBI「アイドル」 Official Music Video","hits":[16,18,47,66,68,99,132,168,173,180],"new":[47,66,132,168,173,180],"cum":24,"lines":[{"t":"無敵の笑顔で荒らすメディア","g":[]},{"t":"知りたいその秘密ミステリアス","g":[]},{"t":"抜けてるとこさえ彼女のエリア","g":[99]},{"t":"完璧で嘘つきな君は","g":[]},{"t":"天才的なアイドル様","g":[132]},{"t":"今日何食べた？","g":[]},{"t":"好きな本は？","g":[]},{"t":"遊びに行くならどこに行くの？","g":[]},{"t":"何も食べてない","g":[]},{"t":"それは内緒","g":[]},{"t":"何を聞かれても","g":[]},{"t":"のらりくらり","g":[]},{"t":"そう淡々と","g":[]},{"t":"だけど燦々と","g":[18]},{"t":"見えそうで見えない秘密は蜜の味","g":[]},{"t":"あれもないないない","g":[]},{"t":"これもないないない","g":[]},{"t":"好きなタイプは？","g":[]},{"t":"相手は？","g":[]},{"t":"さあ答えて","g":[]},{"t":"「誰かを好きになることなんて私分からなくてさ」","g":[68]},{"t":"嘘か本当か知り得ない","g":[]},{"t":"そんな言葉にまた一人堕ちる","g":[]},{"t":"また好きにさせる","g":[]},{"t":"誰もが目を奪われていく","g":[]},{"t":"君は完璧で究極のアイドル","g":[]},{"t":"金輪際現れない","g":[]},{"t":"一番星の生まれ変わり","g":[]},{"t":"その笑顔で愛してるで","g":[]},{"t":"誰も彼も虜にしていく","g":[]},{"t":"その瞳がその言葉が","g":[]},{"t":"嘘でもそれは完全なアイ","g":[]},{"t":"はいはいあの子は特別です","g":[]},{"t":"我々はハナからおまけです","g":[]},{"t":"お星様の引き立て役Bです","g":[]},{"t":"全てがあの子のお陰なわけない","g":[168]},{"t":"洒落臭い","g":[]},{"t":"妬み嫉妬なんてないわけがない","g":[68,168]},{"t":"これはネタじゃない","g":[]},{"t":"からこそ許せない","g":[47]},{"t":"完璧じゃない君じゃ許せない","g":[]},{"t":"自分を許せない","g":[]},{"t":"誰よりも強い君以外は認めない","g":[173]},{"t":"誰もが信じ崇めてる","g":[]},{"t":"まさに最強で無敵のアイドル","g":[]},{"t":"弱点なんて見当たらない","g":[68]},{"t":"一番星を宿している","g":[]},{"t":"弱いとこなんて見せちゃダメダメ","g":[68]},{"t":"知りたくないとこは見せずに","g":[180]},{"t":"唯一無二じゃなくちゃイヤイヤ","g":[66]},{"t":"それこそ本物のアイ","g":[47]},{"t":"得意の笑顔で沸かすメディア","g":[]},{"t":"隠しきるこの秘密だけは","g":[16]},{"t":"愛してるって嘘で積むキャリア","g":[]},{"t":"これこそ私なりの愛だ","g":[47]},{"t":"流れる汗も綺麗なアクア","g":[]},{"t":"ルビーを隠したこの瞼","g":[]},{"t":"歌い踊り舞う私はマリア","g":[]},{"t":"そう嘘はとびきりの愛だ","g":[]},{"t":"誰かに愛されたことも","g":[]},{"t":"誰かのこと愛したこともない","g":[]},{"t":"そんな私の嘘がいつか本当になること","g":[]},{"t":"信じてる","g":[]},{"t":"いつかきっと全部手に入れる","g":[]},{"t":"私はそう欲張りなアイドル","g":[]},{"t":"等身大でみんなのこと","g":[]},{"t":"ちゃんと愛したいから","g":[]},{"t":"今日も嘘をつくの","g":[]},{"t":"この言葉がいつか本当になる日を願って","g":[]},{"t":"それでもまだ","g":[]},{"t":"君と君にだけは言えずにいたけど","g":[16,180]},{"t":"やっと言えた","g":[]},{"t":"これは絶対嘘じゃない","g":[]},{"t":"愛してる","g":[]}]},{"i":4,"title":"ピースサイン","artist":"米津玄師","vid":"9aJVr5tTTWk","vtitle":"米津玄師 - ピースサイン , Kenshi Yonezu - Peace Sign","hits":[5,19,28,44,53,68,109,118,123,151,174,176],"new":[5,19,44,109,118],"cum":29,"lines":[{"t":"いつか僕らの上をスレスレに","g":[]},{"t":"通り過ぎていったあの飛行機を","g":[]},{"t":"不思議なくらいに憶えてる","g":[53]},{"t":"意味もないのに なぜか","g":[]},{"t":"不甲斐なくて泣いた日の夜に","g":[]},{"t":"ただ強くなりたいと願ってた","g":[]},{"t":"そのために必要な勇気を","g":[109,118]},{"t":"探し求めていた","g":[]},{"t":"残酷な運命が定まってるとして","g":[151]},{"t":"それがいつの日か僕の前に現れるとして","g":[151]},{"t":"ただ一瞬 この一瞬 息ができるなら","g":[]},{"t":"どうでもいいと思えた その心を","g":[]},{"t":"もう一度","g":[]},{"t":"遠くへ行け遠くへ行けと","g":[]},{"t":"僕の中で誰かが歌う","g":[]},{"t":"どうしようもないほど熱烈に","g":[28,174]},{"t":"いつだって目を腫らした君が二度と","g":[]},{"t":"悲しまないように笑える","g":[176]},{"t":"そんなヒーローになるための歌","g":[118]},{"t":"さらば掲げろピースサイン","g":[]},{"t":"転がっていくストーリーを","g":[]},{"t":"守りたいだなんて言えるほど","g":[28,68]},{"t":"君が弱くはないのわかってた","g":[]},{"t":"それ以上に僕は弱くてさ","g":[]},{"t":"君が大事だったんだ","g":[]},{"t":"「独りで生きていくんだ」なんてさ","g":[68]},{"t":"口をついて叫んだあの日から","g":[]},{"t":"変わっていく僕を笑えばいい","g":[5]},{"t":"独りが怖い僕を","g":[]},{"t":"蹴飛ばして噛み付いて息もできなくて","g":[]},{"t":"騒ぐ頭と腹の奥がぐしゃぐしゃになったって","g":[123]},{"t":"衒いも外連も消えてしまうくらいに","g":[53]},{"t":"今は触っていたいんだ 君の心に","g":[]},{"t":"僕たちは","g":[]},{"t":"きっといつか遠く離れた","g":[]},{"t":"太陽にすら手が届いて","g":[]},{"t":"夜明け前を手に入れて笑おう","g":[]},{"t":"そうやって青く燃える色に染まり","g":[]},{"t":"おぼろげな街の向こうへ","g":[]},{"t":"手をつないで走っていけるはずだ","g":[]},{"t":"君と未来を盗み描く","g":[]},{"t":"捻りのないストーリーを","g":[]},{"t":"カサブタだらけ荒くれた日々が","g":[19]},{"t":"削り削られ擦り切れた今が","g":[44]},{"t":"君の言葉で蘇る 鮮やかにも 現れていく","g":[]},{"t":"蛹のままで眠る魂を","g":[]},{"t":"食べかけのまま捨てたあの夢を","g":[]},{"t":"もう一度取り戻せ","g":[]},{"t":"もう一度","g":[]},{"t":"遠くへ行け遠くへ行けと","g":[]},{"t":"僕の中で誰かが歌う","g":[]},{"t":"どうしようもないほど熱烈に","g":[28,174]},{"t":"いつだって目を腫らした君が二度と","g":[]},{"t":"悲しまないように笑える","g":[176]},{"t":"そんなヒーローになるための歌","g":[118]},{"t":"さらば掲げろピースサイン","g":[]},{"t":"転がっていくストーリーを","g":[]},{"t":"君と未来を盗み描く 捻りのないストーリーを","g":[]}]},{"i":5,"title":"Lemon","artist":"米津玄師","vid":"SX_ViT4Ra7k","vtitle":"米津玄師  Kenshi Yonezu  - Lemon","hits":[16,28,42,55,68,99,145,152,176,180],"new":[42,55,145,152],"cum":33,"lines":[{"t":"夢ならばどれほどよかったでしょう","g":[28]},{"t":"未だにあなたのことを夢にみる","g":[]},{"t":"忘れた物を取りに帰るように","g":[176]},{"t":"古びた思い出の埃を払う","g":[]},{"t":"戻らない幸せがあることを","g":[]},{"t":"最後にあなたが教えてくれた","g":[]},{"t":"言えずに隠してた昏い過去も","g":[180]},{"t":"あなたがいなきゃ永遠に昏いまま","g":[]},{"t":"きっともうこれ以上　傷つくことなど","g":[68]},{"t":"ありはしないとわかっている","g":[]},{"t":"あの日の悲しみさえ　あの日の苦しみさえ","g":[99]},{"t":"そのすべてを愛してた　あなたとともに","g":[145]},{"t":"胸に残り離れない　苦いレモンの匂い","g":[]},{"t":"雨が降り止むまでは帰れない","g":[]},{"t":"今でもあなたはわたしの光","g":[]},{"t":"暗闇であなたの背をなぞった","g":[]},{"t":"その輪郭を鮮明に覚えている","g":[]},{"t":"受け止めきれないものと出会うたび","g":[42]},{"t":"溢れてやまないのは涙だけ","g":[16]},{"t":"何をしていたの　何を見ていたの","g":[]},{"t":"わたしの知らない横顔で","g":[]},{"t":"どこかであなたが今　わたしと同じ様な","g":[]},{"t":"涙にくれ　淋しさの中にいるなら","g":[]},{"t":"わたしのことなどどうか　忘れてください","g":[68]},{"t":"そんなことを心から願うほどに","g":[28]},{"t":"今でもあなたはわたしの光","g":[]},{"t":"自分が思うより","g":[]},{"t":"恋をしていたあなたに","g":[]},{"t":"あれから思うように","g":[176]},{"t":"息ができない","g":[]},{"t":"あんなに側にいたのに","g":[]},{"t":"まるで嘘みたい","g":[55]},{"t":"とても忘れられない","g":[152]},{"t":"それだけが確か","g":[16]},{"t":"あの日の悲しみさえ　あの日の苦しみさえ","g":[99]},{"t":"そのすべてを愛してた　あなたとともに","g":[145]},{"t":"胸に残り離れない　苦いレモンの匂い","g":[]},{"t":"雨が降り止むまでは帰れない","g":[]},{"t":"切り分けた果実の片方の様に","g":[]},{"t":"今でもあなたはわたしの光","g":[]}]},{"i":6,"title":"チェリー","artist":"スピッツ","vid":"Eze6-eHmtJg","vtitle":"スピッツ / チェリー","hits":[1,16,20,22,28,120,176],"new":[1,20,22,120],"cum":37,"lines":[{"t":"君を忘れない 曲がりくねった道を行く","g":[]},{"t":"産まれたての太陽と 夢を渡る黄色い砂","g":[120]},{"t":"二度と戻れない くすぐり合って転げた日","g":[]},{"t":"きっと 想像した以上に 騒がしい未来が僕を待ってる","g":[]},{"t":"\"愛してる\"の響きだけで 強くなれる気がしたよ","g":[16]},{"t":"ささやかな喜びを つぶれるほど抱きしめて","g":[28]},{"t":"こぼれそうな思い 汚れた手で書き上げた","g":[1]},{"t":"あの手紙はすぐにでも捨てて欲しいと言ったのに","g":[]},{"t":"少しだけ眠い 冷たい水でこじあけて","g":[16]},{"t":"今 せかされるように 飛ばされるように 通り過ぎてく","g":[176]},{"t":"\"愛してる\"の響きだけで 強くなれる気がしたよ","g":[16]},{"t":"いつかまた この場所で 君とめぐり会いたい","g":[]},{"t":"どんなに歩いても たどりつけない 心の雪でぬれた頬","g":[20]},{"t":"悪魔のふりして 切り裂いた歌を 春の風に舞う花びらに変えて","g":[22]},{"t":"君を忘れない 曲がりくねった道を行く","g":[]},{"t":"きっと 想像した以上に 騒がしい未来が僕を待ってる","g":[]},{"t":"\"愛してる\"の響きだけで 強くなれる気がしたよ","g":[16]},{"t":"ささやかな喜びを つぶれるほど抱きしめて","g":[28]},{"t":"ズルしても真面目にも生きてゆける気がしたよ","g":[]},{"t":"いつかまた この場所で 君とめぐり会いたい","g":[]}]},{"i":7,"title":"群青","artist":"YOASOBI","vid":"Y4nEEZwckuU","vtitle":"YOASOBI「群青」Official Music Video","hits":[4,7,16,18,28,46,68,119,123,176,180],"new":[4,7,46,119],"cum":41,"lines":[{"t":"嗚呼、いつもの様に","g":[]},{"t":"過ぎる日々にあくびが出る","g":[]},{"t":"さんざめく夜、越え、今日も","g":[]},{"t":"渋谷の街に朝が降る","g":[]},{"t":"どこか虚しいような","g":[176]},{"t":"そんな気持ち","g":[]},{"t":"つまらないな","g":[]},{"t":"でもそれでいい","g":[]},{"t":"そんなもんさ","g":[]},{"t":"これでいい","g":[]},{"t":"知らず知らず隠してた","g":[]},{"t":"本当の声を響かせてよ、ほら","g":[]},{"t":"見ないフリしていても","g":[]},{"t":"確かにそこにある","g":[119]},{"t":"感じたままに描く","g":[]},{"t":"自分で選んだその色で","g":[]},{"t":"眠い空気纏う朝に","g":[]},{"t":"訪れた青い世界","g":[]},{"t":"好きなものを好きだと言う","g":[]},{"t":"怖くて仕方ないけど","g":[]},{"t":"本当の自分","g":[]},{"t":"出会えた気がしたんだ","g":[]},{"t":"嗚呼、手を伸ばせば伸ばすほどに","g":[7,28]},{"t":"遠くへゆく","g":[]},{"t":"思うようにいかない、今日も","g":[176]},{"t":"また慌ただしくもがいてる","g":[]},{"t":"悔しい気持ちも","g":[]},{"t":"ただ情けなくて","g":[]},{"t":"涙が出る","g":[]},{"t":"踏み込むほど","g":[28,46]},{"t":"苦しくなる","g":[]},{"t":"痛くもなる","g":[]},{"t":"感じたままに進む","g":[]},{"t":"自分で選んだこの道を","g":[]},{"t":"重いまぶた擦る夜に","g":[]},{"t":"しがみついた青い誓い","g":[]},{"t":"好きなことを続けること","g":[]},{"t":"それは「楽しい」だけじゃない","g":[16]},{"t":"本当にできる？","g":[]},{"t":"不安になるけど","g":[]},{"t":"何枚でも","g":[]},{"t":"ほら何枚でも","g":[]},{"t":"自信がないから描いてきたんだよ","g":[]},{"t":"何回でも","g":[]},{"t":"ほら何回でも","g":[]},{"t":"積み上げてきたことが武器になる","g":[]},{"t":"周りを見たって","g":[123]},{"t":"誰と比べたって","g":[123]},{"t":"僕にしかできないことはなんだ","g":[]},{"t":"今でも自信なんかない","g":[68]},{"t":"それでも","g":[]},{"t":"感じたことない気持ち","g":[]},{"t":"知らずにいた想い","g":[180]},{"t":"あの日踏み出して","g":[]},{"t":"初めて感じたこの痛みも全部","g":[]},{"t":"好きなものと向き合うことで","g":[4]},{"t":"触れたまだ小さな光","g":[]},{"t":"大丈夫、行こう、あとは楽しむだけだ","g":[16]},{"t":"全てを賭けて描く","g":[]},{"t":"自分にしか出せない色で","g":[]},{"t":"朝も夜も走り続け","g":[]},{"t":"見つけ出した青い光","g":[]},{"t":"好きなものと向き合うこと","g":[4]},{"t":"今だって怖いことだけど","g":[18]},{"t":"もう今はあの日の透明な僕じゃない","g":[]},{"t":"ありのままの","g":[]},{"t":"かけがえの無い僕だ","g":[]},{"t":"知らず知らず隠してた","g":[]},{"t":"本当の声を響かせてよ、ほら","g":[]},{"t":"見ないフリしていても","g":[]},{"t":"確かにそこに今もそこにあるよ","g":[119]},{"t":"知らず知らず隠してた","g":[]},{"t":"本当の声を響かせてよ、さあ","g":[]},{"t":"見ないフリしていても","g":[]},{"t":"確かにそこに君の中に","g":[119]}]},{"i":8,"title":"クリスマスソング","artist":"back number","vid":"7zBeQezaz4U","vtitle":"back number - クリスマスソング (full)","hits":[16,40,68,72,105,123,151,179],"new":[72,105,179],"cum":44,"lines":[{"t":"どこかで鐘(かね)が鳴(な)って","g":[]},{"t":"らしくない言葉(ことば)が浮(う)かんで","g":[]},{"t":"寒(さむ)さが心地(ここち)よくて","g":[]},{"t":"あれなんで恋(こい)なんかしてんだろう","g":[68]},{"t":"聖夜(せいや)だなんだと繰(く)り返(かえ)す歌(うた)と","g":[]},{"t":"わざとらしくきらめく街(まち)のせいかな","g":[105]},{"t":"会(あ)いたいと思(おも)う回数(かいすう)が","g":[]},{"t":"会(あ)えないと痛(いた)いこの胸(むね)が","g":[]},{"t":"君(きみ)の事(こと)どう思(おも)うか教(おし)えようとしてる","g":[151,179]},{"t":"いいよそんな事(こと)自分(じぶん)で分(わ)かってるよ","g":[]},{"t":"サンタとやらに頼(たよ)んでも仕方(しかた)ないよなぁ","g":[]},{"t":"できれば横(よこ)にいて欲(ほ)しくて","g":[]},{"t":"どこにも行(い)って欲(ほ)しくなくて","g":[]},{"t":"僕(ぼく)の事(こと)だけをずっと考(かんが)えていて欲(ほ)しい","g":[16]},{"t":"でもこんな事(こと)を伝(つた)えたら格好悪(かっこうわる)いし","g":[]},{"t":"長(なが)くなるだけだからまとめるよ","g":[16]},{"t":"君(きみ)が好(す)きだ","g":[]},{"t":"はしゃぐ恋人(こいびと)達(たち)は","g":[]},{"t":"トナカイのツノなんか生(は)やして","g":[68]},{"t":"よく人前(ひとまえ)で出来(でき)るなぁ","g":[]},{"t":"いや羨(うらや)ましくなんてないけど","g":[68]},{"t":"君(きみ)が喜(よろこ)ぶプレゼントってなんだろう","g":[]},{"t":"僕(ぼく)だけがあげられるものってなんだろう","g":[16]},{"t":"大好(だいす)きだと言(い)った返事(へんじ)が","g":[]},{"t":"思(おも)ってたのとは違(ちが)っても","g":[]},{"t":"それだけで嫌(きら)いになんてなれやしないから","g":[16,68]},{"t":"星(ほし)に願(ねが)いをなんてさ柄(がら)じゃないけど","g":[68]},{"t":"結局(けっきょく)君(きみ)じゃないと嫌(いや)なんだって","g":[40,72,123]},{"t":"見上(みあ)げてるんだ","g":[]},{"t":"あの時(とき)君(きみ)に","g":[]},{"t":"出会(であ)ってただそれだけで","g":[16]},{"t":"自分(じぶん)も知(し)らなかった自分(じぶん)が次(つぎ)から次(つぎ)に","g":[]},{"t":"会(あ)いたいと毎日(まいにち)思(おも)ってて","g":[]},{"t":"それを君(きみ)に知(し)って欲(ほ)しくて","g":[]},{"t":"すれ違(ちが)う人混(ひとご)みに君(きみ)を探(さが)している","g":[]},{"t":"こんな日(ひ)は他(ほか)の誰(だれ)かと笑(わら)ってるかな","g":[]},{"t":"胸(むね)の奥(おく)の奥(おく)が苦(くる)しくなる","g":[]},{"t":"できれば横(よこ)にいて欲(ほ)しくて","g":[]},{"t":"どこにも行(い)って欲(ほ)しくなくて","g":[]},{"t":"僕(ぼく)の事(こと)だけをずっと考(かんが)えていて欲(ほ)しい","g":[16]},{"t":"やっぱりこんな事(こと)伝(つた)えたら格好悪(かっこうわる)いし","g":[]},{"t":"長(なが)くなるだけだからまとめるよ","g":[16]},{"t":"君(きみ)が好(す)きだ","g":[]},{"t":"聞(き)こえるまで何度(なんど)だって言(い)うよ","g":[]},{"t":"君(きみ)が好(す)きだ","g":[]}]},{"i":9,"title":"ケセラセラ","artist":"Mrs. GREEN APPLE","vid":"Jy-QS27q7lA","vtitle":"Mrs. GREEN APPLE「ケセラセラ」Official Music Video","hits":[16,28,29,44,68,108,123,132,167,176],"new":[29,108,167],"cum":47,"lines":[{"t":"ケセラセラ","g":[]},{"t":"今日も唱える","g":[]},{"t":"限界？上等。やってやろうか。","g":[]},{"t":"愛を捨てるほど暇じゃない　いつも All right All right","g":[28,29]},{"t":"ここを乗り越えたら　楽になるしかない","g":[108]},{"t":"痛み止めを飲んでも","g":[]},{"t":"消えない胸のズキズキが","g":[]},{"t":"些細な誰かの優しさで","g":[]},{"t":"ちょっと和らいだりするんだよな","g":[]},{"t":"負けるな","g":[]},{"t":"今日も踏ん張って","g":[]},{"t":"固めた殻で身を守って","g":[]},{"t":"また諦める理由探すけど、","g":[]},{"t":"ケセラセラ","g":[]},{"t":"今日も唱える","g":[]},{"t":"限界、上等。妬ましさも全部","g":[]},{"t":"不幸の矢が抜けない日でも All right All right","g":[]},{"t":"食いしばってる","g":[]},{"t":"でもね、","g":[]},{"t":"今日はちょっとだけご褒美を","g":[16]},{"t":"わかっているけれど","g":[]},{"t":"私を愛せるのは私だけ。","g":[16]},{"t":"生まれ変わるなら？","g":[]},{"t":"「また私だね。」","g":[]},{"t":"ひとりぼっちだと気付いても","g":[]},{"t":"繋がりは消えるわけじゃない","g":[167]},{"t":"たまにがいい　たまにでいい","g":[]},{"t":"ちゃんと大切だと思えるから","g":[]},{"t":"貴方の幸せを分けてほしい","g":[]},{"t":"悲劇の図鑑","g":[]},{"t":"私ってそう。","g":[]},{"t":"仕方ない程　自分よがり","g":[]},{"t":"バイバイ　幼き愛の日々","g":[]},{"t":"いいよもう　願うは「はじめから」","g":[]},{"t":"ベイベー　大人になんかなるもんじゃないぞ","g":[68]},{"t":"ツァラトゥストラ","g":[]},{"t":"ケセラセラ","g":[]},{"t":"今日も唱える","g":[]},{"t":"何のせい？誰のせい？","g":[]},{"t":"勝てなくたっていい","g":[123]},{"t":"負けない強さを持ちたい　そうさ All right All right","g":[]},{"t":"乗り切ってみせる","g":[44]},{"t":"ケセラセラ","g":[]},{"t":"今日も言い聞かせる","g":[]},{"t":"不幸の矢が抜けない日でも All right All right","g":[]},{"t":"止まらないで居よう。","g":[]},{"t":"だから、今日は","g":[]},{"t":"ちょっとだけご褒美を","g":[16]},{"t":"笑える日は来るから。","g":[]},{"t":"私を愛せるのは私だけ","g":[16]},{"t":"生まれ変わるなら？","g":[]},{"t":"「また私だね。」","g":[]},{"t":"バイバイ　無頓着な愛の日々","g":[]},{"t":"ファンファーレ　喜劇的な「つづきから」","g":[132]},{"t":"ベイベー　大人になんかなるもんじゃないけど","g":[68]},{"t":"ケセラセラ","g":[]},{"t":"バイバイ　空っぽ器にヒビ","g":[]},{"t":"ファンファーレ　明日も「つづきから」","g":[]},{"t":"ベイベー　大人になんかなるもんじゃないけど","g":[68]},{"t":"ケセラセラ","g":[]},{"t":"なるようになるのさ","g":[176]},{"t":"ケセラセラ","g":[]}]},{"i":10,"title":"3月9日","artist":"レミオロメン","vid":"UNRJyBHziX4","vtitle":"レミオロメン - 3月9日","hits":[4,23,28,85,99,182],"new":[23,182],"cum":49,"lines":[{"t":"流れる季節の真ん中で","g":[]},{"t":"ふと日の長さを感じます","g":[23]},{"t":"せわしく過ぎる日々の中に","g":[]},{"t":"私とあなたで夢を描く","g":[]},{"t":"3月の風に想いをのせて","g":[]},{"t":"桜のつぼみは春へとつづきます","g":[]},{"t":"溢れ出す光の粒が","g":[]},{"t":"少しずつ朝を暖めます","g":[182]},{"t":"大きなあくびをした後に","g":[]},{"t":"少し照れてるあなたの横で","g":[]},{"t":"新たな世界の入口に立ち","g":[]},{"t":"気づいたことは 1人じゃないってこと","g":[]},{"t":"※瞳を閉じれば あなたが","g":[]},{"t":"まぶたのうらに いることで","g":[]},{"t":"どれほど強くなれたでしょう","g":[28]},{"t":"あなたにとって私も そうでありたい※","g":[85]},{"t":"砂ぼこり運ぶ つむじ風","g":[]},{"t":"洗濯物に絡まりますが","g":[]},{"t":"昼前の空の白い月は","g":[]},{"t":"なんだかきれいで 見とれました","g":[]},{"t":"上手くはいかぬこともあるけれど","g":[]},{"t":"天を仰げば それさえ小さくて","g":[99]},{"t":"青い空は凛と澄んで","g":[]},{"t":"羊雲は静かに揺れる","g":[]},{"t":"花咲くを待つ喜びを","g":[]},{"t":"分かち合えるのであれば それは幸せ","g":[4]},{"t":"この先も 隣で そっと微笑んで","g":[]},{"t":"(※くり返し)","g":[]}]},{"i":11,"title":"Rain","artist":"秦基博","vid":"kKYoH7O1Kdg","vtitle":"Rain","hits":[16,134,160,176,180],"new":[134,160],"cum":51,"lines":[{"t":"言葉にできず凍えたままで","g":[]},{"t":"人前ではやさしく生きていた","g":[]},{"t":"しわよせで こんなふうに雑に","g":[]},{"t":"雨の夜にきみを抱きしめてた","g":[]},{"t":"道路わきのビラと壊れた常夜燈","g":[]},{"t":"街角ではそう だれもが急いでた","g":[]},{"t":"きみじゃない 悪いのは自分の激しさを","g":[]},{"t":"かくせないぼくのほうさ","g":[]},{"t":"Lady きみは雨にけむる","g":[]},{"t":"すいた駅を少し走った","g":[]},{"t":"どしゃぶりでもかまわないと","g":[134]},{"t":"ずぶぬれでもかまわないと","g":[134]},{"t":"しぶきあげるきみが消えてく","g":[]},{"t":"路地裏では朝が早いから","g":[]},{"t":"今のうちにきみをつかまえ","g":[160]},{"t":"行かないで 行かないで","g":[]},{"t":"そう言うよ","g":[]},{"t":"別々に暮らす 泣きだしそうな空を","g":[]},{"t":"にぎりしめる強さは今はもうない","g":[]},{"t":"変わらずいる心のすみだけで傷つくような","g":[16,176]},{"t":"きみならもういらない","g":[]},{"t":"Lady きみは雨にぬれて","g":[]},{"t":"ぼくの眼を少し見ていた","g":[]},{"t":"どしゃぶりでもかまわないと","g":[134]},{"t":"ずぶぬれでもかまわないと","g":[134]},{"t":"口笛ふくぼくがついてく","g":[]},{"t":"ずいぶんきみを知りすぎたのに","g":[]},{"t":"初めて争った夜のように","g":[176]},{"t":"行かないで 行かないで","g":[]},{"t":"そう言うよ","g":[]},{"t":"肩が乾いたシャツ改札を出る頃","g":[]},{"t":"きみの町じゃもう雨は小降りになる","g":[]},{"t":"今日だけが明日に続いてる","g":[16]},{"t":"こんなふうに きみとは終われない","g":[]},{"t":"Lady きみは今もこうして","g":[]},{"t":"小さめの傘もささずに","g":[180]},{"t":"どしゃぶりでもかまわないと","g":[134]},{"t":"ずぶぬれでもかまわないと","g":[134]},{"t":"しぶきあげるきみが消えてく","g":[]},{"t":"路地裏では朝が早いから","g":[]},{"t":"今のうちにきみをつかまえ","g":[160]},{"t":"行かないで 行かないで","g":[]},{"t":"そう言うよ","g":[]},{"t":"どしゃぶりでもかまわないと","g":[134]},{"t":"ずぶぬれでもかまわないと","g":[134]},{"t":"口笛ふくぼくがついてく","g":[]},{"t":"ずいぶんきみを知りすぎたのに","g":[]},{"t":"初めて争った夜のように","g":[176]},{"t":"行かないで 行かないで","g":[]},{"t":"そう言うよ","g":[]}]},{"i":12,"title":"キセキ","artist":"GReeeeN","vid":"DwTinTO0o9I","vtitle":"GReeeeN - キセキ","hits":[4,16,122,146,151,173,176],"new":[122,146],"cum":53,"lines":[{"t":"明日、今日よりも好きになれる　溢れる想いが止まらない","g":[173]},{"t":"今もこんなに好きでいるのに　言葉に出来ない","g":[]},{"t":"君のくれた日々が積み重なり　過ぎ去った日々2人歩いた『軌跡』","g":[]},{"t":"僕らの出逢いがもし偶然ならば?　運命ならば?","g":[]},{"t":"君に巡り合えた　それって『奇跡』","g":[4]},{"t":"2人寄り添って歩いて　永久の愛を形にして","g":[]},{"t":"いつまでも君の横で　笑っていたくて","g":[]},{"t":"アリガトウや　Ah　愛してるじゃまだ足りないけど","g":[]},{"t":"せめて言わせて　「幸せです」と","g":[]},{"t":"いつも君の右の手の平を　ただ僕の左の手の平が","g":[]},{"t":"そっと包んでくそれだけで　ただ愛を感じていた","g":[16]},{"t":"日々の中で　小さな幸せ　見つけ重ね　ゆっくり歩いた『軌跡』","g":[]},{"t":"僕らの出会いは大きな世界で　小さな出来事","g":[]},{"t":"巡り合えた　それって『奇跡』","g":[4]},{"t":"うまく行かない日だって　2人で居れば晴れだって!","g":[]},{"t":"強がりや寂しさも　忘れられるから","g":[]},{"t":"僕は君でなら　僕で居れるから!","g":[]},{"t":"だからいつも　そばにいてよ　『愛しい君へ』","g":[]},{"t":"2人フザけあった帰り道　それも大切な僕らの日々","g":[]},{"t":"「想いよ届け!!!」と伝えた時に　初めて見せた表情の君","g":[]},{"t":"少し間が空いて　君がうなずいて　僕らの心　満たされてく愛で","g":[]},{"t":"ぼくらまだ旅の途中で　またこれから先も","g":[146]},{"t":"何十年続いていけるような未来へ","g":[176]},{"t":"例えばほら　明日を見失いそうに　僕らなったとしても、、、","g":[122,151]},{"t":"2人寄り添って歩いて　永久の愛を形にして","g":[]},{"t":"いつまでも君の横で　笑っていたくて","g":[]},{"t":"アリガトウや　Ah　愛してるじゃまだ足りないけど","g":[]},{"t":"せめて言わせて　「幸せです」と","g":[]},{"t":"うまく行かない日だって　2人で居れば晴れだって!","g":[]},{"t":"喜びや悲しみも　全て分け合える","g":[4]},{"t":"君がいるから　生きていけるから!","g":[]},{"t":"だからいつも　そばにいてよ　『愛しい君へ』　最後の一秒まで","g":[]},{"t":"明日、今日より笑顔になれる　君がいるだけで　そう思えるから","g":[16]},{"t":"何十年　何百年　何千年　時を超えよう　君を愛してる","g":[]}]},{"i":13,"title":"時の流れに身をまかせ","artist":"テレサ・テン","vid":"sYf-BBF7Qpc","vtitle":"時の流れに身をまかせ","hits":[16,18,60,68,91,99,180],"new":[60,91],"cum":55,"lines":[{"t":"もしも　あなたと逢えずにいたら","g":[60,180]},{"t":"わたしは何を　してたでしょうか","g":[91]},{"t":"平凡だけど　誰かを愛し","g":[18]},{"t":"普通の暮らし　してたでしょうか","g":[91]},{"t":"※時の流れに　身をまかせ","g":[]},{"t":"あなたの色に　染められ","g":[]},{"t":"一度の人生それさえ　捨てることもかまわない※","g":[99]},{"t":"だから　お願い　そばに置いてね","g":[]},{"t":"いまは　あなたしか　愛せない","g":[]},{"t":"もしも　あなたに嫌われたなら","g":[]},{"t":"明日という日　失くしてしまうわ","g":[]},{"t":"約束なんか　いらないけれど","g":[68]},{"t":"想い出だけじゃ　生きてゆけない","g":[16]},{"t":"時の流れに　身をまかせ","g":[]},{"t":"あなたの胸に　より添い","g":[]},{"t":"綺麗になれたそれだけで　いのちさえもいらないわ","g":[16,99]},{"t":"だから　お願い　そばに置いてね","g":[]},{"t":"いまは　あなたしか　見えないの","g":[]},{"t":"(※くり返し)","g":[]},{"t":"だから　お願い　そばに置いてね","g":[]},{"t":"いまは　あなたしか　愛せない","g":[]}]},{"i":14,"title":"時代","artist":"中島みゆき","vid":"Ry_bpaKDcAo","vtitle":"時代 -ライヴ2010～11- (東京国際フォーラムAより)","hits":[111,121],"new":[111,121],"cum":57,"lines":[{"t":"今はこんなに悲しくて","g":[]},{"t":"涙もかれ果てて","g":[]},{"t":"もう二度と笑顔には なれそうもないけど","g":[111]},{"t":"そんな時代もあったねと","g":[]},{"t":"いつか話せる日がくるわ","g":[]},{"t":"あんな時代もあったねと","g":[]},{"t":"きっと笑って話せるわ","g":[]},{"t":"だから 今日はくよくよしないで","g":[]},{"t":"今日の風に吹かれましょう","g":[]},{"t":"まわるまわるよ 時代はまわる","g":[]},{"t":"喜び悲しみくり返し","g":[]},{"t":"今日は別れた恋人たちも","g":[]},{"t":"生まれ変わって めぐりあうよ","g":[]},{"t":"旅を続ける人々は","g":[]},{"t":"いつか故郷に出会う日を","g":[]},{"t":"たとえ今夜は倒れても","g":[121]},{"t":"きっと信じてドアを出る","g":[]},{"t":"たとえ今日は果てしもなく","g":[]},{"t":"冷たい雨が降っていても","g":[]},{"t":"めぐるめぐるよ 時代はめぐる","g":[]},{"t":"別れと出会いをくり返し","g":[]},{"t":"今日は倒れた旅人たちも","g":[]},{"t":"生まれ変って歩き出すよ","g":[]},{"t":"まわるまわるよ 時代はまわる","g":[]},{"t":"別れと出逢いをくり返し","g":[]},{"t":"今日は倒れた旅人たちも","g":[]},{"t":"生まれ変って歩き出すよ","g":[]},{"t":"今日は倒れた旅人たちも","g":[]},{"t":"生まれ変って歩き出すよ","g":[]}]},{"i":15,"title":"灰色と青","artist":"米津玄師","vid":"gJX2iy6nhHc","vtitle":"米津玄師  - 灰色と青（ ＋菅田将暉 ）,  Kenshi Yonezu - Haiirotoao（+Masaki Suda)","hits":[2,16,51,151,176],"new":[2,51],"cum":59,"lines":[{"t":"袖丈が覚束ない夏の終わり","g":[]},{"t":"明け方の電車に揺られて思い出した","g":[]},{"t":"懐かしいあの風景","g":[]},{"t":"たくさんの遠回りを繰り返して","g":[]},{"t":"同じような街並みがただ通り過ぎた","g":[176]},{"t":"窓に僕が映ってる","g":[]},{"t":"君は今もあの頃みたいにいるのだろうか","g":[]},{"t":"ひしゃげて曲がったあの自転車で走り回った","g":[]},{"t":"馬鹿ばかしい綱渡り　膝に滲んだ血","g":[]},{"t":"今はなんだかひどく虚しい","g":[]},{"t":"どれだけ背丈が変わろうとも","g":[16]},{"t":"変わらない何かがありますように","g":[176]},{"t":"くだらない面影に励まされ","g":[]},{"t":"今も歌う今も歌う今も歌う","g":[]},{"t":"忙しなく街を走るタクシーに","g":[]},{"t":"ぼんやりと背負われたままくしゃみをした","g":[]},{"t":"窓の外を眺める","g":[]},{"t":"心から震えたあの瞬間に","g":[]},{"t":"もう一度出会えたらいいと強く思う","g":[]},{"t":"忘れることはないんだ","g":[51]},{"t":"君は今もあの頃みたいにいるのだろうか","g":[]},{"t":"靴を片方茂みに落として探し回った","g":[151]},{"t":"「何があろうと僕らはきっと上手くいく」と","g":[]},{"t":"無邪気に笑えた　日々を憶えている","g":[]},{"t":"どれだけ無様に傷つこうとも","g":[16]},{"t":"終わらない毎日に花束を","g":[]},{"t":"くだらない面影を追いかけて","g":[]},{"t":"今も歌う今も歌う今も歌う","g":[]},{"t":"朝日が昇る前の欠けた月を","g":[]},{"t":"君もどこかで見ているかな","g":[]},{"t":"何故か訳もないのに胸が痛くて","g":[]},{"t":"滲む顔　霞む色","g":[]},{"t":"今更悲しいと叫ぶには","g":[]},{"t":"あまりに全てが遅すぎたかな","g":[2]},{"t":"もう一度初めから歩けるなら","g":[]},{"t":"すれ違うように君に会いたい","g":[176]},{"t":"どれだけ背丈が変わろうとも","g":[16]},{"t":"変わらない何かがありますように","g":[176]},{"t":"くだらない面影に励まされ","g":[]},{"t":"今も歌う今も歌う今も歌う","g":[]},{"t":"朝日が昇る前の欠けた月を","g":[]},{"t":"君もどこかで見ているかな","g":[]},{"t":"何もないと笑える朝日がきて","g":[]},{"t":"始まりは青い色","g":[]}]},{"i":16,"title":"長い間","artist":"Kiroro","vid":"IiqOCE3_8iI","vtitle":"Kiroro ｢長い間｣ Official Music Video","hits":[14,16,56,176],"new":[14,56],"cum":61,"lines":[{"t":"長い間待たせてごめん","g":[]},{"t":"また急に仕事が入った","g":[]},{"t":"いつも一緒にいられなくて","g":[]},{"t":"淋しい思いをさせたね","g":[]},{"t":"逢えないとき 受話器からきこえる","g":[]},{"t":"君の声がかすれてる","g":[]},{"t":"久しぶりに逢った時の","g":[14]},{"t":"君の笑顔が胸をさらっていく","g":[]},{"t":"気づいたのあなたがこんなに 胸の中にいること","g":[]},{"t":"愛してる まさかねそんな事言えない","g":[56]},{"t":"あなたのその言葉だけを信じて","g":[16]},{"t":"今日まで待っていた私","g":[]},{"t":"笑顔だけは 忘れないように","g":[16,176]},{"t":"あなたの側にいたいから","g":[]},{"t":"笑ってるあなたの側では 素直になれるの","g":[]},{"t":"愛してる でもまさかねそんな事言えない","g":[56]},{"t":"※気づいたのあなたがこんなに 胸の中にいること","g":[]},{"t":"愛してる まさかねそんな事言えない","g":[56]},{"t":"※※笑ってるあなたの側では 素直になれるの","g":[]},{"t":"愛してる でもまさかねそんな事言えない","g":[56]},{"t":"(※くり返し)","g":[]},{"t":"(※※くり返し)","g":[]}]},{"i":17,"title":"Butter-Fly","artist":"和田光司","vid":"32JTFI0alPk","vtitle":"デジモンアドベンチャー オープニング映像 / 和田光司「Butter-Fly」","hits":[18,19,24,68],"new":[24],"cum":62,"lines":[{"t":"ゴキゲンな蝶になって きらめく風に乗って","g":[]},{"t":"今すぐ キミに会いに行こう","g":[]},{"t":"余計な事なんて 忘れた方がマシさ","g":[68]},{"t":"これ以上 シャレてる時間はない","g":[]},{"t":"何が WOW WOW～ この空に届くのだろう","g":[]},{"t":"だけど WOW WOW～ 明日の予定もわからない","g":[18]},{"t":"無限大な夢のあとの 何もない世の中じゃ","g":[]},{"t":"そうさ愛しい 想いも負けそうになるけど","g":[]},{"t":"Stayしがちなイメージだらけの 頼りない翼でも","g":[19,24]},{"t":"きっと飛べるさ On My Love","g":[]},{"t":"ウカレタ蝶になって 一途な風に乗って","g":[]},{"t":"どこまでも キミに会いに行こう","g":[]},{"t":"曖昧な言葉って 意外に便利だって","g":[]},{"t":"叫んでる ヒットソング聴きながら","g":[]},{"t":"何が WOW WOW～ この街に響くのだろう","g":[]},{"t":"だけど WOW WOW～ 期待してても仕方ない","g":[18]},{"t":"無限大な夢のあとの やるせない世の中じゃ","g":[]},{"t":"そうさ常識 はずれも悪くはないかな","g":[]},{"t":"Stayしそうなイメージを染めた ぎこちない翼でも","g":[]},{"t":"きっと飛べるさ On My Love","g":[]},{"t":"無限大な夢のあとの 何もない世の中じゃ","g":[]},{"t":"そうさ愛しい 想いも負けそうになるけど","g":[]},{"t":"Stayしがちなイメージだらけの 頼りない翼でも","g":[19,24]},{"t":"きっと飛べるさ Oh Yeah～","g":[]},{"t":"無限大な夢のあとの やるせない世の中じゃ","g":[]},{"t":"そうさ常識 はずれも悪くはないかな","g":[]},{"t":"Stayしそうなイメージを染めた ぎこちない翼でも","g":[]},{"t":"きっと飛べるさ On My Love","g":[]}]},{"i":18,"title":"Ref:rain","artist":"Aimer","vid":"mvkbCZfwWzA","vtitle":"Aimer 『Ref:rain』MUSIC VIDEO(5th album『Sun Dance』『Penny Rain』2019/04/10（水）2枚同時発売)","hits":[5,53,79,180],"new":[79],"cum":63,"lines":[{"t":"Raining　夏の午後に　通り雨　傘の下","g":[]},{"t":"Kissing　濡れた頬に　そっと口づけた","g":[]},{"t":"あの季節に　まだ焦がれている","g":[]},{"t":"Miss you　窓の外に　遠ざかる景色たち","g":[]},{"t":"Breezing　虹が見えた　すぐに消えそうで","g":[]},{"t":"雨　明日は降らなければいい","g":[5]},{"t":"何も手につかずに　上の空の日々","g":[180]},{"t":"Nothing but you're the part of me","g":[]},{"t":"まだ　足りなくて","g":[]},{"t":"まだ　消えなくて","g":[]},{"t":"重ねた手のひらから幼さが","g":[]},{"t":"What a good thing we lose？","g":[]},{"t":"What a bad thing we knew","g":[]},{"t":"そんなフレーズに濡れてく　雨の中","g":[]},{"t":"ただ　足りなくて","g":[]},{"t":"まだ　言えなくて","g":[]},{"t":"数えた日の夢からさよならが","g":[]},{"t":"What a good thing we lose？","g":[]},{"t":"What a bad thing we knew","g":[]},{"t":"触れられずにいれたら　笑えたかな？","g":[180]},{"t":"Calling　白い息が　舞いあがる　空の下","g":[]},{"t":"Freezing　強い風に　少しかじかんだ手と","g":[]},{"t":"弱さをポケットの中に","g":[]},{"t":"どこを見渡しても　通り過ぎた日々","g":[]},{"t":"Nothing but you're the part of me","g":[]},{"t":"また　触れたくて","g":[]},{"t":"ただ　眩しくて","g":[]},{"t":"思わず目をそらした優しさに","g":[]},{"t":"I wanna sleep in your feel","g":[]},{"t":"I wanna see you in the deep","g":[]},{"t":"そんなフレーズを並べた詩を　今","g":[]},{"t":"あの帰り道　バスに揺られて","g":[]},{"t":"叶うはずもない様な夢を見た","g":[]},{"t":"I wanna sleep in your feel","g":[]},{"t":"I wanna see you in the deep","g":[]},{"t":"繰りかえす季節に　慣れないまま","g":[79]},{"t":"もう少しくらい大人でいれたら　何て言えただろう？","g":[53]},{"t":"まだ　足りなくて","g":[]},{"t":"まだ　消えなくて","g":[]},{"t":"重ねた手のひらから幼さが","g":[]},{"t":"What a good thing we lose？","g":[]},{"t":"What a bad thing we knew","g":[]},{"t":"そんなフレーズに濡れてく　雨の中","g":[]},{"t":"ただ　足りなくて","g":[]},{"t":"まだ　言えなくて","g":[]},{"t":"数えた日の夢からさよならが","g":[]},{"t":"What a good thing we lose?","g":[]},{"t":"What a bad thing we knew.","g":[]},{"t":"触れられずにいれたら　笑えたかな？","g":[180]}]},{"i":19,"title":"SAKURA","artist":"いきものがかり","vid":"61z-cqg28R8","vtitle":"いきものがかり 『SAKURA』Music Video","hits":[36],"new":[36],"cum":64,"lines":[{"t":"さくら ひらひら 舞い降りて落ちて 揺れる 想いのたけを 抱きしめた","g":[]},{"t":"君と 春に 願いし あの夢は 今も見えているよ さくら舞い散る","g":[]},{"t":"電車から 見えたのは いつかのおもかげ ふたりで通った 春の大橋","g":[]},{"t":"卒業の ときが来て 君は故郷(まち)を出た 色づく川辺に あの日を探すの","g":[]},{"t":"それぞれの道を選び ふたりは春を終えた 咲き誇る明日(みらい)は あたしを焦らせて","g":[]},{"t":"小田急線の窓に 今年もさくらが映る 君の声が この胸に 聞こえてくるよ","g":[]},{"t":"さくら ひらひら 舞い降りて落ちて 揺れる 想いのたけを 抱きしめた","g":[]},{"t":"君と 春に 願いし あの夢は 今も見えているよ さくら舞い散る","g":[]},{"t":"書きかけた 手紙には 「元気でいるよ」と 小さな嘘は 見透かされるね","g":[36]},{"t":"めぐりゆく この街も 春を受け入れて 今年もあの花が つぼみをひらく","g":[]},{"t":"君がいない日々を超えて あたしも大人になっていく こうやって全て忘れていくのかな","g":[]},{"t":"「本当に好きだったんだ」 さくらに手を伸ばす この想いが 今春に つつまれていくよ","g":[]},{"t":"さくら ひらひら 舞い降りて落ちて 揺れる 想いのたけを 抱き寄せた","g":[]},{"t":"君が くれし 強き あの言葉は 今も 胸に残る さくら舞いゆく","g":[]},{"t":"さくら ひらひら 舞い降りて落ちて 揺れる 想いのたけを 抱きしめた","g":[]},{"t":"遠き 春に 夢見し あの日々は 空に消えていくよ","g":[]},{"t":"さくら ひらひら 舞い降りて落ちて 春のその向こうへと歩き出す","g":[]},{"t":"君と 春に 誓いし この夢を 強く 胸に抱いて さくら舞い散る","g":[]}]},{"i":20,"title":"まちがいさがし","artist":"米津玄師","vid":"7940nuwCEYA","vtitle":"菅田将暉 『まちがいさがし』","hits":[4,16,19,53,68,175,176,182],"new":[175],"cum":65,"lines":[{"t":"まちがいさがしの間違いの方に","g":[]},{"t":"生まれてきたような気でいたけど","g":[175,176]},{"t":"まちがいさがしの正解の方じゃ","g":[]},{"t":"きっと出会えなかったと思う","g":[]},{"t":"ふさわしく　笑いあえること","g":[]},{"t":"何故だろうか　涙がでること","g":[]},{"t":"君の目が貫いた　僕の胸を真っ直ぐ","g":[]},{"t":"その日から何もかも　変わり果てた気がした","g":[]},{"t":"風に飛ばされそうな　深い春の隅で","g":[]},{"t":"退屈なくらいに何気なく傍にいて","g":[53]},{"t":"間違いだらけの　些細な隙間で","g":[19]},{"t":"くだらない話を　くたばるまで","g":[]},{"t":"正しくありたい　あれない　寂しさが","g":[]},{"t":"何を育んだでしょう","g":[]},{"t":"一つずつ　探し当てていこう","g":[182]},{"t":"起きがけの　子供みたいに","g":[]},{"t":"君の手が触れていた　指を重ね合わせ","g":[4]},{"t":"間違いか正解かだなんてどうでもよかった","g":[68]},{"t":"瞬く間に落っこちた　淡い靄の中で","g":[]},{"t":"君じゃなきゃいけないと　ただ強く思うだけ","g":[16]},{"t":"君の目が貫いた　僕の胸を真っ直ぐ","g":[]},{"t":"その日から何もかも　変わり果てた気がした","g":[]},{"t":"風に飛ばされそうな　深い春の隅で","g":[]},{"t":"誰にも見せない顔を見せて","g":[]},{"t":"君の手が触れていた　指を重ね合わせ","g":[4]},{"t":"間違いか正解かだなんてどうでもよかった","g":[68]},{"t":"瞬く間に落っこちた　淡い靄の中で","g":[]},{"t":"君じゃなきゃいけないと　ただ強く思うだけ","g":[16]}]},{"i":21,"title":"インフェルノ","artist":"Mrs. GREEN APPLE","vid":"wfCcs0vLysk","vtitle":"Mrs. GREEN APPLE - インフェルノ（Inferno）","hits":[85,147,180],"new":[147],"cum":66,"lines":[{"t":"照らすは闇","g":[]},{"t":"僕らは歩き慣れてきた日々も淘汰","g":[]},{"t":"夢は安泰な暮らしだが","g":[]},{"t":"刺激不足故にタラタラ","g":[]},{"t":"照らすは熄み","g":[]},{"t":"僕らの歩き慣れていた道はどこだ","g":[]},{"t":"時はたまに癪だが","g":[]},{"t":"温もりに包まれ只","g":[]},{"t":"炎が立つ","g":[]},{"t":"導の方へ","g":[]},{"t":"思い出すは優しいメロディー","g":[]},{"t":"永遠は無いんだと　無いんだと云フ","g":[]},{"t":"それもまたイイねと笑ってみる","g":[]},{"t":"輝けばいつかは光も絶える","g":[]},{"t":"僕らは命の火が消えるその日まで歩いてゆく","g":[]},{"t":"ところで何故","g":[147]},{"t":"僕らは思考を急に辞めているんだ","g":[]},{"t":"夢は安泰な暮らしだが","g":[]},{"t":"知識不足故にハラハラ","g":[]},{"t":"食せばYummy","g":[]},{"t":"ヨスガに縋り付いたまま朽ちて行くんだ","g":[]},{"t":"ここは業火の中だが","g":[]},{"t":"傷跡がヒリつき只","g":[]},{"t":"水面が立つ","g":[]},{"t":"光の方へ","g":[]},{"t":"手を取るは新しいメモリー","g":[]},{"t":"夜空が分かつ","g":[]},{"t":"導の方へ","g":[]},{"t":"遮るは堅苦しいセオリー","g":[]},{"t":"永遠は無いんだと　無いんだと云フ","g":[]},{"t":"やっぱ苦しいねと泣いてみる","g":[]},{"t":"風船もいつかは萎むか割れる","g":[]},{"t":"僕らは命の泉を護り続けて繋いでゆく","g":[]},{"t":"学びきれずに卒業","g":[180]},{"t":"伝えきれずに失恋","g":[180]},{"t":"遊びきれずに決別","g":[180]},{"t":"面倒臭いが","g":[]},{"t":"地獄じゃあるまいし","g":[]},{"t":"音が出る玩具も","g":[]},{"t":"痛みを飛ばす魔法も","g":[]},{"t":"全部僕にとっての宝物","g":[85]},{"t":"永遠は無いんだと　無いんだと云フ","g":[]},{"t":"僕らは命の火が消えるその日まで歩いてゆく","g":[]}]},{"i":22,"title":"スパークル","artist":"RADWIMPS","vid":"a2GujJZfXpg","vtitle":"スパークル [original ver.] -Your name. Music Video edition- 予告編 from new album「人間開花」初回盤DVD","hits":[4,16,68,99,155,176],"new":[155],"cum":67,"lines":[{"t":"まだこの世界は　僕を飼いならしてたいみたいだ","g":[]},{"t":"望み通りいいだろう　美しくもがくよ","g":[]},{"t":"互いの砂時計　眺めながらキスをしようよ","g":[]},{"t":"「さよなら」から一番　遠い　場所で待ち合わせよう","g":[4]},{"t":"辞書にある言葉で　出来上がった世界を憎んだ","g":[]},{"t":"万華鏡の中で　八月のある朝","g":[]},{"t":"君は僕の前で　ハニかんでは澄ましてみせた","g":[]},{"t":"この世界の教科書のような笑顔で","g":[176]},{"t":"ついに時はきた　昨日までは序章の序章で","g":[155]},{"t":"飛ばし読みでいいから　ここからが僕だよ","g":[]},{"t":"経験と知識と　カビの生えかかった勇気を持って","g":[]},{"t":"いまだかつてないスピードで　君のもとへダイブを","g":[]},{"t":"まどろみの中で　生温いコーラに","g":[]},{"t":"ここでないどこかを　夢見たよ","g":[]},{"t":"教室の窓の外に","g":[]},{"t":"電車に揺られ　運ばれる朝に","g":[]},{"t":"愛し方さえも　君の匂いがした","g":[99]},{"t":"歩き方さえも　その笑い声がした","g":[99]},{"t":"いつか消えてなくなる　君のすべてを","g":[]},{"t":"この眼に焼き付けておくことは","g":[]},{"t":"もう権利なんかじゃない　義務だと思うんだ","g":[68]},{"t":"運命だとか未来とかって　言葉がどれだけ手を","g":[16]},{"t":"伸ばそうと届かない　場所で僕ら恋をする","g":[]},{"t":"時計の針も二人を　横目に見ながら進む","g":[]},{"t":"そんな世界を二人で　一生　いや、何章でも","g":[]},{"t":"生き抜いていこう","g":[]}]},{"i":23,"title":"今夜このまま","artist":"あいみょん","vid":"mH6LoI63buY","vtitle":"あいみょん - 今夜このまま【OFFICIAL MUSIC VIDEO】","hits":[5,8,19,40,42,46,53,176],"new":[8],"cum":68,"lines":[{"t":"苦いようで甘いようなこの泡に","g":[176]},{"t":"くぐらせる想いが弾ける","g":[]},{"t":"体は言う事を聞かない","g":[]},{"t":"「いかないで」って","g":[]},{"t":"走ってゆければいいのに","g":[5,8]},{"t":"広いようで狭いようなこの場所は","g":[176]},{"t":"言いたい事も喉に詰まる","g":[]},{"t":"体が帰りたいと嘆く","g":[]},{"t":"「いかないで」って","g":[]},{"t":"叫んでくれる人がいればなぁ","g":[]},{"t":"抜け出せない","g":[]},{"t":"抜けきれない","g":[42]},{"t":"よくある話じゃ終われない","g":[]},{"t":"簡単に冷める気もないから","g":[]},{"t":"とりあえずアレ下さい","g":[]},{"t":"消えない想いは","g":[]},{"t":"軽く火照らせて飛ばして","g":[]},{"t":"指先から始まる何かに期待して","g":[]},{"t":"泳いでく　溺れてく","g":[]},{"t":"今夜はこのまま","g":[]},{"t":"泡の中で眠れたらなぁ","g":[]},{"t":"だんだん息もできなくなって","g":[]},{"t":"心の壁も穴だらけで","g":[19]},{"t":"制御不能　結構不幸？","g":[]},{"t":"自暴自棄　です。","g":[]},{"t":"そんなに多くはいらないから","g":[]},{"t":"幸せの横棒ひとつくらいで","g":[53]},{"t":"満たされたい　満たしてみたい","g":[]},{"t":"乱されたい　会いたい","g":[]},{"t":"いつかの誰かに","g":[]},{"t":"やるせない","g":[]},{"t":"やりきれない","g":[42]},{"t":"よくある話じゃ終われない","g":[]},{"t":"簡単に辞める気もないから","g":[]},{"t":"とりあえずアレ下さい","g":[]},{"t":"言えない想いは","g":[]},{"t":"軽く飲み込んで　隠しちゃって","g":[46]},{"t":"鼻の先に取り付いた本音に油断して","g":[]},{"t":"抱かれてく　騙されてく","g":[]},{"t":"今夜の夜風に","g":[]},{"t":"吹かれながら　揺れながら","g":[]},{"t":"ねぇ　もう　帰ろう　帰ろう","g":[]},{"t":"影も　もう　ねぇ　薄くなって","g":[]},{"t":"結局　味のない　味気のない","g":[40]},{"t":"夜が眠る","g":[]},{"t":"癒えない想いが","g":[]},{"t":"加速するばかりなんだ","g":[]},{"t":"止められない","g":[]},{"t":"放たれてく　夜になる","g":[]},{"t":"私はこのまま","g":[]},{"t":"消えない想いは","g":[]},{"t":"軽く火照らせて飛ばして","g":[]},{"t":"指先から始まる何かに期待して","g":[]},{"t":"泳いでく　溺れてく","g":[]},{"t":"今夜はこのまま","g":[]},{"t":"泡の中で眠れたらなぁ","g":[]},{"t":"誰かの腕の中で","g":[]},{"t":"甘い夢を見ながら","g":[]},{"t":"眠れたらなぁ","g":[]}]},{"i":24,"title":"前前前世","artist":"RADWIMPS","vid":"PDSkFeMVNFs","vtitle":"RADWIMPS - 前前前世 (movie ver.) [Official Music Video]","hits":[4,5,16,63,123,180],"new":[63],"cum":69,"lines":[{"t":"やっと眼を覚ましたかい　それなのになぜ眼も合わせやしないんだい？","g":[4]},{"t":"「遅いよ」と怒る君　これでもやれるだけ飛ばしてきたんだよ","g":[16]},{"t":"心が身体を追い越してきたんだよ","g":[]},{"t":"君の髪や瞳だけで胸が痛いよ","g":[16]},{"t":"同じ時を吸いこんで離したくないよ","g":[]},{"t":"遥か昔から知る　その声に","g":[]},{"t":"生まれてはじめて　何を言えばいい？","g":[5]},{"t":"君の前前前世から僕は　君を探しはじめたよ","g":[]},{"t":"そのぶきっちょな笑い方をめがけて　やってきたんだよ","g":[]},{"t":"君が全然全部なくなって　チリヂリになったって","g":[123]},{"t":"もう迷わない　また１から探しはじめるさ","g":[]},{"t":"むしろ０から　また宇宙をはじめてみようか","g":[63]},{"t":"どっから話すかな　君が眠っていた間のストーリー","g":[]},{"t":"何億　何光年分の物語を語りにきたんだよ　けどいざその姿この眼に映すと","g":[]},{"t":"君も知らぬ君とジャレて　戯れたいよ","g":[]},{"t":"君の消えぬ痛みまで愛してみたいよ","g":[]},{"t":"銀河何個分かの　果てに出逢えた","g":[]},{"t":"その手を壊さずに　どう握ったならいい？","g":[180]},{"t":"君の前前前世から僕は　君を探しはじめたよ","g":[]},{"t":"その騒がしい声と涙をめがけ　やってきたんだよ","g":[]},{"t":"そんな革命前夜の僕らを誰が止めるというんだろう","g":[]},{"t":"もう迷わない　君のハートに旗を立てるよ","g":[]},{"t":"君は僕から諦め方を　奪い取ったの","g":[]},{"t":"前前前世から僕は　君を探しはじめたよ","g":[]},{"t":"そのぶきっちょな笑い方をめがけて　やってきたんだよ","g":[]},{"t":"君が全然全部なくなって　チリヂリになったって","g":[123]},{"t":"もう迷わない　また１から探しはじめるさ","g":[]},{"t":"何光年でも　この歌を口ずさみながら","g":[]}]},{"i":25,"title":"勇気100%","artist":"光GENJI","vid":"TfBHI0ISG70","vtitle":"勇気100% 光GENJI","hits":[5,16,46,108,123,130],"new":[130],"cum":70,"lines":[{"t":"がっかりしてめそめそして どうしたんだい","g":[]},{"t":"太陽みたいに笑う きみはどこだい","g":[]},{"t":"wow wow","g":[]},{"t":"やりたいこと やったもん勝ち 青春なら","g":[]},{"t":"つらいときはいつだって そばにいるから","g":[]},{"t":"夢はでかくなけりゃ つまらないだろう","g":[]},{"t":"胸をたたいて 冒険しよう (hey hey)","g":[]},{"t":"※そうさ100%勇気","g":[]},{"t":"もうがんばるしかないさ","g":[108]},{"t":"この世界中の元気 抱きしめながら","g":[]},{"t":"そうさ100%勇気 もうやりきるしかないさ","g":[108]},{"t":"ぼくたちが持てる輝き 永遠に忘れないでね※","g":[]},{"t":"ぶつかったり 傷ついたり すればいいさ","g":[5]},{"t":"HEARTが燃えているなら 後悔しない","g":[]},{"t":"wow wow","g":[]},{"t":"じっとしてちゃ はじまらない このときめき","g":[]},{"t":"きみと追いかけてゆける 風が好きだよ","g":[]},{"t":"昨日 飛べなかった 空があるなら","g":[]},{"t":"いまあるチャンス つかんでみよう(hey hey)","g":[]},{"t":"そうさ100%勇気","g":[]},{"t":"さぁ飛び込むしかないさ","g":[46,108]},{"t":"まだ涙だけで終わる ときじゃないだろう","g":[16]},{"t":"そうさ100%勇気 もう ふりむいちゃいけない","g":[130]},{"t":"ぼくたちはぼくたちらしく どこまでも駆けてゆくのさ","g":[]},{"t":"たとえさみしすぎる 夜がきたって","g":[123]},{"t":"新しい朝 かならずくるさ","g":[]},{"t":"wow wow","g":[]},{"t":"(※くりかえし)","g":[]}]},{"i":26,"title":"君の知らない物語","artist":"supercell","vid":"rZZzlY8vUf8","vtitle":"『君の知らない物語』supercell｜『化物語』ノンクレジットED映像","hits":[16,18,22,46,68,123,125,176],"new":[125],"cum":71,"lines":[{"t":"いつもどおりのある日の事","g":[]},{"t":"君は突然立ち上がり言った","g":[]},{"t":"「今夜星を見に行こう」","g":[]},{"t":"「たまには良いこと言うんだね」","g":[]},{"t":"なんてみんなして言って笑った","g":[68]},{"t":"明かりもない道を","g":[]},{"t":"バカみたいにはしゃいで歩いた","g":[]},{"t":"抱え込んだ孤独や不安に","g":[46]},{"t":"押しつぶされないように","g":[176]},{"t":"真っ暗な世界から見上げた","g":[]},{"t":"夜空は星が降るようで","g":[]},{"t":"いつからだろう　君の事を","g":[]},{"t":"追いかける私がいた","g":[]},{"t":"どうかお願い","g":[]},{"t":"驚かないで聞いてよ","g":[]},{"t":"私のこの想いを","g":[]},{"t":"「あれがデネブ、アルタイル、ベガ」","g":[]},{"t":"君は指さす夏の大三角","g":[]},{"t":"覚えて空を見る","g":[]},{"t":"やっと見つけた織姫様","g":[]},{"t":"だけどどこだろう彦星様","g":[18]},{"t":"これじゃひとりぼっち","g":[]},{"t":"楽しげなひとつ隣の君","g":[]},{"t":"私は何も言えなくて","g":[]},{"t":"本当はずっと君の事を","g":[]},{"t":"どこかでわかっていた","g":[]},{"t":"見つかったって","g":[123]},{"t":"届きはしない","g":[]},{"t":"だめだよ　泣かないで","g":[]},{"t":"そう言い聞かせた","g":[]},{"t":"強がる私は臆病で","g":[]},{"t":"興味がないようなふりをしてた","g":[22,176]},{"t":"だけど","g":[18]},{"t":"胸を刺す痛みは増してく","g":[]},{"t":"ああそうか　好きになるって","g":[]},{"t":"こういう事なんだね","g":[]},{"t":"どうしたい?　言ってごらん","g":[125]},{"t":"心の声がする","g":[]},{"t":"君の隣がいい","g":[]},{"t":"真実は残酷だ","g":[]},{"t":"言わなかった","g":[]},{"t":"言えなかった","g":[]},{"t":"二度と戻れない","g":[]},{"t":"あの夏の日","g":[]},{"t":"きらめく星","g":[]},{"t":"今でも思い出せるよ","g":[]},{"t":"笑った顔も","g":[]},{"t":"怒った顔も","g":[]},{"t":"大好きでした","g":[]},{"t":"おかしいよね","g":[]},{"t":"わかってたのに","g":[]},{"t":"君の知らない","g":[]},{"t":"私だけの秘密","g":[16]},{"t":"夜を越えて","g":[]},{"t":"遠い思い出の君が","g":[]},{"t":"指をさす","g":[]},{"t":"無邪気な声で","g":[]}]},{"i":27,"title":"唱","artist":"Ado","vid":"pgXpM4l_MwI","vtitle":"【Ado】 唱","hits":[53,118,149,176],"new":[149],"cum":72,"lines":[{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"Okay　たちまち独壇場 Listen listen","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"傾け　振り切ろう","g":[]},{"t":"ヤーヤーヤーヤーヤー　唱タイム","g":[]},{"t":"天辺の御成り　ほらおいで","g":[]},{"t":"宵をコンプリート　オーライ Hell yeah yeah yeah","g":[]},{"t":"だんだんノリノリで超簡単 Brah brah brah！！！ Pow","g":[]},{"t":"えも言われない Ain't nobody stop","g":[]},{"t":"全土絢爛豪華 Attention　騒ごうか","g":[]},{"t":"意思表示にもうじき衝撃の声高らか堂々登板","g":[]},{"t":"もう伽藍洞は疾っくの疾う淘汰","g":[]},{"t":"Aye　繚乱桜花　御出座しだ","g":[]},{"t":"格好つけてるつもりは NO NO","g":[]},{"t":"オートマティックに溢れちゃう本能","g":[]},{"t":"宣う断頭台の上で　燥げ華麗","g":[]},{"t":"Da rat a tat... WARNING！","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"バンザイ　遊ぶ気に寿 Shout it out, Shout it out","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"はんなり　感情通りに八艘飛び Shout it out, Shout it out","g":[149]},{"t":"(Hey uh) 食らっちゃいな","g":[]},{"t":"(Hay ha) Rat tat tat tat tat (Pull up)","g":[]},{"t":"(Hey uh, wa wa wa)　満開　総員一気にとびきり Jump around","g":[]},{"t":"Look at me now","g":[]},{"t":"皮膚を破りそうな程に跳ねる心臓くらい激情的仕様 (Exotic vox)","g":[53]},{"t":"イニミニマニモ　ご来場からのご来光","g":[]},{"t":"かくれんぼしてるその気持ち解放　(理性アディオス)","g":[]},{"t":"しゃかりきじみちゃう","g":[]},{"t":"蛇腹刃蛇尾　騙る二枚刃","g":[]},{"t":"野心家　嫉妬するようなジュース","g":[176]},{"t":"たぶらかすな　かっとなっちゃ嫌","g":[]},{"t":"カルマに至る前に揺蕩うわ","g":[]},{"t":"蛇腹刃蛇尾　騙る二枚刃","g":[]},{"t":"野心家　嫉妬するようなジュース","g":[176]},{"t":"たぶらかすな　かっとなっちゃ嫌","g":[]},{"t":"十色のバタフライ　(No escape)","g":[]},{"t":"ご存じの通り　騒々しい鼓動に絆されてもう止まれない","g":[]},{"t":"衝動に塗装し描いた Daybreak　肺貫通低音狂","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"異例の危険度　比類なき活気充満","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"いちかばちか　嗚呼","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"バンザイ　遊ぶ気に寿 Shout it out, Shout it out","g":[]},{"t":"Nah-Nah-Nah-Nah-Nah, Ready for my show","g":[]},{"t":"喝采　巻き起こすために Stay","g":[118]},{"t":"一切合切忘れて Shout it out","g":[]},{"t":"Aye wah oh oh oh","g":[]},{"t":"右に左　まとめて Rat a tat a tat (Pull up)","g":[]},{"t":"思いっ切り一気に (Clap Clap Clap)　なにはともあれ　ご唱和あれ","g":[]},{"t":"Shout it out, Shout it out","g":[]}]},{"i":28,"title":"夜空ノムコウ","artist":"SMAP","vid":"lmo7e8C1NM0","vtitle":"SMAP - 夜空ノムコウ","hits":[16,28,29,54,68,99],"new":[54],"cum":73,"lines":[{"t":"あれからぼくたちは 何かを信じてこれたかなぁ…","g":[]},{"t":"夜空のむこうには 明日がもう待っている Woo…","g":[]},{"t":"誰かの声に気づき ぼくらは身をひそめた","g":[]},{"t":"公園のフェンス越しに 夜の風が吹いた","g":[]},{"t":"君が何か伝えようと にぎり返したその手は","g":[]},{"t":"ぼくの心のやわらかい場所を 今でもまだしめつける","g":[]},{"t":"あれからぼくたちは 何かを信じてこれたかなぁ…","g":[]},{"t":"マドをそっと開けてみる 冬の風のにおいがした","g":[]},{"t":"悲しみっていつかは 消えてしまうものなのかなぁ…","g":[]},{"t":"タメ息は少しだけ 白く残ってすぐ消えた","g":[16]},{"t":"歩き出すことさえも いちいちためらうくせに","g":[54,99]},{"t":"つまらない常識など つぶせると思ってた","g":[68]},{"t":"君に話した言葉は どれだけ残っているの?","g":[16]},{"t":"ぼくの心のいちばん奥で から回りしつづける","g":[]},{"t":"あのころの未来に ぼくらは立っているのかなぁ…","g":[]},{"t":"全てが思うほど うまくはいかないみたいだ","g":[28,29]},{"t":"このままどこまでも 日々は続いていくのかなぁ…","g":[]},{"t":"雲のない星空が マドのむこうにつづいてる","g":[]},{"t":"あれからぼくたちは 何かを信じてこれたかなぁ…","g":[]},{"t":"夜空のむこうには もう明日が待っている Woo……","g":[]}]},{"i":29,"title":"奏","artist":"スキマスイッチ","vid":"J5Z7tIq7bco","vtitle":"スキマスイッチ - 「奏（かなで）」Music Video : SUKIMASWITCH / KANADE Music Video","hits":[18,42,68,77,122,123,151,176,180],"new":[77],"cum":74,"lines":[{"t":"改札の前 つなぐ手と手","g":[]},{"t":"いつものざわめき 新しい風","g":[]},{"t":"明るく見送るはずだったのに","g":[]},{"t":"うまく笑えずに君を見ていた","g":[180]},{"t":"君が大人になってくその季節が","g":[]},{"t":"悲しい歌で溢れないように","g":[176]},{"t":"最後に何か君に伝えたくて","g":[]},{"t":"「さよなら」に代わる言葉を僕は探してた","g":[77]},{"t":"君の手を引くその役目が","g":[]},{"t":"僕の使命だなんて そう思ってた","g":[68]},{"t":"だけど今わかったんだ 僕らならもう","g":[18]},{"t":"重ねた日々が ほら 導いてくれる","g":[]},{"t":"君が大人になってくその時間が","g":[]},{"t":"降り積もる間に僕も変わってく","g":[]},{"t":"たとえばそこにこんな歌があれば","g":[122]},{"t":"ふたりはいつもどんな時もつながっていける","g":[]},{"t":"突然ふいに鳴り響くベルの音","g":[]},{"t":"焦る僕 解ける手  離れてく君","g":[]},{"t":"夢中で呼び止めて抱きしめたんだ","g":[]},{"t":"君がどこに行ったって僕の声で守るよ","g":[123]},{"t":"君が僕の前に現れた日から","g":[]},{"t":"何もかもが違くみえたんだ","g":[]},{"t":"朝も光も涙も歌う声も","g":[]},{"t":"君が輝きをくれたんだ","g":[]},{"t":"抑えきれない思いをこの声に乗せて","g":[42]},{"t":"遠く君の街へ届けよう","g":[]},{"t":"たとえばそれがこんな歌だったら","g":[122]},{"t":"僕らは何処にいたとしてもつながっていける","g":[151]}]},{"i":30,"title":"愛をこめて花束を","artist":"Superfly","vid":"gU5oN0KVofU","vtitle":"Superfly 『愛をこめて花束を』Music Video","hits":[4,16,18,28,68,94,105,180],"new":[94],"cum":75,"lines":[{"t":"二人で写真を撮ろう　懐かしいこの景色と","g":[]},{"t":"あの日と同じポーズで　おどけてみせて欲しい","g":[]},{"t":"見上げる空の青さを　気まぐれに雲は流れ","g":[]},{"t":"キレイなものは　遠くにあるからキレイなの","g":[]},{"t":"約束したとおりあなたと","g":[]},{"t":"ここに来られて本当に良かったわ","g":[]},{"t":"この込み上がる気持ちが　愛じゃないなら","g":[]},{"t":"何が愛かわからないほど","g":[28]},{"t":"愛をこめて花束を　大袈裟だけど受け取って","g":[18,94]},{"t":"理由なんて訊かないでよね","g":[68]},{"t":"今だけすべて忘れて　笑わないで受けとめて","g":[16]},{"t":"照れていないで","g":[]},{"t":"昨日とよく似た今日は　何気ない分かれ道を","g":[]},{"t":"分かって選びそびれた　臆病のせいでしょう","g":[105]},{"t":"私は泣くのが得意で","g":[]},{"t":"最初から慰めを当てにしてたわ","g":[]},{"t":"何度も間違った道　選び続けて","g":[]},{"t":"正しく　ここに戻って来たの","g":[]},{"t":"巡り巡る時を超え　いつもあなたの所へと","g":[]},{"t":"この心　舞い戻ってゆく","g":[]},{"t":"無理に描く理想より　笑い合える今日の方が","g":[4]},{"t":"ずっと幸せね","g":[]},{"t":"violet, indigo, black and blue","g":[]},{"t":"flame, yellow, purple, sky blue,","g":[]},{"t":"pink, yellow green, ash, brown……","g":[]},{"t":"あなたに贈る色は……?","g":[]},{"t":"巡り巡る時を超え　いつもあなたの所へと","g":[]},{"t":"この心　舞い戻ってゆく","g":[]},{"t":"ありがとうも言い出せずに　甘えていた","g":[180]},{"t":"今日ここへ来るまでは","g":[]},{"t":"愛をこめて花束を　大袈裟だけど受け取って","g":[18,94]},{"t":"理由なんて訊かないでね","g":[68]},{"t":"今だけすべて忘れて　笑わないで受けとめて","g":[16]},{"t":"本当のわたしを","g":[]},{"t":"いつまでもそばにいて","g":[]}]},{"i":31,"title":"楓","artist":"スピッツ","vid":"YapsFDcGe_s","vtitle":"スピッツ / 楓","hits":[4,28,43,99,100,176],"new":[43,100],"cum":77,"lines":[{"t":"忘れはしないよ 時が流れても","g":[]},{"t":"いたずらなやりとりや","g":[]},{"t":"心のトゲさえも 君が笑えばもう","g":[99,100]},{"t":"小さく丸くなっていたこと","g":[]},{"t":"かわるがわるのぞいた穴から","g":[]},{"t":"何を見てたかなぁ?","g":[]},{"t":"一人きりじゃ叶えられない","g":[43]},{"t":"夢もあったけれど","g":[]},{"t":"さよなら 君の声を 抱いて歩いていく","g":[]},{"t":"ああ 僕のままで どこまで届くだろう","g":[]},{"t":"探していたのさ 君と会う日まで","g":[]},{"t":"今じゃ懐かしい言葉","g":[]},{"t":"ガラスの向こうには 水玉の雲が","g":[]},{"t":"散らかっていた あの日まで","g":[]},{"t":"風が吹いて飛ばされそうな","g":[]},{"t":"軽いタマシイで","g":[]},{"t":"他人と同じような幸せを","g":[176]},{"t":"信じていたのに","g":[]},{"t":"これから 傷ついたり 誰か 傷つけても","g":[]},{"t":"ああ 僕のままで どこまで届くだろう","g":[]},{"t":"瞬きするほど長い季節が来て","g":[28]},{"t":"呼び合う名前がこだまし始める","g":[4]},{"t":"聞こえる?","g":[]},{"t":"さよなら 君の声を 抱いて歩いて行く","g":[]},{"t":"ああ 僕のままで どこまで届くだろう","g":[]},{"t":"ああ 君の声を 抱いて歩いて行く","g":[]},{"t":"ああ 僕のままで どこまで届くだろう","g":[]},{"t":"ああ 君の声を…","g":[]}]},{"i":32,"title":"瞳をとじて","artist":"平井堅","vid":"EqVoCfSwfUY","vtitle":"平井 堅 『瞳をとじて』MUSIC VIDEO","hits":[16,82,121,151],"new":[82],"cum":78,"lines":[{"t":"朝目覚める度に 君の抜け殻が横にいる","g":[]},{"t":"ぬくもりを感じた いつもの背中が冷たい","g":[]},{"t":"苦笑いをやめて 重いカーテンを開けよう","g":[]},{"t":"眩しすぎる朝日 僕と毎日の追いかけっこだ","g":[]},{"t":"あの日 見せた泣き顔","g":[]},{"t":"涙照らす夕陽 肩のぬくもり","g":[]},{"t":"消し去ろうと願う度に","g":[]},{"t":"心が 体が 君を覚えている","g":[]},{"t":"Your love forever","g":[]},{"t":"瞳を閉じて 君を描くよ それだけでいい","g":[16]},{"t":"たとえ季節が 僕の心を 置き去りにしても","g":[82,121]},{"t":"いつかは君のこと なにも感じなくなるのかな","g":[]},{"t":"今の痛み抱いて 眠る方がまだ いいかな","g":[]},{"t":"あの日 見てた星空","g":[]},{"t":"願いかけて 二人探した光は","g":[]},{"t":"瞬く間に消えてくのに","g":[]},{"t":"心は 体は 君で輝いてる","g":[]},{"t":"I wish forever","g":[]},{"t":"瞳をとじて 君を描くよ それしか出来ない","g":[]},{"t":"たとえ世界が 僕を残して 過ぎ去ろうとしても","g":[121,151]},{"t":"Your love forever","g":[]},{"t":"瞳をとじて 君を描くよ それだけでいい","g":[16]},{"t":"たとえ季節が 僕を残して 色を変えようとも","g":[]},{"t":"記憶の中に君を探すよ それだけでいい","g":[16]},{"t":"なくしたものを 越える強さを 君がくれたから","g":[]},{"t":"君がくれたから","g":[]}]},{"i":33,"title":"虹","artist":"福山雅治","vid":"SXyqhjhaQQA","vtitle":"福山雅治 - 虹 (Full ver.)","hits":[16,38,66,68,180],"new":[38],"cum":79,"lines":[{"t":"聞いて欲しい歌があるよ","g":[]},{"t":"いつか言いたかった言葉があるよ","g":[]},{"t":"それは特別なことなんかじゃないんだ","g":[68]},{"t":"そう それは難しいことなんかじゃないんだ","g":[68]},{"t":"ただ 地図を広げて","g":[]},{"t":"ただ 風を待ってたんだ 答えもなく","g":[]},{"t":"いま僕は行くのさ イメージの向こう側へ","g":[]},{"t":"僕の向こうへと","g":[]},{"t":"さぁ 飛び立とう","g":[]},{"t":"君が 君だけが 教えてくれたよ","g":[16]},{"t":"いつまでも色褪せない憧れがあるよ","g":[]},{"t":"だから行かなくちゃ","g":[66]},{"t":"サヨナラのかわりに 君がくれたんだ","g":[38]},{"t":"この勇気をくれたんだ","g":[]},{"t":"ただ 雨に打たれ","g":[]},{"t":"ただ 虹を待ってたんだ 疑いもせずに","g":[180]},{"t":"いま僕は行くのさ","g":[]},{"t":"イメージの向こう側へ 空の向こうへと","g":[]},{"t":"この翼で","g":[]},{"t":"(もしも)僕が いつか風を","g":[]},{"t":"(風を)追い越せるその時","g":[]},{"t":"(もしも)僕が いつか虹を","g":[]},{"t":"(虹を)手にいれるその時","g":[]},{"t":"(きっと)君は笑って","g":[]},{"t":"(笑って)くれるのかな","g":[]},{"t":"(きっと)また逢えるかな(君に)","g":[]},{"t":"ただ 地図を広げて","g":[]},{"t":"ただ 風を待ってたんだ 答えもなく","g":[]},{"t":"いま僕は行くのさ","g":[]},{"t":"イメージの向こう側へ 僕の向こうへと","g":[]},{"t":"ただ 雨に打たれ","g":[]},{"t":"ただ 虹を待ってたんだ 疑いもせずに","g":[180]},{"t":"いま僕は行くのさ","g":[]},{"t":"イメージの向こう側へ 君の空へ","g":[]},{"t":"僕の虹へ 飛び立つのさ","g":[]}]},{"i":34,"title":"サウダージ","artist":"ポルノグラフィティ","vid":"lzsB4eKPdJI","vtitle":"ポルノグラフィティ『サウダージ』MUSIC VIDEO","hits":[16,27,53,103,119,137,144,180,182],"new":[27,103,144],"cum":82,"lines":[{"t":"私は私と はぐれる訳にはいかないから","g":[]},{"t":"いつかまた逢いましょう その日までサヨナラ恋心よ","g":[]},{"t":"嘘をつくぐらいなら 何も話してくれなくていい","g":[53]},{"t":"あなたは去っていくの それだけはわかっているから","g":[16]},{"t":"見つめあった私は 可愛い女じゃなかったね","g":[]},{"t":"せめて最後は笑顔で飾らせて","g":[]},{"t":"涙が悲しみを溶かして 溢れるものだとしたら","g":[144]},{"t":"その滴も もう一度飲みほしてしまいたい","g":[]},{"t":"凛とした痛み胸に 留まり続ける限り","g":[]},{"t":"あなたを忘れずにいられるでしょう","g":[180]},{"t":"許してね恋心よ 甘い夢は波にさらわれたの","g":[]},{"t":"いつかまた逢いましょう その日までサヨナラ恋心よ","g":[]},{"t":"時を重ねるごとに ひとつずつあなたを知っていって","g":[27,182]},{"t":"さらに時を重ねて ひとつずつわからなくなって","g":[103,182]},{"t":"愛が消えていくのを 夕日に例えてみたりして","g":[]},{"t":"そこに確かに残るサウダージ","g":[119]},{"t":"想いを紡いだ言葉まで 影を背負わすのならば","g":[]},{"t":"海の底で物言わぬ貝になりたい","g":[]},{"t":"誰にも邪魔をされずに 海に帰れたらいいのに","g":[137,180]},{"t":"あなたをひっそりと思い出させて","g":[]},{"t":"諦めて恋心よ 青い期待は私を切り裂くだけ","g":[16]},{"t":"あの人に伝えて…寂しい…大丈夫…寂しい","g":[]},{"t":"繰り返される よくある話","g":[]},{"t":"出逢いと別れ 泣くも笑うも好きも嫌いも","g":[]},{"t":"許してね恋心よ 甘い夢は波にさらわれたの","g":[]},{"t":"いつかまた逢いましょう その日までサヨナラ恋心よ","g":[]},{"t":"あなたのそばでは 永遠を確かに感じたから","g":[119]},{"t":"夜空を焦がして 私は生きたわ恋心と","g":[]}]},{"i":35,"title":"ら・ら・ら","artist":"大黒摩季","vid":"SBogk2eyj6s","vtitle":"ら・ら・ら","hits":[5,9,18,33,154,182],"new":[9,154],"cum":84,"lines":[{"t":"懐かしいにおいがした すみれの花時計","g":[]},{"t":"恋愛中ってもっと楽しいと思ってた","g":[]},{"t":"好きになるのは簡単なのに輝き持続するのは…","g":[]},{"t":"ら・ら・ら ～今日と明日はあなたに逢えない","g":[]},{"t":"TVやマスコミはいったい誰のもの?","g":[33]},{"t":"とっても寂しいから とりあえずつけてます","g":[182]},{"t":"夢があるのはいいのだけど こんな忙しい人じゃ…","g":[18]},{"t":"ら・ら・ら ～今日も明日もあなたに逢いたい","g":[]},{"t":"年月が経つのはナゼ こんなに早いのだろう","g":[]},{"t":"あっという間にもう こんな年齢だし、親も年だし、","g":[]},{"t":"あなたしかいないし…ねえ","g":[]},{"t":"ら・ら・ら ～何かやらなきゃ誰にも会えない","g":[]},{"t":"人の心 裏の裏は ただの表だったりして","g":[]},{"t":"振り返れば恋ばかりで つい自分を忘れてた","g":[9,154]},{"t":"これから私 何をどうして生きていけばいいんだろう…","g":[5]},{"t":"ら・ら・ら ～やっぱり 今日も明日もあなたに逢いたい","g":[]},{"t":"ら・ら・ら ～だけど 今日も明日もあなたに逢えない","g":[18]},{"t":"ずっと ずっと ずっと…一緒にいようね","g":[]}]},{"i":36,"title":"HOWEVER","artist":"GLAY","vid":"gPcPseeICjs","vtitle":"GLAY / HOWEVER","hits":[4,16,20,21,99,173],"new":[21],"cum":85,"lines":[{"t":"やわらかな風が吹く この場所で","g":[]},{"t":"今二人ゆっくりと歩き出す","g":[]},{"t":"幾千の出会い別れ全て","g":[]},{"t":"この地球で生まれて","g":[]},{"t":"すれ違うだけの人もいたね わかり合えないままに","g":[4,16]},{"t":"慣れない街の届かぬ夢に 迷いそうな時にも","g":[]},{"t":"暗闇を駆けぬける勇気をくれたのはあなたでした Fu…","g":[]},{"t":"絶え間なく注ぐ愛の名を 永遠と呼ぶ事ができたなら","g":[]},{"t":"言葉では伝える事が どうしてもできなかった","g":[21]},{"t":"愛しさの意味を知る","g":[]},{"t":"あなたを幸せにしたい… 胸に宿る未来図を","g":[]},{"t":"悲しみの涙に濡らさぬ様 紡ぎ合い生きてる","g":[4]},{"t":"愛の始まりに心戸惑い 背を向けた夏の午後","g":[]},{"t":"今思えば頼りなく揺れてた 若すぎた日々の罪","g":[]},{"t":"それでもどんなに離れていても あなたを感じてるよ","g":[20]},{"t":"今度戻ったら一緒に暮らそう","g":[]},{"t":"やっぱり二人がいいね いつも","g":[]},{"t":"孤独を背負う人々の群れにたたずんでいた","g":[]},{"t":"心寄せる場所を探してた","g":[]},{"t":"｢出会うのが遅すぎたね｣と","g":[]},{"t":"泣き出した夜もある","g":[]},{"t":"二人の遠まわりさえ 一片の人生","g":[99]},{"t":"傷つけたあなたに 今告げよう 誰よりも 愛してると…","g":[173]},{"t":"絶え間なく注ぐ愛の名を 永遠と呼ぶ事ができたなら","g":[]},{"t":"言葉では伝える事が どうしてもできなかった","g":[21]},{"t":"優しさの意味を知る","g":[]},{"t":"恋した日の胸騒ぎを 何気ない週末を","g":[]},{"t":"幼さ残るその声を 気の強いまなざしを","g":[]},{"t":"あなたを彩る全てを抱きしめて","g":[]},{"t":"ゆっくりと歩き出す","g":[]},{"t":"やわらかな風が吹く この場所で","g":[]}]},{"i":37,"title":"セロリ","artist":"山崎まさよし","vid":"M4sWFgBYNbI","vtitle":"山崎まさよし - 「セロリ」MUSIC VIDEO [4K画質]","hits":[4,16,44,99,157],"new":[157],"cum":86,"lines":[{"t":"育ってきた環境が違うから好き嫌いはイナメナイ","g":[]},{"t":"夏がだめだったりセロリが好きだったりするのね","g":[]},{"t":"ましてや男と女だからすれちがいはしょうがない","g":[]},{"t":"妥協してみたり多くを求めたり なっちゃうね","g":[]},{"t":"何がきっかけでどんなタイミングで二人は出逢ったんだろう","g":[]},{"t":"やるせない時とか心許ない夜","g":[]},{"t":"出来るだけいっしょにいたいのさ","g":[16]},{"t":"がんばってみるよ　やれるだけ","g":[16]},{"t":"がんばってみてよ　少しだけ","g":[16]},{"t":"なんだかんだ言っても　つまりは　単純に","g":[157]},{"t":"君のこと好きなのさ","g":[]},{"t":"もともと何処吹く他人だから価値観はイナメナイ","g":[]},{"t":"流行が好きだったりそのわり古風なとこあったりするのね","g":[]},{"t":"性格曲げてまで気持ちおさえてまで付き合うことないけど","g":[4,99]},{"t":"一人じゃ持ち切れない素敵な時間に","g":[44]},{"t":"出来るだけいっしょにいたいのさ","g":[16]},{"t":"がんばってみるよ　やれるだけ","g":[16]},{"t":"がんばってみてよ　少しだけ","g":[16]},{"t":"なんだかんだ言っても　つまりは　単純に","g":[157]},{"t":"君のこと好きなのさ","g":[]}]},{"i":38,"title":"LOVEマシーン","artist":"モーニング娘。","vid":"6A7j6eryPV4","vtitle":"モーニング娘。 『LOVEマシーン』 (MV)","hits":[5,34,123],"new":[34],"cum":87,"lines":[{"t":"あんたにゃ もったいない (fu-fu-)","g":[]},{"t":"あたしゃ本当 NICE BODY","g":[]},{"t":"自分で 言う位","g":[]},{"t":"タダじゃない! じゃない?","g":[34]},{"t":"熱けりゃ 冷ませばいい (フーフー)","g":[5]},{"t":"淋しけりゃ EVERY BODY","g":[]},{"t":"誰にも わからない (fu-fu-)","g":[]},{"t":"恋愛って いつ火がつくのか","g":[]},{"t":"DYNAMITE 恋はDYNAMITE","g":[]},{"t":"どんなに不景気だって","g":[]},{"t":"恋はインフレーション","g":[]},{"t":"こんなに優しくされちゃ みだら","g":[]},{"t":"明るい未来に 就職希望だわ","g":[]},{"t":"日本の未来は (Wow Wow Wow Wow)","g":[]},{"t":"世界がうらやむ(Yeah Yeah Yeah Yeah)","g":[]},{"t":"恋をしようじゃないか! (Wow Wow Wow Wow)","g":[34]},{"t":"Dance! Dancin'all of the night","g":[]},{"t":"なんだか もの足りない (fu-fu-)","g":[]},{"t":"どこにいたって 愛してて欲しいは","g":[123]},{"t":"自分で 伝えるの","g":[]},{"t":"恥ずかしいじゃない!","g":[]},{"t":"理想の 二人だわ (夫婦)","g":[]},{"t":"憧れよ EVERYBODY","g":[]},{"t":"誰しも 気づいてない (fu-fu-)","g":[]},{"t":"恋愛って 夢の落とし穴","g":[]},{"t":"MYSTERY 恋はMYSTERY","g":[]},{"t":"そんなの不自然だって","g":[]},{"t":"恋のインサイダー","g":[]},{"t":"それでも上手にされちゃ あらわ","g":[]},{"t":"幸せ来る日も キャンセル待ちなの?","g":[]},{"t":"あんたの笑顔は(Wow Wow Wow Wow)","g":[]},{"t":"世界がうらやむ(Yeah Yeah Yeah Yeah)","g":[]},{"t":"夢があるんじゃないか!(Wow Wow Wow Wow)","g":[34]},{"t":"Dance! Dancin'all of the night","g":[]},{"t":"Love Love Love マシーン(Wow Wow Wow Wow)","g":[]},{"t":"Love Love Love ステーション(Yeah Yeah Yeah Yeah)","g":[]},{"t":"Love Love Love ファクトリー(Wow Wow Wow Wow)","g":[]},{"t":"Love!Love is so wonderful","g":[]},{"t":"日本の未来は(Wow Wow Wow Wow)","g":[]},{"t":"世界がうらやむ(Yeah Yeah Yeah Yeah)","g":[]},{"t":"恋をしようじゃないか! (Wow Wow Wow Wow)","g":[34]},{"t":"Dance! Dancin'all of the night","g":[]},{"t":"モーニング娘。も(Wow Wow Wow Wow)","g":[]},{"t":"あんたもあたしも(Yeah Yeah Yeah Yeah)","g":[]},{"t":"みんなも社長さんも(Wow Wow Wow Wow)","g":[]},{"t":"Dance! Dancin'all of the night","g":[]},{"t":"Love マシーン","g":[]}]},{"i":39,"title":"しるし","artist":"Mr.Children","vid":"xXA5StMti8c","vtitle":"Mr.Children 「しるし」 MUSIC VIDEO","hits":[18,28,42,53,98,110,123,151],"new":[98,110],"cum":89,"lines":[{"t":"最初からこうなることが","g":[]},{"t":"決まっていたみたいに","g":[]},{"t":"違うテンポで刻む鼓動を互いが聞いてる","g":[]},{"t":"どんな言葉を選んでも","g":[]},{"t":"どこか嘘っぽいんだ","g":[98]},{"t":"左脳に書いた手紙","g":[]},{"t":"ぐちゃぐちゃに丸めて捨てる","g":[]},{"t":"心の声は君に届くのかな?","g":[]},{"t":"沈黙の歌に乗って･･･","g":[]},{"t":"ダーリンダーリン","g":[]},{"t":"いろんな角度から君を見てきた","g":[]},{"t":"そのどれもが素晴らしくて","g":[]},{"t":"僕は愛を思い知るんだ","g":[]},{"t":"「半信半疑=傷つかない為の予防線」を","g":[]},{"t":"今、微妙なニュアンスで","g":[]},{"t":"君は示そうとしている","g":[151]},{"t":"「同じ顔をしてる」と","g":[]},{"t":"誰かが冷やかした写真","g":[]},{"t":"僕らは似ているのかなぁ?","g":[]},{"t":"それとも似てきたのかなぁ?","g":[110]},{"t":"面倒くさいって思うくらいに","g":[53]},{"t":"真面目に向き合っていた","g":[]},{"t":"軽はずみだった自分を","g":[]},{"t":"うらやましくなるほどに","g":[28]},{"t":"心の声は誰が聞くこともない","g":[]},{"t":"それもいい そのほうがいい","g":[]},{"t":"ダーリンダーリン","g":[]},{"t":"いろんな顔を持つ君を知ってるよ","g":[]},{"t":"何をして過ごしていたって","g":[123]},{"t":"思い出して苦しくなるんだ","g":[]},{"t":"カレンダーに記入した","g":[]},{"t":"いくつもの記念日より","g":[]},{"t":"小刻みに鮮明に僕の記憶を埋め尽くす","g":[]},{"t":"泣いたり笑ったり","g":[]},{"t":"不安定な想いだけど","g":[18]},{"t":"それが君と僕のしるし","g":[]},{"t":"ダーリンダーリン","g":[]},{"t":"いろんな角度から君を見てきた","g":[]},{"t":"共に生きれない日が来たって","g":[42,123]},{"t":"どうせ愛してしまうと思うんだ","g":[]},{"t":"ダーリンダーリン Oh My darling","g":[]},{"t":"狂おしく鮮明に僕の記憶を埋めつくす","g":[]},{"t":"ダーリンダーリン","g":[]}]}],"uncovered":[3,6,10,11,12,13,15,17,26,30,31,32,35,37,39,45,49,50,52,57,58,59,61,62,64,65,67,69,70,71,73,74,75,76,78,80,81,83,84,86,87,88,89,90,92,93,95,96,97,101,102,104,106,107,112,113,114,115,116,124,126,127,128,129,131,133,135,136,138,139,140,141,142,143,148,150,153,156,158,159,161,162,163,164,165,166,169,170,171,172,177,178,181],"grammar":[{"no":1,"g":"上げる（あげる）","romaji":"ageru","zh":"～完；做完（書き上げる等）","example":"レポートを書き上げた。","form":"動詞ます形語幹 + 上げる（書き上げる・立ち上げる）","note":"強調「做到徹底完成」，比單用「終わる」更有做到最後的實感。"},{"no":2,"g":"あまり","romaji":"amari","zh":"過於～（不太好的結果）","example":"嬉しさのあまり泣いた。","form":"名詞/辞書形 + の/な + あまり；形容詞 + さのあまり","note":"後面幾乎都接負面結果。「嬉しさのあまり」是固定例外。"},{"no":3,"g":"あまりにも","romaji":"amari ni mo","zh":"太過～；過度～","example":"あまりにも寒い。","form":"あまりにも + 形容詞/動詞","note":""},{"no":4,"g":"合う（あう）","romaji":"au","zh":"互相～（話し合う等）","example":"みんなで話し合おう。","form":"動詞ます形語幹 + 合う（話し合う・助け合う）","note":"表「互相」的動作，主語必須是複數或有對手。"},{"no":5,"g":"ばいい","romaji":"ba ii","zh":"～就好了；可以～","example":"わからなければ先生に聞けばいい。","form":"動詞ば形 + いい（聞けばいい）","note":"兩種語感：①建議「～就好」②冷淡的「這樣就夠了」。看語氣分辨。"},{"no":6,"g":"ばよかった","romaji":"ba yokatta","zh":"要是～就好了（後悔）","example":"もっと早く行けばよかった。","form":"動詞ば形 + よかった（行けばよかった）","note":""},{"no":7,"g":"ば～ほど","romaji":"ba~hodo","zh":"越～越～","example":"聞けば聞くほど面白い。","form":"動詞ば形 + 同じ動詞辞書形 + ほど（聞けば聞くほど）","note":""},{"no":8,"g":"ば～のに","romaji":"ba~noni","zh":"要是～就…（可惜沒有）","example":"行けばよかったのに。","form":"動詞ば形 + よかった + のに","note":""},{"no":9,"g":"ばかりで","romaji":"bakari de","zh":"淨是～；只～（負面）","example":"遊んでばかりで勉強しない。","form":"動詞/名詞 + ばかりで（遊んでばかりで）","note":"負面評價「淨是～」。中性陳述用「だけで」。"},{"no":10,"g":"ばかりでなく","romaji":"bakari denaku","zh":"不只～還～","example":"彼は英語ばかりでなく中国語も話せる。","form":"名詞/動詞 + ばかりでなく（英語ばかりでなく）","note":"客觀的「不只～」，不帶批評，與 9 的差別在這裡。"},{"no":11,"g":"べきだ","romaji":"beki da","zh":"應該～；理應～","example":"約束は守るべきだ。","form":"動詞辞書形 + べきだ（する→すべき）","note":""},{"no":12,"g":"べきではない","romaji":"beki dewa nai","zh":"不應該～","example":"人を笑うべきではない。","form":"動詞辞書形 + べきではない","note":""},{"no":13,"g":"別に～ない","romaji":"betsu ni~nai","zh":"並不特別～；沒怎麼～","example":"別に困っていない。","form":"別に + 否定形（別に困っていない）","note":""},{"no":14,"g":"ぶりに","romaji":"buri ni","zh":"隔～之後（再度）","example":"十年ぶりに会った。","form":"期間/回数 + ぶりに（十年ぶりに）","note":""},{"no":15,"g":"中（ちゅう）","romaji":"chuu / juu","zh":"正在～之中；～當中","example":"会議中なので静かに。","form":"名詞 + 中（会議中・営業中・勉強中）","note":""},{"no":16,"g":"だけ","romaji":"dake","zh":"只；僅～","example":"君だけを見ている。","form":"名詞/動詞 + だけ（君だけを）","note":"客觀限定「只有」。若要表達「別無選擇的無奈」用 しかない。"},{"no":17,"g":"だけでなく","romaji":"dake de naku","zh":"不只是～還～","example":"歌だけでなく踊りもうまい。","form":"名詞/動詞 + だけでなく","note":""},{"no":18,"g":"だけど","romaji":"dakedo","zh":"不過；可是","example":"好きだけど時間がない。","form":"文 + だけど（口語轉折）","note":""},{"no":19,"g":"だらけ","romaji":"darake","zh":"滿是～（髒亂等負面）","example":"泥だらけの靴。","form":"名詞 + だらけ（泥だらけ・傷だらけ）","note":"只能接名詞，且幾乎都是負面（泥・傷・借金・ゴミ）。正面詞不用：✗ 幸せだらけ。"},{"no":20,"g":"どんなに～ても","romaji":"donna ni~temo","zh":"無論多麼～都…","example":"どんなに遠くても会いに行く。","form":"どんなに + 形容詞/動詞 + ても","note":""},{"no":21,"g":"どうしても","romaji":"doushitemo","zh":"無論如何都（想/不）～","example":"どうしても忘れられない。","form":"どうしても + 動詞（たい/ない形）","note":""},{"no":22,"g":"ふりをする","romaji":"furi o suru","zh":"假裝～","example":"何も知らないふりをした。","form":"動詞た形/辞書形 + ふりをする；名詞 + のふりをする","note":""},{"no":23,"g":"ふと","romaji":"futo","zh":"忽然；猛然","example":"ふと君のことを思い出す。","form":"ふと + 動詞た形（ふと思い出した）","note":""},{"no":24,"g":"がち","romaji":"gachi","zh":"容易～；常常～","example":"冬は風邪をひきがちだ。","form":"動詞ます形語幹/名詞 + がち（病気がち・遅れがち）","note":""},{"no":25,"g":"がたい","romaji":"gatai","zh":"難以～（想像しがたい等）","example":"信じがたい話だ。","form":"動詞ます形語幹 + がたい（信じがたい）","note":""},{"no":26,"g":"気味（ぎみ）","romaji":"gimi","zh":"有點～的樣子；~的傾向","example":"風邪気味なので休む。","form":"名詞/動詞ます形語幹 + 気味（風邪気味・太り気味）","note":""},{"no":27,"g":"ごとに","romaji":"goto ni","zh":"每～；每隔～","example":"一年ごとに変化する。","form":"名詞/動詞辞書形 + ごとに（一年ごとに）","note":""},{"no":28,"g":"ほど","romaji":"hodo","zh":"～的程度；越…越…","example":"涙が出るほど嬉しかった。","form":"名詞/動詞 + ほど（泣きたいほど）","note":"表程度之高，常帶誇張：「泣きたいほど」。"},{"no":29,"g":"ほど～ない","romaji":"hodo~nai","zh":"沒有比～更…；不如～","example":"東京ほど大きい街はない。","form":"名詞 + ほど + 否定（東京ほど大きくない）","note":"比較否定句型：A ほど B ない＝B 沒 A 那麼…。"},{"no":30,"g":"一度に","romaji":"ichido ni","zh":"一次就；同時全部","example":"一度に全部は覚えられない。","form":"一度に + 動詞（一度に全部は無理）","note":""},{"no":31,"g":"いくら～ても","romaji":"ikura~temo","zh":"無論怎樣～也…","example":"いくら練習しても上手にならない。","form":"いくら + 動詞て形 + も（いくら練習しても）","note":""},{"no":32,"g":"一方だ","romaji":"ippou da","zh":"不斷地～（單向變化）","example":"物価は上がる一方だ。","form":"動詞辞書形 + 一方だ（上がる一方だ）","note":""},{"no":33,"g":"一体（いったい）","romaji":"ittai","zh":"到底；究竟","example":"一体誰がやったのか。","form":"一体 + 疑問詞（一体誰が）","note":""},{"no":34,"g":"じゃない","romaji":"janai","zh":"應該是～吧？（推測）","example":"これ、君のじゃない？","form":"文末 + じゃない（か）／語調上揚（君のじゃない？）","note":""},{"no":35,"g":"か何か","romaji":"ka nani ka","zh":"～或什麼的","example":"お茶かなにか飲む？","form":"名詞 + か何か（お茶か何か）","note":""},{"no":36,"g":"かける","romaji":"kakeru","zh":"～到一半；沒～完（書きかける等）","example":"声をかけようと思って言いかける。","form":"動詞ます形語幹 + かける（書きかける・食べかける）","note":""},{"no":37,"g":"から～にかけて","romaji":"kara~ni kakete","zh":"從～到～（範圍大略）","example":"夜から朝にかけて雨が降る。","form":"名詞 + から + 名詞 + にかけて（夜から朝にかけて）","note":""},{"no":38,"g":"代わりに","romaji":"kawari ni","zh":"代替～；交換條件是～","example":"その代わりに僕が行く。","form":"名詞 + の代わりに／動詞辞書形 + 代わりに","note":""},{"no":39,"g":"結果（けっか）","romaji":"kekka","zh":"～的結果；由於～","example":"相談した結果、中止になった。","form":"動詞た形 + 結果（相談した結果）","note":""},{"no":40,"g":"結局","romaji":"kekkyoku","zh":"最後終究～","example":"結局行かなかった。","form":"結局 + 文（結局行かなかった）","note":""},{"no":41,"g":"決して～ない","romaji":"kesshite~nai","zh":"決不～；從不～","example":"決して諦めない。","form":"決して + 否定形（決して諦めない）","note":""},{"no":42,"g":"～きれない","romaji":"kirenai","zh":"無法完全～","example":"食べきれないほどの料理。","form":"動詞ます形語幹 + きれない（食べきれない）","note":"表「量太大做不完」，不是能力不足。能力不足用「～ことができない」。"},{"no":43,"g":"きり","romaji":"kiri","zh":"～之後就（一直）；只","example":"出かけたきり戻らない。","form":"動詞た形 + きり（出かけたきり）","note":"「做了某動作後就再也沒…」，後面常接否定或持續狀態。"},{"no":44,"g":"～切る","romaji":"kiru","zh":"完全～；徹底～","example":"最後まで走り切った。","form":"動詞ます形語幹 + 切る（使い切る・走り切る）","note":"表徹底完成到底：使い切る・走り切る。注意 裏切る・横切る 是同形不同義。"},{"no":45,"g":"っけ","romaji":"kke","zh":"來著？（確認記憶）","example":"そうだっけ？","form":"文末（た形/だ）+ っけ（そうだっけ）","note":""},{"no":46,"g":"～込む","romaji":"komu","zh":"～進去；深入～（走り込む等）","example":"飛び込もう。","form":"動詞ます形語幹 + 込む（飛び込む・話し込む）","note":""},{"no":47,"g":"こそ","romaji":"koso","zh":"正是～（強調）","example":"今こそ夢を見ろ。","form":"名詞/助詞 + こそ（今こそ）","note":"強調焦點，常帶「正是這個」的對比感。"},{"no":48,"g":"こと","romaji":"koto","zh":"～的事；（ことだ：最好～）","example":"大切なのは毎日続けることだ。","form":"動詞辞書形 + ことだ（建議）／ことができる（可能）","note":"ことだ＝建議（最好～）；ことができる＝可能。兩者是完全不同的用法。"},{"no":49,"g":"ことから","romaji":"koto kara","zh":"由於～（由來）","example":"姿が似ていることから兄弟と呼ばれる。","form":"文 + ことから（似ていることから）","note":""},{"no":50,"g":"ことになっている","romaji":"koto ni natteiru","zh":"規定／慣例是～","example":"ここでは写真を撮ってはいけないことになっている。","form":"動詞辞書形/ない形 + ことになっている","note":""},{"no":51,"g":"ことはない","romaji":"koto wa nai","zh":"沒必要～","example":"謝ることはない。","form":"動詞辞書形 + ことはない（謝ることはない）","note":""},{"no":52,"g":"ことは～が","romaji":"koto wa~ga","zh":"～是～，不過…","example":"高いことは高いが買う価値がある。","form":"動詞/形容詞 + ことは + 同詞 + が（高いことは高いが）","note":""},{"no":53,"g":"くらい / ぐらい","romaji":"kurai / gurai","zh":"大約；～的程度","example":"泣きたいくらい悔しい。","form":"名詞/動詞 + くらい（泣きたいくらい）","note":""},{"no":54,"g":"くせに","romaji":"kuse ni","zh":"明明～卻（責難）","example":"知っているくせに教えない。","form":"名詞 + のくせに／動詞・形容詞 + くせに","note":"帶責難與輕蔑語氣，不能對自己用，也不適合對長輩用。"},{"no":55,"g":"まるで","romaji":"maru de","zh":"宛如；簡直像","example":"まるで夢みたいだ。","form":"まるで + 名詞 + のようだ／みたいだ","note":""},{"no":56,"g":"まさか","romaji":"masaka","zh":"難道；不會吧","example":"まさか嘘じゃないよね？","form":"まさか + 文（まさか嘘だよね？）","note":""},{"no":57,"g":"めったに～ない","romaji":"metta ni~nai","zh":"很少～","example":"めったに会えない。","form":"めったに + 否定形（めったに会えない）","note":""},{"no":58,"g":"も～ば～も","romaji":"mo~ba~mo","zh":"既～又～","example":"雨も降れば風も吹く。","form":"名詞 + も + ば形 + 名詞 + も（雨も降れば風も吹く）","note":""},{"no":59,"g":"もしかしたら","romaji":"moshika shitara","zh":"說不定；搞不好","example":"もしかしたら明日は晴れるかも。","form":"もしかしたら + 文 + かも（しれない）","note":""},{"no":60,"g":"もしも～たら","romaji":"moshimo~tara","zh":"假如～的話","example":"もしも生まれ変わったら。","form":"もしも + 動詞たら形（もしも生まれ変わったら）","note":""},{"no":61,"g":"向け","romaji":"muke","zh":"面向～（初学者向け）","example":"初心者向けの本。","form":"名詞 + 向け（初心者向け）","note":""},{"no":62,"g":"向き","romaji":"muki","zh":"適合～；朝～","example":"南向きの部屋。","form":"名詞 + 向き（南向き）","note":""},{"no":63,"g":"むしろ","romaji":"mushiro","zh":"寧可；倒不如說","example":"むしろそれでよかった。","form":"むしろ + 文（むしろよかった）","note":""},{"no":64,"g":"ながらも","romaji":"nagara mo","zh":"雖然～卻仍～","example":"小さいながらも立派な店。","form":"動詞ます形語幹/形容詞 + ながらも（小さいながらも）","note":""},{"no":65,"g":"ないことはない","romaji":"nai koto wa nai","zh":"也不是不～","example":"行けないことはない。","form":"動詞ない形 + ことはない（行けないことはない）","note":""},{"no":66,"g":"ないと","romaji":"naito","zh":"不～的話（不行）","example":"行かないと。","form":"動詞ない形 + と（＋いけない）","note":"口語常省略後半：行かないと（いけない）。"},{"no":67,"g":"なかなか","romaji":"nakanaka","zh":"相當；遲遲（不）","example":"なかなか眠れない。","form":"なかなか + 否定形（なかなか眠れない）","note":""},{"no":68,"g":"なんか / なんて / など","romaji":"nanka / nante / nado","zh":"～之類；竟然～（輕蔑/驚訝）","example":"君なんて嫌いだ。","form":"名詞 + なんか／文 + なんて／名詞 + など","note":"なんか／なんて 帶輕蔑或驚訝語感，正式場合避免。"},{"no":69,"g":"～直す","romaji":"naosu","zh":"重新～；再做～","example":"書き直してみる。","form":"動詞ます形語幹 + 直す（書き直す）","note":""},{"no":70,"g":"なるべく","romaji":"naru beku","zh":"盡量","example":"なるべく早く来て。","form":"なるべく + 動詞（なるべく早く）","note":""},{"no":71,"g":"なぜなら","romaji":"nazenara","zh":"因為（說明理由）","example":"なぜなら夢があるから。","form":"なぜなら + 文 + からだ","note":""},{"no":72,"g":"んだって","romaji":"ndatte","zh":"聽說～；（追問）說什麼？","example":"彼、来ないんだって。","form":"文 + んだって（来ないんだって）","note":""},{"no":73,"g":"に違いない","romaji":"ni chigai nai","zh":"一定是～","example":"これは本物に違いない。","form":"文 + に違いない（本物に違いない）","note":""},{"no":74,"g":"に反して","romaji":"ni hanshite","zh":"違反～；與～相反","example":"予想に反して負けた。","form":"名詞 + に反して（予想に反して）","note":""},{"no":75,"g":"にかけて","romaji":"ni kakete","zh":"在～方面（是一流）","example":"歌にかけては誰にも負けない。","form":"名詞 + にかけては（歌にかけては）","note":""},{"no":76,"g":"に関して / に関して","romaji":"ni kan suru","zh":"關於～","example":"日本の歴史に関して研究している。","form":"名詞 + に関して（歴史に関して）","note":""},{"no":77,"g":"に代わって","romaji":"ni kawatte","zh":"代替～","example":"私に代わって出席する。","form":"名詞 + に代わって（私に代わって）","note":""},{"no":78,"g":"に比べて","romaji":"ni kurabete","zh":"與～相比","example":"去年に比べて暑い。","form":"名詞 + に比べて（去年に比べて）","note":""},{"no":79,"g":"に慣れる","romaji":"ni nareru","zh":"習慣於～","example":"新しい生活に慣れない。","form":"名詞 + に慣れる（生活に慣れる）","note":"注意：土になれる 的「なれる」是 なる 的可能形，不是「慣れる」。"},{"no":80,"g":"において / における","romaji":"ni oite / ni okeru","zh":"在～（場面／領域）","example":"会議において決定した。","form":"名詞 + において（会議において）","note":""},{"no":81,"g":"に従って","romaji":"ni shitagatte","zh":"隨著～；依照～","example":"時間がたつに従って慣れた。","form":"名詞/動詞辞書形 + に従って（時がたつに従って）","note":""},{"no":82,"g":"にしても","romaji":"ni shite mo","zh":"即使～也；就連～也","example":"大人にしても難しい。","form":"名詞/動詞 + にしても（大人にしても）","note":""},{"no":83,"g":"にしては","romaji":"ni shite wa","zh":"就～而言算是…","example":"3歳にしては上手だ。","form":"名詞/動詞 + にしては（3歳にしては）","note":""},{"no":84,"g":"に対して","romaji":"ni taishite","zh":"對於～","example":"先生に対して丁寧に話す。","form":"名詞 + に対して（先生に対して）","note":""},{"no":85,"g":"にとって","romaji":"ni totte","zh":"對～而言","example":"君にとって大切なものは？","form":"名詞 + にとって（君にとって）","note":"從某人的立場評價：「君にとって」＝對你來說。"},{"no":86,"g":"について","romaji":"ni tsuite","zh":"關於～（議題）","example":"将来について考える。","form":"名詞 + について（将来について）","note":""},{"no":87,"g":"につれて","romaji":"ni tsurete","zh":"隨著～（連動變化）","example":"時間がたつにつれて寂しくなる。","form":"動詞辞書形/名詞 + につれて（時間がたつにつれて）","note":""},{"no":88,"g":"には","romaji":"ni wa","zh":"對～來說（要做～的話）","example":"生きるには勇気がいる。","form":"動詞辞書形 + には（生きるには）","note":""},{"no":89,"g":"によると / によれば","romaji":"ni yoru to/ni yoreba","zh":"根據～（消息來源）","example":"天気予報によると雨らしい。","form":"名詞 + によると（天気予報によると）","note":""},{"no":90,"g":"によって / による","romaji":"ni yotte / ni yoru","zh":"因～而異；由～；藉由","example":"人によって考えが違う。","form":"名詞 + によって（人によって）","note":"三重用法：①因～而異 ②由～（動作主）③藉由～（手段）。看上下文。"},{"no":91,"g":"のでしょうか","romaji":"no deshou ka","zh":"會是～呢？（柔軟的疑問）","example":"いつか叶うのでしょうか。","form":"文 + のでしょうか（叶うのでしょうか）","note":""},{"no":92,"g":"を中心に","romaji":"o chuushin ni","zh":"以～為中心","example":"駅を中心に発展した。","form":"名詞 + を中心に（駅を中心に）","note":""},{"no":93,"g":"をはじめ","romaji":"o hajime","zh":"以～為首；包括～","example":"大阪をはじめ全国で行われる。","form":"名詞 + をはじめ（大阪をはじめ）","note":""},{"no":94,"g":"を込めて","romaji":"o komete","zh":"傾注～（心意）","example":"愛を込めて歌う。","form":"名詞 + を込めて（愛を込めて）","note":""},{"no":95,"g":"を通じて / を通して","romaji":"o tsuujite / o tooshite","zh":"透過～；經由～","example":"音楽を通して友達ができた。","form":"名詞 + を通じて（音楽を通じて）","note":""},{"no":96,"g":"おかげで","romaji":"okage de","zh":"多虧～；託～的福","example":"あなたのおかげで救われた。","form":"名詞 + の + おかげで／動詞た形 + おかげで","note":""},{"no":97,"g":"っぱなし","romaji":"ppanashi","zh":"一直～著（放著不管）","example":"電気をつけっぱなしにする。","form":"動詞ます形語幹 + っぱなし（開けっぱなし）","note":"帶「該收拾卻放著不管」的負面語感。"},{"no":98,"g":"っぽい","romaji":"ppoi","zh":"很像～；容易～","example":"最近忘れっぽい。","form":"名詞/動詞ます形語幹 + っぽい（忘れっぽい）","note":""},{"no":99,"g":"さえ","romaji":"sae","zh":"連～都","example":"名前さえ知らない。","form":"名詞 + さえ（名前さえ知らない）","note":"舉極端例子「連～都」，常含驚訝或不滿。"},{"no":100,"g":"さえ～ば","romaji":"sae~ba","zh":"只要～就…","example":"君さえいればいい。","form":"名詞 + さえ + ば形（君さえいれば）","note":""},{"no":101,"g":"際に","romaji":"sai ni","zh":"～之際；～的時候","example":"出国の際にパスポートが必要。","form":"動詞辞書形/た形 + 際に／名詞 + の際に","note":"書面語，比「とき」正式得多，口語少用。"},{"no":102,"g":"最中に","romaji":"saichuu ni","zh":"正在～時（被打斷）","example":"試験の最中に電話が鳴った。","form":"動詞ている + 最中に／名詞 + の最中に","note":"強調「正做到一半被打斷」，後面接突發事件。"},{"no":103,"g":"さらに","romaji":"sara ni","zh":"更加；更上一層","example":"さらに強くなる。","form":"さらに + 形容詞/動詞（さらに強く）","note":""},{"no":104,"g":"さて","romaji":"sate","zh":"那麼；話說回來","example":"さて、次はどうしよう。","form":"文頭（さて、次は）","note":""},{"no":105,"g":"せいで","romaji":"sei de","zh":"都怪～；因為～（負面）","example":"雨のせいで試合が中止。","form":"名詞 + のせいで／動詞た形 + せいで","note":""},{"no":106,"g":"せいぜい","romaji":"seizei","zh":"至多；充其量；好好～吧","example":"せいぜい頑張って。","form":"せいぜい + 数量/動詞（せいぜい三日）","note":""},{"no":107,"g":"しばらく","romaji":"shibaraku","zh":"一陣子；暫時","example":"しばらく会っていない。","form":"しばらく + 動詞（しばらく会っていない）","note":""},{"no":108,"g":"しかない","romaji":"shikanai","zh":"只能～","example":"歩いて帰るしかない。","form":"動詞辞書形 + しかない（帰るしかない）","note":"帶「別無選擇」的無奈，必須接否定形。"},{"no":109,"g":"そのために","romaji":"sono tame ni","zh":"為了那個目的","example":"そのために生きてきた。","form":"文頭/接續（そのために生きてきた）","note":""},{"no":110,"g":"それとも","romaji":"soretomo","zh":"還是（疑問選擇）","example":"紅茶？それともコーヒー？","form":"名詞 + それとも + 名詞（紅茶？それともコーヒー？）","note":""},{"no":111,"g":"そうもない","romaji":"sou mo nai /sou ni nai","zh":"看樣子不太會～","example":"雨は止みそうもない。","form":"動詞ます形語幹 + そうもない（止みそうもない）","note":""},{"no":112,"g":"すでに","romaji":"sude ni","zh":"已經","example":"夢はすでに始まっている。","form":"すでに + 動詞た形（すでに始まっている）","note":""},{"no":113,"g":"すなわち","romaji":"sunawachi","zh":"亦即；就是","example":"光すなわち希望。","form":"名詞 + すなわち + 名詞（光すなわち希望）","note":""},{"no":114,"g":"数量詞+は","romaji":"suuryou + wa","zh":"（數量）至少也有～；強調數量","example":"三時間はかかった。","form":"数量詞 + は（三時間はかかった）","note":""},{"no":115,"g":"たものだ","romaji":"ta mono da","zh":"（回憶）以前總是～","example":"子供の頃はよく泣いたものだ。","form":"動詞た形 + ものだ（泣いたものだ）","note":""},{"no":116,"g":"たとたん","romaji":"ta totan","zh":"～的一瞬間就…","example":"ドアを開けたとたんに飛び出した。","form":"動詞た形 + とたん（に）（開けたとたんに）","note":""},{"no":117,"g":"たびに","romaji":"tabi ni","zh":"每當～就…","example":"会うたびに恋する。","form":"動詞辞書形/名詞の + たびに（会うたびに）","note":""},{"no":118,"g":"ために","romaji":"tame ni","zh":"為了～；因為～","example":"夢のために戦う。","form":"動詞辞書形 + ために（目的）／名詞の・た形 + ために（原因）","note":""},{"no":119,"g":"確かに","romaji":"tashika ni","zh":"的確（承認）","example":"確かにそうかもしれない。","form":"文頭（確かにそうだ）","note":""},{"no":120,"g":"たて","romaji":"tate","zh":"剛～好（焼きたて）","example":"焼きたてのパン。","form":"動詞ます形語幹 + たて（焼きたて）","note":""},{"no":121,"g":"たとえ～ても","romaji":"tatoe~temo","zh":"即使～也…","example":"たとえ世界が終わっても。","form":"たとえ + 動詞て形 + も（たとえ終わっても）","note":""},{"no":122,"g":"たとえば","romaji":"tatoeba","zh":"例如","example":"たとえば星のように。","form":"文頭（たとえば星のように）","note":""},{"no":123,"g":"たって","romaji":"tatte","zh":"就算～也（口語ても）","example":"今さら謝ったって遅い。","form":"動詞て形 + たって（口語＝ても）","note":""},{"no":124,"g":"てばかりいる","romaji":"te bakari iru","zh":"老是～；淨是～","example":"遊んでばかりいる。","form":"動詞て形 + ばかりいる（遊んでばかりいる）","note":""},{"no":125,"g":"てごらん","romaji":"te goran","zh":"（溫和指示）試試～","example":"目を閉じてごらん。","form":"動詞て形 + ごらん（閉じてごらん）","note":""},{"no":126,"g":"てはじめて","romaji":"te hajimete","zh":"～之後才第一次…","example":"会えてはじめて気づいた。","form":"動詞て形 + はじめて（会えてはじめて）","note":"「做了～之後才第一次…」，強調覺察的轉折點。"},{"no":127,"g":"てからでないと","romaji":"te kara de nai to","zh":"不做完～就不能…","example":"確認してからでないと進めない。","form":"動詞て形 + からでないと（確認してからでないと）","note":""},{"no":128,"g":"てしょうがない","romaji":"te shou ga nai","zh":"～得不得了","example":"会いたくてしょうがない。","form":"動詞て形/形容詞 + てしょうがない（会いたくてしょうがない）","note":""},{"no":129,"g":"て済む","romaji":"te sumu","zh":"～就解決（不用更多）","example":"謝って済むなら警察はいらない。","form":"動詞て形 + 済む（謝って済む）","note":""},{"no":130,"g":"てはいけないから","romaji":"te wa ikenai kara","zh":"因為不可以～","example":"走ってはいけないからね。","form":"動詞て形 + はいけない（走ってはいけない）","note":""},{"no":131,"g":"ている場合じゃない","romaji":"teiru baai janai","zh":"現在不是～的時候","example":"泣いている場合じゃない。","form":"動詞ている + 場合じゃない（泣いている場合じゃない）","note":""},{"no":132,"g":"的","romaji":"teki","zh":"～式的；～風的","example":"夢的な世界。","form":"名詞 + 的（てき）（夢的な）","note":"書面語，接名詞形成形容動詞（夢的・知的・病的）。"},{"no":133,"g":"ても始まらない","romaji":"temo hajimaranai","zh":"～也無濟於事","example":"悔やんでも始まらない。","form":"動詞て形 + も始まらない（悔やんでも始まらない）","note":""},{"no":134,"g":"てもかまわない","romaji":"temo kamawanai","zh":"～也無所謂","example":"雨でもかまわない。","form":"動詞て形 + もかまわない（雨でもかまわない）","note":""},{"no":135,"g":"てもしょうがない","romaji":"temo shou ga nai","zh":"～也沒用","example":"考えてもしょうがない。","form":"動詞て形 + もしょうがない（考えてもしょうがない）","note":""},{"no":136,"g":"と言えば","romaji":"to ieba","zh":"說到～","example":"夏と言えば花火。","form":"名詞 + と言えば（夏と言えば）","note":""},{"no":137,"g":"といい / たらいい","romaji":"to ii / tara ii","zh":"～的話就好了；～就可以","example":"夢が叶うといいね。","form":"動詞辞書形 + といい／たら形 + いい（叶うといいね）","note":"表願望「但願～」。與 5 的 ばいい（建議）語感不同。"},{"no":138,"g":"と言っても","romaji":"to ittemo","zh":"雖說～（但實際上…）","example":"春と言ってもまだ寒い。","form":"文 + と言っても（春と言っても）","note":""},{"no":139,"g":"ということだ","romaji":"to iu koto da","zh":"也就是說～；聽說～","example":"つまり誰も来なかったということだ。","form":"文 + ということだ（来なかったということだ）","note":""},{"no":140,"g":"というのは","romaji":"to iu nowa","zh":"所謂的～（下定義）","example":"「一期一会」というのは言葉。","form":"名詞 + というのは（一期一会というのは）","note":""},{"no":141,"g":"というと","romaji":"to iu to","zh":"說起～；一提到～","example":"夏というと海を思い出す。","form":"名詞 + というと（夏というと）","note":""},{"no":142,"g":"というより","romaji":"to iu yori","zh":"與其說～不如說…","example":"淋しいというより退屈だ。","form":"名詞 + というより（淋しいというより）","note":""},{"no":143,"g":"と見える / と見えて","romaji":"to mieru / to miete","zh":"看來似乎是～","example":"疲れたと見えてすぐ寝た。","form":"文 + と見える（疲れたと見えて）","note":""},{"no":144,"g":"とすれば / としたら","romaji":"to sureba / to shitara","zh":"假如～的話","example":"嘘だとしたら許せない。","form":"文 + とすれば／としたら（嘘だとしたら）","note":""},{"no":145,"g":"とともに","romaji":"to tomo ni","zh":"與～一起；伴隨～","example":"君とともに歩む。","form":"名詞 + とともに（君とともに）","note":""},{"no":146,"g":"途中で","romaji":"tochuu de / tochuu ni","zh":"中途；半路上","example":"途中で諦めない。","form":"名詞 + の途中で（旅の途中で）","note":""},{"no":147,"g":"ところで","romaji":"tokoro de","zh":"話說回來（換話題）","example":"ところで明日は暇？","form":"文頭（ところで、明日は？）","note":""},{"no":148,"g":"ところが","romaji":"tokoro ga","zh":"然而（意外結果）","example":"頼んだところが断られた。","form":"文頭（ところが、断られた）","note":""},{"no":149,"g":"とおりに","romaji":"toori ni","zh":"按照～（教えたとおり）","example":"心のとおりに生きる。","form":"動詞た形/名詞の + とおりに（教えたとおりに）","note":""},{"no":150,"g":"通す","romaji":"toosu","zh":"貫徹～；貫穿～","example":"最後までやり遂げてみせる。","form":"動詞ます形語幹 + 通す（貫き通す・やり通す）","note":""},{"no":151,"g":"として","romaji":"toshite","zh":"作為～；以～身分","example":"日本人として恥ずかしい。","form":"名詞 + として（日本人として）","note":"表身分或立場，不是「當作」。"},{"no":152,"g":"とても～ない","romaji":"totemo~nai","zh":"怎麼也不會～（太…）","example":"とてもじゃないが信じられない。","form":"とても + 否定形（とても信じられない）","note":""},{"no":153,"g":"とは限らない","romaji":"towa kagiranai","zh":"未必～；不一定～","example":"高ければ高いとは限らない。","form":"文 + とは限らない（高いとは限らない）","note":""},{"no":154,"g":"つい","romaji":"tsui","zh":"不由得；一不小心（就）","example":"つい本音を言ってしまった。","form":"つい + 動詞た形（つい言ってしまった）","note":""},{"no":155,"g":"ついに","romaji":"tsui ni","zh":"終於；終究","example":"ついに夢が叶った。","form":"ついに + 動詞た形（ついに叶った）","note":""},{"no":156,"g":"ついでに","romaji":"tsuide ni","zh":"順便","example":"ついでにこれも頼もう。","form":"文 + ついでに（ついでにこれも）","note":""},{"no":157,"g":"つまり","romaji":"tsumari","zh":"也就是說；總之","example":"つまり君は行きたくないの？","form":"文頭/接續（つまり君は）","note":""},{"no":158,"g":"つもりだった","romaji":"tsumori datta","zh":"本來打算～","example":"行くつもりだったのに。","form":"動詞辞書形 + つもりだった（行くつもりだった）","note":""},{"no":159,"g":"つもりで","romaji":"tsumori de","zh":"抱著～的打算","example":"死ぬつもりで頑張った。","form":"動詞辞書形/た形 + つもりで（死ぬつもりで）","note":""},{"no":160,"g":"うちに","romaji":"uchi ni","zh":"趁～的時候；在～期間","example":"若いうちに色々経験すべき。","form":"動詞ている/ない形 + うちに（若いうちに）","note":""},{"no":161,"g":"上で","romaji":"ue de","zh":"～之後再；在～的基礎上","example":"考えた上で返事します。","form":"動詞た形 + 上で（考えた上で）","note":"表「先做完 A，再基於 A 做 B」。注意與物理位置的「上で」不同。"},{"no":162,"g":"上に","romaji":"ue ni","zh":"不僅～而且（還）","example":"頭がいい上に顔もいい。","form":"動詞/形容詞 + 上に（頭がいい上に）","note":""},{"no":163,"g":"は別として","romaji":"wa betsu toshite","zh":"～姑且不論；另當別論","example":"冗談は別として本気だ。","form":"名詞 + は別として（冗談は別として）","note":""},{"no":164,"g":"はもちろん","romaji":"wa mochiron","zh":"～自不必說；更不用說","example":"英語はもちろん中国語も話せる。","form":"名詞 + はもちろん（英語はもちろん）","note":""},{"no":165,"g":"は～で有名","romaji":"wa~de yuumei","zh":"以～聞名","example":"桜で有名な場所。","form":"名詞 + は + 名詞 + で有名（桜で有名な）","note":""},{"no":166,"g":"わけだ","romaji":"wake da","zh":"難怪～；原來如此","example":"なるほど、そういうわけだ。","form":"文 + わけだ（そういうわけだ）","note":"「原來如此、難怪」，表說話者剛想通。"},{"no":167,"g":"わけではない","romaji":"wake dewa nai","zh":"並非～（部分否定）","example":"嫌いなわけではない。","form":"文 + わけではない（嫌いなわけではない）","note":"部分否定「並非全部」。全面否定用 わけがない。"},{"no":168,"g":"わけがない","romaji":"wake ga nai","zh":"不可能～","example":"知るわけがない。","form":"文 + わけがない（知るわけがない）","note":"強烈否定「不可能」，語氣比 ではない 強。"},{"no":169,"g":"わけにはいかない","romaji":"wake niwa ikanai","zh":"（因顧慮）不能～","example":"秘密を明かすわけにはいかない。","form":"動詞辞書形/ない形 + わけにはいかない","note":"因社會規範或心理顧慮「不能做」，不是能力問題。"},{"no":170,"g":"わりに","romaji":"wari ni","zh":"以～的程度來說（意外地）","example":"値段のわりに美味しい。","form":"名詞の/動詞/形容詞 + わりに（値段のわりに）","note":"「以～的程度來說，意外地…」，核心在「不成比例」。"},{"no":171,"g":"わざと","romaji":"wazato","zh":"故意地","example":"わざと間違えた。","form":"わざと + 動詞た形（わざと間違えた）","note":""},{"no":172,"g":"わざわざ","romaji":"wazawaza","zh":"特地；特意","example":"わざわざ来てくれた。","form":"わざわざ + 動詞（わざわざ来てくれた）","note":""},{"no":173,"g":"よりも","romaji":"yorimo","zh":"比～更","example":"言葉よりも心。","form":"名詞 + よりも（言葉よりも）","note":""},{"no":174,"g":"ようがない","romaji":"you ga nai","zh":"無從～；沒辦法～","example":"連絡しようがない。","form":"動詞ます形語幹 + ようがない（連絡しようがない）","note":""},{"no":175,"g":"ような気がする","romaji":"you na ki ga suru","zh":"感覺好像～","example":"昨日より寒いような気がする。","form":"文 + ような気がする（寒いような気がする）","note":""},{"no":176,"g":"ように","romaji":"you ni","zh":"為了～；（如～般）","example":"夢が叶うように。","form":"動詞辞書形/ない形 + ように（目的）／名詞の + ように（比喻）","note":"兩義：①目的「為了～」②比喻「像～一樣」。接續不同。"},{"no":177,"g":"ように見える","romaji":"you ni mieru","zh":"看起來像～","example":"簡単に見えるけど難しい。","form":"文 + ように見える（簡単に見える）","note":""},{"no":178,"g":"ようとしない","romaji":"you to shinai","zh":"不肯～；不打算～","example":"目を合わせようとしない。","form":"動詞意向形 + としない（合わせようとしない）","note":""},{"no":179,"g":"ようとする","romaji":"you to suru","zh":"打算～；正要～","example":"忘れようとしても無駄だ。","form":"動詞意向形 + とする（忘れようとしても）","note":""},{"no":180,"g":"ずに","romaji":"zuni","zh":"沒～就…（不做～）","example":"何も言わずに去った。","form":"動詞ない形（ず形）+ に（言わずに）","note":"書面／口語皆可，比「ないで」稍正式。"},{"no":181,"g":"ずにはいられない","romaji":"zuni wa irarenai","zh":"不由得～；忍不住～","example":"会いに行かずにはいられない。","form":"動詞ない形（ず形）+ にはいられない（行かずにはいられない）","note":""},{"no":182,"g":"ずつ","romaji":"zutsu","zh":"各～；一點一點地","example":"少しずつ近づく。","form":"数量詞 + ずつ（少しずつ・一人ずつ）","note":""}]}},"practice":[{"title":"愛・おぼえていますか","artist":"飯島真理","vid":"OfuW_Wbt73c","source":"超時空要塞マクロス 1982 ED","why":"歌詞極簡（29 行、N3 文法 0 條），幾乎全是 N4 以下句型。適合當『第一首聽懂的日文歌』，但不是 N3 教材。","hits":{"n3":[],"n4":[83,98,107,118]}},{"title":"CHA-LA HEAD-CHA-LA","artist":"影山ヒロノブ","vid":"caqqCTSEBig","source":"ドラゴンボールZ OP","why":"節奏快、詞彙偏口語與擬聲詞（パチパチ、カラッポ）。3 條文法都在既有歌單已涵蓋。","hits":{"n3":[28,46,99],"n4":[16,58,74,88,107,118]}},{"title":"残酷な天使のテーゼ","artist":"高橋洋子","vid":"o6wtDPVkKqI","source":"新世紀エヴァンゲリオン OP","why":"本批最有教學價值的一首：7 條 N3 文法（さえ、ために、よりも、ように、なんて…）。全部已被既有歌單涵蓋，但句子漂亮，適合精讀。","hits":{"n3":[16,18,68,99,118,173,176],"n4":[42,50,54,107,118,123,126]}},{"title":"世界が終るまでは…","artist":"WANDS","vid":"1Bk9YpwWEsg","source":"SLAM DUNK ED","why":"3 條（だけ、だらけ、〜切る）。詞彙偏抒情書面（やつれ切った、欲望だらけ），搭配情緒記憶效果好。","hits":{"n3":[16,19,44],"n4":[32,50,54,62,68,118,119,125]}},{"title":"君が好きだと叫びたい","artist":"BAAD","vid":"JybB4rQRLds","source":"SLAM DUNK OP","why":"4 條（だけ、ことはない、なんて、ように）。口語戀愛句型密集，適合練『〜なんて』的語感。","hits":{"n3":[16,51,68,176],"n4":[1,5,9,22,59,62,93,99,119,125,126]}},{"title":"ムーンライト伝説","artist":"DALI","vid":"obfP1lxjcXY","source":"美少女戦士セーラームーン OP","why":"29 行裡只有 1 條 N3 文法（ように）。歌詞幾乎全是 N5–N4 的短句（ゴメンネ 素直じゃなくて…），是典型「旋律好記、語言簡單」的動漫歌。當發音與節奏練習很適合。","hits":{"n3":[176],"n4":[22,54,118,119,126]}},{"title":"One more time, One more chance","artist":"山崎まさよし","vid":"BqFftJDXii0","source":"秒速5センチメートル 主題歌","why":"46 行只有 2 條（だけ、など）。長歌但文法密度低，抒情書面體為主。適合練聽力與情感理解，不適合當 N3 教材。","hits":{"n3":[16,68],"n4":[19,20,54,62,74,83,102,107,110,119]}},{"title":"メヌエット","artist":"山崎まさよし（山崎将義）","vid":"AjDlZRWli5M","source":"PS2『ロマンシング サガ -ミンストレルソング-』主題歌（2005）","why":"詞曲編全由山崎將義創作，RPG 主題曲的史詩感歌詞（大地を駆け抜ける風に／黄金の穂波がうねる）。3 條 N3 文法（ばいい、たとえ〜ても、として）都已被既有歌單涵蓋，新增 0 條。詞彙偏文學書面，適合當抒情歌練讀。","hits":{"n3":[5,121,151],"n4":[5,54,71,86,88,107,119]}},{"title":"Subtitle","artist":"Official髭男dism","vid":"hN5MBlGv2Ac","source":"日劇《silent》主題曲","why":"37 行命中 11 條，全部已被現有歌單涵蓋。詞彙密度高、句子長，屬「讀得懂但學不到新文法」的類型。","hits":{"n3":[5,7,16,28,55,68,85,123,151,173,176],"n4":[5,14,32,44,45,83,86,93,94,102,104,107,117,118,119,123,126]}},{"title":"晩餐歌","artist":"tuki.","vid":"oZpYEEcvu5I","source":"網路爆紅抒情曲","why":"58 行命中 5 條，全已覆蓋。口語碎句多，適合練語感與情緒表達。","hits":{"n3":[4,40,68,123,176],"n4":[32,62,93,97,99,102,107,118,126]}},{"title":"Anytime Anywhere","artist":"milet","vid":"r105CzDvoo0","source":"葬送的芙莉蓮 ED","why":"50 行只有 2 條（だけ、なんて）。大量英文段落稀釋日文量，是候選中學習效率最低的。","hits":{"n3":[16,68],"n4":[5,30,32,54,88,95,107,118,123]}},{"title":"オレンジ","artist":"SPYAIR","vid":"YkVjY1F-Eoc","source":"排球少年劇場版主題曲","why":"37 行命中 5 條全已覆蓋。","hits":{"n3":[4,5,16,68,176],"n4":[5,8,16,22,32,50,54,64,94,99,107,118,126]}},{"title":"晴る","artist":"ヨルシカ","vid":"CkvWJNt77mU","source":"葬送的芙莉蓮 OP","why":"44 行只有 3 條（だけ、さえ、ように）。","hits":{"n3":[16,99,176],"n4":[5,14,86,95,126]}},{"title":"The Story of Us","artist":"milet","vid":"_1NbGbYG4qg","source":"芙莉蓮插曲","why":"有「恐れずに進め」的 ずに，但 ずに 已由其他歌涵蓋。","hits":{"n3":[176,180],"n4":[5,11,16,50,69,94,97,107,118,126]}},{"title":"満ちてゆく","artist":"藤井風","vid":"ptiK8U4WlSc","source":"抒情神曲","why":"33 行只有 2 條（合う、ために）。文體偏短句與詩意斷句，文法密度低，但情緒與發音練習價值高。宣稱的「をはじめ」在歌詞中不存在。","hits":{"n3":[4,118],"n4":[7,9,16,30,54,59,98,110,119]}},{"title":"茜さす","artist":"Aimer","vid":"bN1t3-2X3aM","source":"《夏目友人帳 伍》ED","why":"22 行只有 3 條（きり、ために、として）。宣稱的「つつ」在歌詞中不存在，且「つつ」本身也不在本 N3 清單中（屬 N2）。","hits":{"n3":[43,118,151],"n4":[54,62,86,95,102,107,110]}},{"title":"炎","artist":"LiSA","vid":"4DxL6IKmXx4","source":"《鬼滅之刃 無限列車篇》主題曲","why":"唯一的「かけ」是「かけがえのない」（無可取代），與 N3 文法「〜かける」（做到一半）無關。全曲命中條數少，詞彙偏書面。","hits":{"n3":[16,28,118,173,176,180],"n4":[42,54,62,95,118,119,123,126]}},{"title":"空も飛べるはず","artist":"スピッツ","vid":"h-kQw4JqCHE","source":"《白線流》主題曲","why":"21 行、N3 命中 0。歌詞極簡，是典型「旋律記憶點強但語言簡單」的歌。宣稱的 はず 確實存在（「自由に空も飛べるはず」），但 はず 屬 N4。","hits":{"n3":[],"n4":[32,42,50,62,69,88,93,107]}},{"title":"ただ君に晴れ","artist":"ヨルシカ","vid":"-VKIqrvVOpo","source":"","why":"34 行、N3 命中 4（全已覆蓋）。宣稱的 まま 確實存在（「背伸びしたままで」），屬 N4。","hits":{"n3":[16,44,68,176],"n4":[5,11,14,22,32,42,54,88,94,95,107,118,126]}},{"title":"糸","artist":"中島みゆき","vid":"jOegTv3a2h4","source":"","why":"25 行、N3 命中 1。宣稱的 かもしれない 與 得る／うる 都存在於同一句「暖めうるかもしれない」，但前者 N4、後者 N2，皆非 N3。","hits":{"n3":[4],"n4":[29,98,118]}},{"title":"マリーゴールド","artist":"あいみょん","vid":"0xSiBpUdW4E","source":"","why":"50 行、N3 命中 7（全已覆蓋）。宣稱的「～続ける」不存在，實際有「このまま」（N4）。","hits":{"n3":[19,22,28,29,53,68,176],"n4":[16,42,71,83,95,99,107,110,126]}},{"title":"どんなときも。","artist":"槇原敬之","vid":"b88pxLpMZKk","source":"1991 經典","why":"31 行、N3 命中 4（全已覆蓋）。宣稱的 らしい 存在於「僕が僕らしくあるために」（連用形），屬 N4。","hits":{"n3":[19,53,118,176,180],"n4":[22,28,29,42,44,50,64,69,70,71,83,86,99,102,107,117,118,123,126]}},{"title":"夜に駆ける","artist":"YOASOBI","vid":"by4SYYWlhEs","source":"","why":"67 行、N3 命中 9（全已覆蓋）。ていく 有 3 處真用法（泣いていく／溶けていく／吹き抜けていく），屬 N4；てくる 則無（「差し伸べてくれた」是 てくれる）。","hits":{"n3":[4,16,46,68,72,118,123,176],"n4":[16,32,54,59,79,94,95,97,107,118,126]}},{"title":"First Love","artist":"宇多田ヒカル","vid":"o1sUaVJUeB0","source":"1999 經典","why":"35 行、N3 命中 3。だろ 存在（「どこにいるんだろう」），屬 N5。","hits":{"n3":[16,151],"n4":[7,14,32,69,107,118]}},{"title":"うっせぇわ","artist":"Ado","vid":"Qp3b-RXtz4w","source":"","why":"63 行。宣稱的「じゃあるまいし」不存在，全曲無「まい」。屬 N2。","hits":{"n3":[18,68,176],"n4":[5,29,55,88,95,104,107,123,126]}},{"title":"タッチ","artist":"岩崎良美","vid":"j0vpP976jZg","source":"《タッチ》OP（1985）","why":"80 年代校園動畫代表曲，旋律簡單好記。「呼吸を止めて一秒」幾乎每個台灣人都聽過。N4 命中 6 條但全已涵蓋。","hits":{"n3":[5,16,68,180],"n4":[5,32,62,88,99,118]}},{"title":"悲しみよこんにちは","artist":"斉藤由貴","vid":"CJiLPsAJRI8","source":"《めぞん一刻》OP（1986）","why":"抒情慢板，詞彙溫柔。N4 命中 4、N3 命中 2，皆已涵蓋。","hits":{"n3":[46,120],"n4":[32,98,107,118]}},{"title":"愛をとりもどせ!!","artist":"クリスタルキング","vid":"xSpSPs7Eqx8","source":"《北斗の拳》OP（1984）","why":"「YouはShock」是 80 年代最著名的動畫開場之一。歌詞短，日文量偏少（英文段落多）。","hits":{"n3":[4,68],"n4":[98,107]}},{"title":"微笑みの爆弾","artist":"馬渡松子","vid":"9ZbVCs3EJUA","source":"《幽遊白書》OP（1992）","why":"90 年代動畫歌的清爽路線。N4/N3 各命中 2/1 條。","hits":{"n3":[105],"n4":[98,118]}},{"title":"おどるポンポコリン","artist":"B.B.クィーンズ","vid":"OmTJQVnNq5Y","source":"《ちびまる子ちゃん》ED（1990）","why":"日本國民級童謠風歌曲，2011 年仍是 Oricon 榜常客。日文極簡單，適合練節奏。","hits":{"n3":[],"n4":[118]}},{"title":"めざせポケモンマスター","artist":"松本梨香","vid":"A2gpcDS4wFk","source":"《ポケットモンスター》OP（1997）","why":"跨世代的熟悉感。N4 命中 6 條（含 ～なくちゃ、～ずに），是很實用的口語句型。","hits":{"n3":[18,66,68,176],"n4":[5,54,95,104,118,126]}},{"title":"輪舞-revolution","artist":"奥井雅美","vid":"Y_0VKKoj-A0","source":"《少女革命ウテナ》OP（1997）","why":"N4/N3 各命中 7 條，是本批候選中文法密度最高的之一，可惜全部已被現有歌單涵蓋。","hits":{"n3":[4,46,118,121,173,174,176],"n4":[22,32,107,118,119,123,126]}},{"title":"魔訶不思議アドベンチャー","artist":"高橋洋樹","vid":"6-WKZzsuqkc","source":"《ドラゴンボール》OP（1986）","why":"「つかもうぜ! DRAGONBALL」——初代七龍珠，熟悉度極高。歌詞短、文法少。","hits":{"n3":[18,47],"n4":[22,118]}},{"title":"銀河鉄道999","artist":"ゴダイゴ","vid":"jUbrLrXlvLw","source":"《銀河鉄道999》主題曲（1979）","why":"1979 年國民神曲，詞彙偏文學（終着駅、汽笛）。","hits":{"n3":[18,118,173],"n4":[62,95,102,123]}},{"title":"宇宙戦艦ヤマト","artist":"ささきいさお","vid":"lCQ392MwsYo","source":"《宇宙戦艦ヤマト》OP（1974）","why":"最早期動畫歌之一，文語腔重（さらば地球よ），N3 命中 0。","hits":{"n3":[],"n4":[5,54,118]}},{"title":"つぐない","artist":"テレサ・テン","vid":"PhAjY67NR9k","source":"1984","why":"鄧麗君日本代表作之一（中文版：償還）。N4 命中 7 條，旋律與咬字都適合跟唱。","hits":{"n3":[173],"n4":[5,14,42,44,45,99,123]}},{"title":"愛人","artist":"テレサ・テン","vid":"jOdiFj5nQcg","source":"1985","why":"連續三年日本有線大賞。歌詞是成人抒情，句構完整，適合學「〜てあげる／〜てくれる」的語感。","hits":{"n3":[16,121,176],"n4":[42,88,97,107,118,119,126]}},{"title":"別れの予感","artist":"テレサ・テン","vid":"_ADewipUYYE","source":"1987","why":"鄧麗君晚期名曲。N4 命中 6 條。","hits":{"n3":[16,28,68,173],"n4":[9,54,93,97,107,123]}},{"title":"空港","artist":"テレサ・テン","vid":"Vr6AxVGpTC0","source":"1974","why":"鄧麗君在日本的第一首大熱曲。歌詞短，當入門很合適。","hits":{"n3":[180],"n4":[54,118]}},{"title":"恋人たちの神話","artist":"テレサ・テン","vid":"eEH1dJ3klf8","source":"1988","why":"本批鄧麗君歌中 N4 命中最多（9 條）。","hits":{"n3":[16,28,176],"n4":[5,8,54,97,99,107,118,119,126]}},{"title":"あなたと共に生きてゆく","artist":"テレサ・テン","vid":"dxVxMGXzR_A","source":"1993","why":"鄧麗君最後的日本單曲之一。N3 命中 5 條，是本批鄧麗君歌裡 N3 最多的。","hits":{"n3":[4,99,145,151,173],"n4":[54,107,118,123]}},{"title":"ラブ・ストーリーは突然に","artist":"小田和正","vid":"sZxzPcT1Meg","source":"《東京ラブストーリー》主題曲（1991）","why":"90 年代日劇主題曲的原點，Oricon 史上第 8 暢銷單曲（270 萬張）。「何から伝えればいいのか分からないまま時は流れて」幾乎人人都會。","hits":{"n3":[2,5,16,118,173],"n4":[5,11,32,42,88,123]}},{"title":"クリスマス・イブ","artist":"山下達郎","vid":"1-xwxyHOyVw","source":"《JR XMAS EXPRESS》CM 曲（1983，1990 年代成為國民聖誕歌）","why":"每年聖誕節必播。詞彙簡單、旋律慢，很適合跟唱練發音。","hits":{"n3":[43,111],"n4":[14,32,54,83]}},{"title":"PRIDE","artist":"今井美樹","vid":"rJVG-WLMIBo","source":"《ドク》主題曲（1996）","why":"成人抒情代表，「私は今 南の一つ星を 見上げてる」——句構完整，適合練書面語語感。","hits":{"n3":[4,18,47,99,117,180],"n4":[22,54,62,69,88,95,97,98,99,107,118]}},{"title":"君がいるだけで","artist":"米米CLUB","vid":"5Q8vU0GWGzM","source":"《世界奇妙物語》等 1992 年度曲","why":"「たとえば君がいるだけで心が強くなれること知ったよ」——たとえば 的好例句。","hits":{"n3":[16,24,54,122,176],"n4":[8,16,74,88,95,97,118,119,123,126]}},{"title":"もう恋なんてしない","artist":"槇原敬之","vid":"naz0-szzYXk","source":"《白い巨塔》等（1992）","why":"失戀歌經典，N4 命中 11 條，是很高的密度，但全部已被涵蓋。","hits":{"n3":[2,16,18,68,167],"n4":[3,16,54,62,70,107,108,118,119,122,123]}},{"title":"負けないで","artist":"ZARD","vid":"_4DJkOUU648","source":"《白い巨塔》插入曲（1993，日本國民應援歌）","why":"2011 年地震後最常被播放的應援曲。短句連發，適合練節奏與元氣句型。","hits":{"n3":[20,23,123,176],"n4":[107,118,126]}},{"title":"愛は勝つ","artist":"KAN","vid":"imX9psQlF6Y","source":"1990 年度單曲冠軍","why":"「心配ないからね君の想いが」——口語會話句型密集。","hits":{"n3":[20,28,41,117],"n4":[5,22,32,54,98,107,118,119]}},{"title":"夏色","artist":"ゆず","vid":"hhDzDL9Y2Lo","source":"1998","why":"街頭民謠風，「駐車場のネコはアクビをしながら」——日常名詞多，適合累積生活詞彙。","hits":{"n3":[16,99,123,176],"n4":[22,33,50,62,83,88,118,126]}},{"title":"ロマンスの神様","artist":"広瀬香美","vid":"T8yZWCg85Cs","source":"《時をかける少女》等 1993","why":"冬季情歌，歌詞大量「〜してあげる／〜してほしい」，授受表現的寶庫。","hits":{"n3":[5,66,91],"n4":[5,19,32,54,88,102,118,119,123]}},{"title":"ロビンソン","artist":"スピッツ","vid":"51CH3dPaWXc","source":"1995","why":"「新しい季節は なぜかせつない日々で」——象徵 90 年代 J-POP 的句子。","hits":{"n3":[16,176],"n4":[59,83,88,119,126]}},{"title":"survival dAnce","artist":"TRF","vid":"gfuykoLwzII","source":"1995","why":"小室家族舞曲。日文量少（大量英文），學習效率低但熟悉度高。","hits":{"n3":[16,18,42,47,152,180],"n4":[7,14,32,33,86,88,107,118]}},{"title":"White Love","artist":"SPEED","vid":"8VJ62lmsU0o","source":"1997","why":"Oricon 百萬單曲，90 年代少女團代表。","hits":{"n3":[4,28,68,85,118,120,176],"n4":[16,44,46,59,83,86,107,117,118,126]}},{"title":"青春","artist":"サザンオールスターズ","vid":"oO9g4H_LF9A","source":"《涙をふいて》主題歌（2000）","why":"桑田佳祐式的日常描寫，「酒場は酔いどれパーティ」——生活名詞多。","hits":{"n3":[68,98],"n4":[]}},{"title":"大きな古時計","artist":"平井堅","vid":"E3hvxbM_ubw","source":"2002 翻唱經典（原曲 1876 美國）","why":"語彙極簡、旋律好記。日文只有 1 條文法命中，但作為「零壓力跟唱」很適合。","hits":{"n3":[180],"n4":[]}},{"title":"あなたに会えてよかった","artist":"小泉今日子","vid":"VkifgYNY5d0","source":"《同級生》等 1991（2000 年代仍長紅）","why":"90 年代初的清爽情歌，「サヨナラさえ 上手に言えなかった」——さえ 的好例句。","hits":{"n3":[16,22,99,118,176],"n4":[]}},{"title":"見上げてごらん夜の星を","artist":"坂本九","vid":"hsK4klZENlQ","source":"1963 名曲，2000 年代多次翻唱（平井堅等）","why":"最溫柔的日文之一。歌詞短、全平假名易讀，適合初學跟唱。","hits":{"n3":[68,123,125,176],"n4":[]}},{"title":"Best Friend","artist":"Kiroro","vid":"OGACI56J34A","source":"《ちゅらさん》主題歌（2001）","why":"沖繩民謠風，「もう大丈夫心配ないと」——口語安慰句型。","hits":{"n3":[176],"n4":[]}},{"title":"奏（かなで）","artist":"スキマスイッチ","vid":"J5Z7tIq7bco","source":"《ラブ・ストーリー》等（2004）","why":"N3 命中 9 條（很高），但全部已被涵蓋。旋律優美，適合複習。","hits":{"n3":[18,42,68,77,122,123,151,176,180],"n4":[]}},{"title":"Sign","artist":"Mr.Children","vid":"4wuWJ7GAc2s","source":"《オレンジデイズ》主題歌（2004）","why":"N3 命中 6、N4 命中 10——密度高但零新增。","hits":{"n3":[4,18,123,137,147],"n4":[]}},{"title":"青春アミーゴ","artist":"修二と彰","vid":"dAW8QaZV_LY","source":"《野ブタ。をプロデュース》主題歌（2005）","why":"2005 年度冠軍單曲，口語會話密度極高。","hits":{"n3":[4,44,176],"n4":[]}},{"title":"抱きしめたい","artist":"Mr.Children","vid":"qiUgB0S-1Dc","source":"1992／日劇金曲常客","why":"早期 Mr.Children，詞彙溫柔。","hits":{"n3":[16,28,173,176],"n4":[]}},{"title":"涙そうそう","artist":"BEGIN / 森山良子","vid":"LCV04NF7ytY","source":"《涙そうそう》映画（2006）","why":"沖繩抒情代表，被翻唱無數次。歌詞短、情感濃。","hits":{"n3":[54],"n4":[]}},{"title":"千の風になって","artist":"秋川雅史","vid":"NKhIwdOsh9s","source":"2006-2007 跨年長銷","why":"詩朗誦式的歌詞，罕見的「書面語體」流行歌——但日文量少。","hits":{"n3":[68,123,176],"n4":[]}},{"title":"少年時代","artist":"井上陽水","vid":"dNS4rE2dKJA","source":"《少年時代》映画（1990）","why":"「夏が過ぎ 風あざみ」——最著名的日文抒情開場之一。","hits":{"n3":[157],"n4":[]}},{"title":"桜坂","artist":"福山雅治","vid":"AGYJ6jeu3p8","source":"《桜坂》等（2000）","why":"2000 年度冠軍。詞彙偏文學（桜坂、面影）。","hits":{"n3":[16],"n4":[42,62,95,97,98,118]}},{"title":"ハナミズキ","artist":"一青窈","vid":"TngUo1gDNOg","source":"《涙そうそう》系（2004）","why":"「君と好きな人が 百年続きますように」——ように 的經典用法。","hits":{"n3":[1,176],"n4":[5,32,55,93,102,118,126]}},{"title":"三日月","artist":"絢香","vid":"wHw6W4BznTM","source":"《牛に願いを》主題歌（2006）","why":"抒情慢板，句構完整。","hits":{"n3":[16,123],"n4":[16,50,83,118,119,123]}},{"title":"蕾","artist":"コブクロ","vid":"WPH1BLHKOJE","source":"《東京タワー》主題歌（2007）","why":"「なりたい自分を見失ったら」——たら 的好例句。","hits":{"n3":[4,176],"n4":[19,32,50,62,83,86,95,107,118,119,125,126]}},{"title":"粉雪","artist":"レミオロメン","vid":"1wxTksLZ1Mw","source":"《1リットルの涙》主題歌（2005）","why":"2005-2006 長銷，情緒記憶極強。","hits":{"n3":[2,4,16,68,176],"n4":[8,16,54,62,79,86,95,107,118,119,126]}},{"title":"TSUNAMI","artist":"サザンオールスターズ","vid":"xRyL5BPOWfE","source":"《涙をふいて》系（2000）","why":"桑田佳祐最著名的抒情曲，日文教科書常引用。","hits":{"n3":[4,176,180],"n4":[16,32,62,83,118,126]}}],"bonus":{"title":"僕が死のうと思ったのは","artist":"中島美嘉（原作：amazarashi）","vid":"AabAbM_Lmuo","vtitle":"中島美嘉 - 僕が死のうと思ったのは / THE FIRST TAKE","why":"實測命中 5 條文法，但其中 2 條是誤判；真正命中的 3 條現有歌單都已涵蓋 → <b>新增覆蓋 0 條</b>，所以不進最小集合。","genuine":[{"no":55,"note":"今日はまるで昨日みたいだ"},{"no":66,"note":"満たされないと泣いているのは"},{"no":176,"note":"あなたのような人が生まれた"}],"traps":[{"form":"に慣れる","wrong":"その木漏れ日でうたた寝したら 虫の死骸と土になれるかな","why":"這裡的「なれる」是 <b>なる（變成）的可能形</b>——「能變成蟲的屍骸與泥土嗎」。不是「に慣れる（習慣於）」。"},{"form":"上で","wrong":"ベッドの上で土下座してるよ","why":"這裡是 <b>物理位置的「上面」</b>。N3 文法的「〜た上で」是「做完～之後」，接續是動詞た形，不會是名詞+の上で。"}],"difficulty":"詞彙偏難：32 個在 N5–N3 詞表內，但另有 55 個在表外，含文語（然り、為さる、御免、急度）與詩語（木漏れ日、桟橋、死骸、漁港、灯台、海猫）。適合當「獎勵曲」，不適合當主力教材。"},"nv":"1,400","default":"n4"};
+
+let LEVEL = (() => {
+  try { return localStorage.getItem('jlpt.active') || DATA.default; } catch(e) { return DATA.default; }
+})();
+if (!DATA.levels[LEVEL]) LEVEL = DATA.default;
+
+let D = DATA.levels[LEVEL];
+let GMAP = {};
+
+const learnKey = lv => `jlpt.learned.${lv}`;
+function loadLearned(){
+  try { return new Set(JSON.parse(localStorage.getItem(learnKey(LEVEL)) || '[]')); }
+  catch(e) { return new Set(); }
+}
+let learned = loadLearned();
+function save(){
+  try { localStorage.setItem(learnKey(LEVEL), JSON.stringify([...learned])); } catch(e){}
+}
+
+const TIMING_KEY = 'jlpt.timing.v1';
+let timings = {};
+try { timings = JSON.parse(localStorage.getItem(TIMING_KEY) || '{}'); } catch(e){}
+function saveTimings(){ try { localStorage.setItem(TIMING_KEY, JSON.stringify(timings)); } catch(e){} }
+
+let marking = false, markNext = 0, ytPlayer = null, ticker = null, activeIdx = 0;
+let onlyUnlearned = false;
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function jpNum(n){
+  const d='〇一二三四五六七八九';
+  if (n<10) return d[n];
+  if (n<20) return n===10?'十':'十'+d[n%10];
+  const t=Math.floor(n/10), o=n%10;
+  return d[t]+'十'+(o?d[o]:'');
+}
+
+/* ---------- 等級切換 ---------- */
+function switchLevel(lv){
+  if (!DATA.levels[lv] || lv === LEVEL) return;
+  LEVEL = lv; D = DATA.levels[lv];
+  learned = loadLearned();
+  try { localStorage.setItem('jlpt.active', lv); } catch(e){}
+  marking = false; markNext = 0;
+  if (ytPlayer && ytPlayer.stopVideo) { try { ytPlayer.stopVideo(); } catch(e){} }
+  ytPlayer = null;
+  renderAll();
+  activeIdx = 0;
+  selectSong(0);
+}
+
+function renderAll(){
+  GMAP = {};
+  D.grammar.forEach(g => GMAP[g.no] = g);
+
+  document.getElementById('eyebrow').textContent = `JLPT ${D.level} · 歌詞最小集合 · 習得帖`;
+  document.getElementById('h1').innerHTML =
+    `<em>${jpNum(D.playlist.length)}</em>首歌，<br><em>${Math.round(D.coverage)}%</em>的 ${D.level} 文法。`;
+  document.getElementById('lede').innerHTML =
+    `同一批 <b>${D.nsrc} 首日文歌的實際歌詞</b>，換上 ${D.level} 的 ${D.total} 條文法重新跑一次集合覆蓋——`
+    + `挑出能補最多文法的 <b>最小集合</b>。每首歌開場就列出它教你哪幾條，標記「習得」後上方數字即時重算。`;
+
+  document.querySelectorAll('.lv button').forEach(b => {
+    b.classList.toggle('is-on', b.dataset.lv === LEVEL);
+  });
+  const n4 = DATA.levels.n4, n3 = DATA.levels.n3;
+  document.getElementById('lvN4').textContent = `${n4.coverage}%`;
+  document.getElementById('lvN3').textContent = `${n3.coverage}%`;
+  document.getElementById('lvHint').innerHTML = LEVEL === 'n4'
+    ? `<span>先從 N4 打底：<b>${n4.playlist.length} 首</b>就能補到 <b>${n4.covered}/${n4.total}</b> 條。熟了再切 N3。</span>`
+    : `<span>N3 需要 <b>${n3.playlist.length} 首</b>、覆蓋 <b>${n3.covered}/${n3.total}</b> 條。N3 多是書面語，歌詞本來就少見。</span>`;
+
+  updateMetrics();
+  renderList();
+  renderUncovered();
+  renderPractice();
+  renderBonus();
+  applyTimings();
+}
+
+/* ---------- 進度統計 ---------- */
+function updateMetrics(){
+  const total = D.total;
+  document.getElementById('mCovered').innerHTML = D.covered + '<small>/' + total + '</small>';
+  document.getElementById('mLearned').innerHTML = learned.size + '<small>/' + total + '</small>';
+  const rate = learned.size / total * 100;
+  document.getElementById('mRate').innerHTML = rate.toFixed(1) + '<small>%</small>';
+  document.getElementById('mSongs').innerHTML = D.playlist.length;
+  document.getElementById('barFill').style.width = Math.min(rate, 100) + '%';
+  document.getElementById('ucCount').textContent = D.uncovered.length;
+  document.getElementById('listCount').textContent = D.playlist.length + ' 首';
+}
+
+/* ---------- 歌單 ---------- */
+function renderList(){
+  const wrap = document.getElementById('songScroll');
+  wrap.innerHTML = D.playlist.map((s, idx) => {
+    const done = s.new.length > 0 && s.new.every(n => learned.has(n));
+    const badgeCls = s.new.length ? 'song__badge' : 'song__badge song__badge--zero';
+    const badge = s.new.length ? '+' + s.new.length : '–';
+    return `<div class="song ${idx===activeIdx?'is-active':''} ${done?'is-done':''}" data-idx="${idx}">
+      <div class="song__num">${String(s.i).padStart(2,'0')}</div>
+      <div class="song__body">
+        <div class="song__title">${esc(s.title)}</div>
+        <div class="song__artist">${esc(s.artist)}</div>
+      </div>
+      <div class="${badgeCls}">${badge}</div>
+    </div>`;
+  }).join('');
+  wrap.querySelectorAll('.song').forEach(el => {
+    el.addEventListener('click', () => selectSong(+el.dataset.idx));
+  });
+}
+
+/* ---------- 播放器（YouTube IFrame API） ---------- */
+function loadYT(){
+  if (window.YT && window.YT.Player) return Promise.resolve();
+  if (window.__ytP) return window.__ytP;
+  window.__ytP = new Promise(res => {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.onload = () => { window.onYouTubeIframeAPIReady = res; };
+    document.head.appendChild(tag);
+  });
+  return window.__ytP;
+}
+
+function mountPlayer(vid){
+  const player = document.getElementById('player');
+  player.innerHTML = `<div id="ytHost"></div>
+    <a class="player__alt" href="https://www.youtube.com/watch?v=${vid}" target="_blank" rel="noopener">另開 YouTube ↗</a>`;
+  const host = document.getElementById('ytHost');
+  host.style.cssText = 'position:absolute;inset:0';
+  loadYT().then(() => {
+    ytPlayer = new YT.Player('ytHost', {
+      videoId: vid,
+      playerVars: { rel: 0, modestbranding: 1, autoplay: 1, playsinline: 1 },
+      events: {
+        onReady: e => { e.target.playVideo(); startTicker(); },
+        onStateChange: e => { if (e.data === YT.PlayerState.PLAYING) startTicker(); }
+      }
+    });
+  });
+}
+
+/* ---------- 舞台 ---------- */
+function selectSong(idx){
+  activeIdx = idx;
+  const s = D.playlist[idx];
+  if (!s) return;
+  renderList();
+
+  const player = document.getElementById('player');
+  const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(s.title + ' ' + s.artist)}`;
+  const watchUrl = s.vid ? `https://www.youtube.com/watch?v=${s.vid}` : searchUrl;
+  if (s.vid){
+    player.innerHTML = `
+      <button class="cover" id="btnPlay" style="background-image:url('https://i.ytimg.com/vi/${s.vid}/maxresdefault.jpg')" aria-label="播放 ${esc(s.title)}">
+        <span class="cover__play"></span>
+      </button>
+      <a class="player__alt" href="${watchUrl}" target="_blank" rel="noopener">無法播放？YouTube ↗</a>`;
+    (() => {
+      const btn = document.getElementById('btnPlay');
+      const probe = new Image();
+      probe.onload = () => { if (probe.naturalWidth <= 120) btn.style.backgroundImage = `url('https://i.ytimg.com/vi/${s.vid}/hqdefault.jpg')`; };
+      probe.onerror = () => { btn.style.backgroundImage = `url('https://i.ytimg.com/vi/${s.vid}/hqdefault.jpg')`; };
+      probe.src = `https://i.ytimg.com/vi/${s.vid}/maxresdefault.jpg`;
+    })();
+    document.getElementById('btnPlay').addEventListener('click', () => mountPlayer(s.vid));
+  } else {
+    player.innerHTML = `<div class="player__idle"><div class="vinyl"></div>
+      <p>找不到影片，<a href="${searchUrl}" target="_blank" rel="noopener" style="color:var(--cyan)">在 YouTube 搜尋</a></p></div>`;
+  }
+
+  const cards = s.hits.map(no => grammarCard(GMAP[no], s.new.includes(no))).join('');
+  const lines = s.lines || [];
+  const lyricHtml = lines.map((ln, i) => {
+    const blank = !ln.t || !ln.t.trim();
+    if (blank) return `<div class="lyric is-blank" data-line="${i}"></div>`;
+    const chips = (ln.g || []).filter(no => GMAP[no]).map(no => {
+      const g = GMAP[no];
+      const cls = [s.new.includes(no) ? 'is-new' : '', learned.has(no) ? 'is-learned' : ''].filter(Boolean).join(' ');
+      return `<button class="gchip ${cls}" data-goto="${no}" title="${esc(g.zh)}">${esc(g.g)}</button>`;
+    }).join('');
+    return `<div class="lyric ${chips ? 'has-g' : ''}" data-line="${i}">
+      <span class="lyric__n">${String(i + 1).padStart(2, '0')}</span>
+      <div>
+        <div class="lyric__jp">${esc(ln.t)}</div>
+        ${chips ? `<div class="lyric__chips">${chips}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('stageBody').innerHTML = `
+    <div class="stage__head">
+      <div>
+        <div class="stage__title">${esc(s.title)}</div>
+        <div class="stage__meta">
+          <span>${esc(s.artist)}</span>
+          <span>·</span>
+          <a href="${watchUrl}" target="_blank" rel="noopener">YouTube 原頁 ↗</a>
+          ${s.vtitle ? `<span>·</span><span style="opacity:.65">${esc(s.vtitle)}</span>` : ''}
+        </div>
+      </div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <span class="chip">第 ${s.i} / ${D.playlist.length} 首</span>
+        <span class="chip chip--new">本首新添 +${s.new.length}</span>
+        <span class="chip">累計 ${s.cum} / ${D.total}</span>
+      </div>
+    </div>
+
+    <div class="lyrics">
+      <div class="lyrics__bar">
+        <span class="lyrics__label">Lyrics · 點琥珀色標籤看文法</span>
+        <div class="lyrics__acts">
+          <button class="btn" id="btnSync" title="邊聽邊按，記住每行的時間點">對時</button>
+          <button class="btn" id="btnSyncClear" title="清除這首歌的對時">清除</button>
+        </div>
+      </div>
+      <div id="lyricBox">${lyricHtml || '<div class="lyric"><span></span><div class="lyric__jp" style="opacity:.5">這首歌沒有歌詞檔</div></div>'}</div>
+    </div>
+
+    <div class="panel-title" style="margin-top:1.4rem">這首歌的 ${D.level} 文法 <span>點右側圓印標記習得</span></div>
+    <div class="grammar-list">${cards}</div>
+  `;
+  bindStamps();
+  bindLyricActions();
+}
+
+function grammarCard(g, isNew){
+  if (!g) return '';
+  const cls = ['gcard', isNew ? 'is-new' : '', learned.has(g.no) ? 'is-learned' : ''].filter(Boolean).join(' ');
+  return `<div class="${cls}" data-no="${g.no}">
+    <div class="gcard__no">${String(g.no).padStart(3,'0')}</div>
+    <div>
+      <div class="gcard__form">${esc(g.g)}</div>
+      <div class="gcard__zh">${esc(g.zh)}</div>
+      ${g.form ? `<div class="gcard__form-row"><span class="gcard__key">接續</span><span class="gcard__val">${esc(g.form)}</span></div>` : ''}
+      ${g.note ? `<div class="gcard__form-row gcard__note"><span class="gcard__key">語感</span><span class="gcard__val">${esc(g.note)}</span></div>` : ''}
+      <div class="gcard__ex">${esc(g.example)}</div>
+      <div class="gcard__romaji">${esc(g.romaji)}</div>
+    </div>
+    <button class="stamp" data-stamp="${g.no}" aria-label="標記習得">習</button>
+  </div>`;
+}
+
+function bindStamps(){
+  document.querySelectorAll('[data-stamp]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const no = +btn.dataset.stamp;
+      if (learned.has(no)) learned.delete(no); else learned.add(no);
+      save(); syncAll();
+    });
+  });
+}
+
+function syncAll(){
+  updateMetrics();
+  renderList();
+  renderUncovered();
+  const s = D.playlist[activeIdx];
+  if (s){
+    document.querySelectorAll('[data-stamp]').forEach(btn => {
+      const no = +btn.dataset.stamp;
+      btn.closest('.gcard').classList.toggle('is-learned', learned.has(no));
+    });
+    document.querySelectorAll('.gchip').forEach(c => {
+      c.classList.toggle('is-learned', learned.has(+c.dataset.goto));
+    });
+  }
+}
+
+/* ---------- 歌詞互動 ---------- */
+function bindLyricActions(){
+  const box = document.getElementById('lyricBox');
+  if (!box) return;
+  box.querySelectorAll('[data-goto]').forEach(btn => {
+    btn.addEventListener('click', e => { e.stopPropagation(); focusGrammar(+btn.dataset.goto); });
+  });
+  box.querySelectorAll('.lyric[data-line]').forEach(el => {
+    el.addEventListener('click', () => {
+      if (!marking) return;
+      const t = ytPlayer && ytPlayer.getCurrentTime ? ytPlayer.getCurrentTime() : null;
+      if (t === null) { toast('先在播放器按播放，才能對時'); return; }
+      recordMark(+el.dataset.line, t);
+    });
+  });
+  const bSync = document.getElementById('btnSync');
+  const bClear = document.getElementById('btnSyncClear');
+  if (bSync) bSync.addEventListener('click', toggleMarking);
+  if (bClear) bClear.addEventListener('click', () => {
+    timings[D.playlist[activeIdx].title] = [];
+    saveTimings(); applyTimings(); toast('已清除這首歌的對時');
+  });
+  if (bSync) bSync.classList.toggle('is-on', marking);
+  applyTimings();
+}
+
+function focusGrammar(no){
+  const card = document.querySelector(`.gcard[data-no="${no}"]`);
+  if (!card) return;
+  document.querySelectorAll('.gcard.is-focus').forEach(c => c.classList.remove('is-focus'));
+  card.classList.add('is-focus');
+  card.scrollIntoView({behavior:'smooth', block:'center'});
+  card.classList.remove('flash'); void card.offsetWidth; card.classList.add('flash');
+}
+
+function toggleMarking(){
+  marking = !marking;
+  const b = document.getElementById('btnSync');
+  if (b) b.classList.toggle('is-on', marking);
+  document.querySelector('.lyrics')?.classList.toggle('is-marking', marking);
+  if (marking){
+    markNext = 0;
+    toast('對時中：播放歌曲，每一行開始唱時點那一行（或按空白鍵）');
+    startTicker();
+  } else {
+    const arr = timings[D.playlist[activeIdx].title] || [];
+    toast('對時結束，已記住 ' + arr.filter(x => x != null).length + ' 行');
+  }
+}
+
+function recordMark(i, t){
+  const key = D.playlist[activeIdx].title;
+  const arr = (timings[key] = timings[key] || []);
+  for (let k = 0; k < i; k++) if (arr[k] == null) arr[k] = null;
+  arr[i] = Math.round(t * 10) / 10;
+  arr.length = i + 1;
+  saveTimings(); applyTimings();
+  markNext = i + 1;
+  const el = document.querySelector(`.lyric[data-line="${i}"]`);
+  if (el){ el.classList.add('is-active'); el.scrollIntoView({behavior:'smooth', block:'center'}); }
+  document.querySelectorAll('.lyric.is-marking').forEach(x => x.classList.remove('is-marking'));
+  const nxt = document.querySelector(`.lyric[data-line="${markNext}"]`);
+  if (nxt) nxt.classList.add('is-marking');
+}
+
+function applyTimings(){
+  document.querySelectorAll('.lyric.is-active').forEach(x => x.classList.remove('is-active'));
+  document.querySelectorAll('.lyric.is-marking').forEach(x => x.classList.remove('is-marking'));
+}
+
+function startTicker(){
+  if (ticker) return;
+  ticker = setInterval(() => {
+    if (!ytPlayer || !ytPlayer.getCurrentTime) return;
+    const arr = timings[D.playlist[activeIdx].title];
+    if (!arr || !arr.length) return;
+    const t = ytPlayer.getCurrentTime();
+    let cur = -1;
+    for (let i = 0; i < arr.length; i++) if (arr[i] != null && arr[i] <= t + 0.15) cur = i;
+    const el = document.querySelector(`.lyric[data-line="${cur}"]`);
+    document.querySelectorAll('.lyric.is-active').forEach(x => { if (x !== el) x.classList.remove('is-active'); });
+    if (el && !el.classList.contains('is-active')){
+      el.classList.add('is-active');
+      const box = document.getElementById('lyricBox');
+      if (box){
+        const r = box.getBoundingClientRect();
+        if (r.bottom > 120 && r.top < window.innerHeight - 120) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+  }, 250);
+}
+
+function toast(msg){
+  let el = document.getElementById('toast');
+  if (!el){
+    el = document.createElement('div');
+    el.id = 'toast';
+    el.style.cssText = 'position:fixed;left:50%;bottom:2rem;transform:translateX(-50%);z-index:99;'
+      + 'background:rgba(20,16,14,.96);border:1px solid rgba(224,163,74,.5);color:#f2ece2;'
+      + 'padding:.6rem 1.1rem;border-radius:3px;font-size:.8rem;font-family:"Zen Kaku Gothic New",sans-serif;'
+      + 'box-shadow:0 8px 28px rgba(0,0,0,.6);transition:opacity .3s;max-width:min(90vw,36rem);text-align:center';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg; el.style.opacity = '1';
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.style.opacity = '0'; }, 2600);
+}
+
+/* ---------- 課外文法 ---------- */
+function renderUncovered(){
+  let list = D.uncovered;
+  if (onlyUnlearned) list = list.filter(n => !learned.has(n));
+  const grid = document.getElementById('ucGrid');
+  if (!list.length){
+    grid.innerHTML = `<div class="empty">${onlyUnlearned ? '課外文法全部習得了，收工。' : '沒有資料'}</div>`;
+    return;
+  }
+  grid.innerHTML = list.map(no => {
+    const g = GMAP[no] || {};
+    const cls = 'ucard' + (learned.has(no) ? ' is-learned' : '');
+    return `<div class="${cls}" data-no="${no}">
+      <div class="ucard__no">${String(no).padStart(3,'0')}</div>
+      <div style="flex:1;min-width:0">
+        <div class="ucard__form">${esc(g.g || '')}</div>
+        <div class="ucard__zh">${esc(g.zh || '')}</div>
+      </div>
+      <button class="stamp" data-stamp="${no}" aria-label="標記習得">習</button>
+    </div>`;
+  }).join('');
+  grid.querySelectorAll('[data-stamp]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const no = +btn.dataset.stamp;
+      if (learned.has(no)) learned.delete(no); else learned.add(no);
+      save(); syncAll();
+    });
+  });
+}
+
+/* ---------- 練習曲（不進最小集合） ---------- */
+function renderPractice(){
+  const wrap = document.getElementById('practiceWrap');
+  if (!wrap || !DATA.practice || !DATA.practice.length) return;
+  const cards = DATA.practice.map(p => {
+    const hits = p.hits[LEVEL] || [];
+    const chips = hits.slice(0, 6).map(no => GMAP[no]
+      ? `<span class="pcard__chip">${esc(GMAP[no].g)}</span>` : '').join('');
+    const zero = hits.length === 0 ? `<span class="pcard__zero">無 ${D.level} 文法命中</span>` : '';
+    const thumb = p.vid
+      ? `<a class="pcard__thumb" href="https://www.youtube.com/watch?v=${p.vid}" target="_blank" rel="noopener">
+           <img src="https://i.ytimg.com/vi/${p.vid}/hqdefault.jpg" alt="${esc(p.title)}" loading="lazy"
+                onerror="this.onerror=null;this.src=this.src.replace('hqdefault','mqdefault')">
+         </a>`
+      : `<div class="pcard__thumb"></div>`;
+    return `<div class="pcard">
+      <div class="pcard__top">
+        ${thumb}
+        <div style="min-width:0">
+          <div class="pcard__title">${esc(p.title)}</div>
+          <div class="pcard__artist">${esc(p.artist)}${p.source ? ' · ' + esc(p.source) : ''}</div>
+        </div>
+      </div>
+      <div class="pcard__why">${esc(p.why)}</div>
+      <div class="pcard__chips">${chips}${zero}</div>
+    </div>`;
+  }).join('');
+  wrap.innerHTML = `
+    <h2 style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;margin-bottom:.5rem">練習曲 · 好聽但不進最小集合</h2>
+    <p style="color:var(--paper-dim);font-size:.88rem;max-width:60ch;margin-bottom:1.2rem">
+      這幾首經過實測：新增覆蓋 0 條——它們教的文法，上面 ${D.playlist.length} 首已經涵蓋過了。
+      所以不佔最小集合的位置。但如果你本來就喜歡這些歌，拿來練耳朵與複習句型完全值得。
+      標籤會跟著你切換的等級變化。
+    </p>
+    <div class="practice__grid">${cards}</div>`;
+}
+
+/* ---------- BONUS 曲 ---------- */
+function renderBonus(){
+  const wrap = document.getElementById('bonusWrap');
+  if (!wrap) return;
+  const b = DATA.bonus;
+  if (!b){ wrap.innerHTML = ''; return; }
+  const genuine = (b.genuine || []).map(g => {
+    const G = GMAP[g.no] || {};
+    return G.g ? `<div class="bonus__row"><b>${esc(G.g)}</b><em>${esc(G.zh || '')}</em><em>·「${esc(g.note)}」</em></div>` : '';
+  }).join('');
+  const traps = (b.traps || []).map(t => `
+    <div class="trap">
+      <div class="trap__head">${esc(t.form)}<span class="trap__tag">假命中</span></div>
+      <div class="trap__quote">「${esc(t.wrong)}」</div>
+      <div class="trap__why">${t.why}</div>
+    </div>`).join('');
+  wrap.innerHTML = `
+    <h2 style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;margin-bottom:.5rem">BONUS · 不進歌單，但值得聽</h2>
+    <p style="color:var(--paper-dim);font-size:.88rem;max-width:60ch;margin-bottom:1.2rem">
+      這首被評估過要不要加進歌單。結果是「不進」，但它的兩個文法陷阱比新增一條覆蓋更有教學價值。
+    </p>
+    <div class="bonus__card">
+      <div class="bonus__top">
+        <div class="bonus__thumb">
+          <img src="https://i.ytimg.com/vi/${b.vid}/hqdefault.jpg" alt="${esc(b.title)}" loading="lazy"
+               onerror="this.onerror=null;this.src=this.src.replace('hqdefault','mqdefault')">
+          <a href="https://www.youtube.com/watch?v=${b.vid}" target="_blank" rel="noopener" aria-label="在 YouTube 開啟"><span></span></a>
+        </div>
+        <div class="bonus__info">
+          <div class="bonus__title">${esc(b.title)}</div>
+          <div class="bonus__artist">${esc(b.artist)}</div>
+          <div class="bonus__why">${b.why}</div>
+        </div>
+      </div>
+      <div>
+        <div class="bonus__sub">真正命中的文法</div>
+        <div class="bonus__list">${genuine}</div>
+      </div>
+      <div>
+        <div class="bonus__sub">兩個陷阱 · 別被騙</div>
+        <div class="bonus__list" style="gap:.6rem">${traps}</div>
+      </div>
+      <div class="bonus__why" style="border-left-color:var(--moss)">${esc(b.difficulty)}</div>
+    </div>`;
+}
+
+/* ---------- 事件 ---------- */
+document.querySelectorAll('.lv button').forEach(b => {
+  b.addEventListener('click', () => switchLevel(b.dataset.lv));
+});
+
+document.getElementById('btnReset').addEventListener('click', () => {
+  if (!confirm(`重設 ${D.level} 的習得進度？`)) return;
+  learned = new Set(); save(); syncAll();
+});
+
+document.getElementById('btnPrint').addEventListener('click', () => window.print());
+
+document.getElementById('btnOnlyUnlearned').addEventListener('click', e => {
+  onlyUnlearned = !onlyUnlearned;
+  e.currentTarget.classList.toggle('is-on', onlyUnlearned);
+  renderUncovered();
+});
+
+document.getElementById('lnkTop').addEventListener('click', e => {
+  e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});
+});
+
+document.addEventListener('keydown', e => {
+  if (!marking) return;
+  if (e.code === 'Space' || e.key === ' '){
+    e.preventDefault();
+    if (!ytPlayer || !ytPlayer.getCurrentTime) { toast('先按播放'); return; }
+    recordMark(markNext, ytPlayer.getCurrentTime());
+  }
+});
+
+/* ---------- 啟動 ---------- */
+renderAll();
+selectSong(0);
+</script>
+</body>
+</html>
